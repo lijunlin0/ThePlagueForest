@@ -11,7 +11,7 @@ public enum StatusEffectRemoveReason
 
 public class StatusEffect
 {
-    private Dictionary<Property,double> mPropertyCorrections;
+    private Dictionary<Property,float> mPropertyCorrections;
     private bool mIsDead;
 
     private Character mTarget;
@@ -25,8 +25,8 @@ public class StatusEffect
     
     public bool IsDead(){return mIsDead;}
     public Character GetTarget(){return mTarget;}
-    public Dictionary<Property,double> GetPropertyCorrections() { return mPropertyCorrections;}
-    public void SetPropertyCorrections(Dictionary<Property,double> corrections) {mPropertyCorrections=corrections;}
+    public Dictionary<Property,float> GetPropertyCorrections() { return mPropertyCorrections;}
+    public void SetPropertyCorrections(Dictionary<Property,float> corrections) {mPropertyCorrections=corrections;}
     public StatusEffectId GetId(){return mId;}
     
 }

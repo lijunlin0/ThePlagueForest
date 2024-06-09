@@ -9,7 +9,7 @@ public class Sword : Equipment
     }
     public override void OnGet(StatusEffect effect,int layer)
     {
-        Dictionary<Property,double> corrections=new Dictionary<Property,double>();
+        Dictionary<Property,float> corrections=new Dictionary<Property,float>();
         corrections.Add(Property.AttackAddition,AttackAddition*layer);
         effect.SetPropertyCorrections(corrections);
     }

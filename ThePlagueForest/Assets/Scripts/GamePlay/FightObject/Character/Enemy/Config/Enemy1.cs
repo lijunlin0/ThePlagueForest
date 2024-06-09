@@ -28,7 +28,7 @@ public class Enemy1 : Enemy
         if(distance>1)
         {   
             transform.localRotation=Quaternion.LookRotation(Vector3.forward, direction);
-            transform.position+=direction.normalized*mSpeed*Time.deltaTime;
+            transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
         }
     }
     protected override void Init()

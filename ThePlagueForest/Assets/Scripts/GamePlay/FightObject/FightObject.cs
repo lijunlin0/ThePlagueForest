@@ -11,7 +11,7 @@ public class FightObject : MonoBehaviour
         mIsDead=false;
     }
 
-    public virtual void FightObjectDestroy()
+    public virtual void PlayDestroyAnimation()
     {
         Destroy(gameObject);
     }

@@ -10,7 +10,6 @@ public class Enemy : Character
     protected override void Init()
     {
         base.Init();
-        mSpeed=200;
     }
     public virtual void Move()
     {

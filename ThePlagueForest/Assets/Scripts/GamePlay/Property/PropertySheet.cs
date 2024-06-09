@@ -20,7 +20,7 @@ public enum Property
 public class PropertySheet
 {
     private Character mCharacter;
-    private Dictionary<Property,double> mProperties=new Dictionary<Property,double>();
+    private Dictionary<Property,float> mProperties=new Dictionary<Property,float>();
     public PropertySheet(Character character,PropertySheet mBaseProperty,StatusEffectList statusEffectList)
     {
         mCharacter=character;
@@ -30,8 +30,8 @@ public class PropertySheet
         });
         foreach(StatusEffect statusEffect in statusEffectList.GetStatusEffects())
         {
-            Dictionary<Property,double> propertyCorrections=statusEffect.GetPropertyCorrections();
-            foreach(KeyValuePair<Property,double> correction in propertyCorrections)
+            Dictionary<Property,float> propertyCorrections=statusEffect.GetPropertyCorrections();
+            foreach(KeyValuePair<Property,float> correction in propertyCorrections)
             {
                 AddRawValue(correction.Key,correction.Value);
             }
@@ -46,44 +46,44 @@ public class PropertySheet
        });
     }
 
-    public double GetRawValue(Property property)
+    public float GetRawValue(Property property)
     {
         return mProperties[property];
     }
-    public void SetRawValue(Property property,double value)
+    public void SetRawValue(Property property,float value)
     {
         mProperties[property]=value;
     }
-    public void AddRawValue(Property property,double value)
+    public void AddRawValue(Property property,float value)
     {
         mProperties[property]+=value;  
     }
     //获取攻击力倍率
-    public double GetAttackFactor()
+    public float GetAttackFactor()
     {
         return (mProperties[Property.AttackAddition]+100)/100;
     }
     //获取攻击速度倍率
-    public double GetAttackSpeedFactor()
+    public float GetAttackSpeedFactor()
     {
         return (mProperties[Property.AttackSpeedAddition]+100)/100;
     }
     //获取移动速度
-    public double GetMoveSpeed()
+    public float GetMoveSpeed()
     {
-        double baseMoveSpeed=mProperties[Property.BaseMoveSpeed];
-        double moveSpeedAddition=mProperties[Property.MoveSpeedAddition];
+        float baseMoveSpeed=mProperties[Property.BaseMoveSpeed];
+        float moveSpeedAddition=mProperties[Property.MoveSpeedAddition];
         return baseMoveSpeed*(moveSpeedAddition+100)/100;
     }
     //获取最大生命值
     public int GetMaxHealth()
     {
-        double baseHealth=mProperties[Property.BaseHealth];
-        double healthAddition=mProperties[Property.HealthAddition];
+        float baseHealth=mProperties[Property.BaseHealth];
+        float healthAddition=mProperties[Property.HealthAddition];
         return (int)(baseHealth*(healthAddition+100)/100);
     }
     // 获取生命恢复速度
-    public double GetHealthRecoveryRate()
+    public float GetHealthRecoveryRate()
     {
         return mProperties[Property.HealthRecoveryRate];
     }

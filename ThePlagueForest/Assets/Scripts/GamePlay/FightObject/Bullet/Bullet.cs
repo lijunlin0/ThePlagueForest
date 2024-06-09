@@ -11,12 +11,16 @@ public class Bullet : FightObject
     protected override void Init()
     {
         base.Init();
-        mLiveTime=Time.time;
+        mLiveTime=0;
         mMaxLifeTime=5;
     }
     public virtual void OnUpdate()
     {
-
+        mLiveTime+=Time.deltaTime;
+        if(mLiveTime>=mMaxLifeTime)
+        {
+            mIsDead=true;
+        }
     }
 
 }

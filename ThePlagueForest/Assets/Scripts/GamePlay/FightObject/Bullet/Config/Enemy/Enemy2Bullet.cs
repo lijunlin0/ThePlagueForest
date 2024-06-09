@@ -16,9 +16,9 @@ public class Enemy2Bullet : Bullet
     }
     public override void OnUpdate()
     {
-        if(Time.time-mLiveTime>mMaxLifeTime)
+        base.OnUpdate();
+        if(mIsDead)
         {
-            mIsDead=true;
             return;
         }
         FightUtility.Move(gameObject,mBulletMoveSpeed);
@@ -27,7 +27,6 @@ public class Enemy2Bullet : Bullet
     protected override void Init()
     {
         base.Init();
-        mBulletMoveSpeed=400;
         mLiveTime = Time.time;
     }
 }

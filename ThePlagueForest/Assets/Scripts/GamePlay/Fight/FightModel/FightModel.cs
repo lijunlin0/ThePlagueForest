@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using UnityEngine;
 using DG.Tweening;
 
@@ -100,7 +100,7 @@ public class FightModel
             if(bullet.IsDead())
             {
                 mEnemyBulletList.RemoveAt(i);
-                bullet.FightObjectDestroy();
+                bullet.PlayDestroyAnimation();
             }
             else
             {
@@ -114,7 +114,7 @@ public class FightModel
             if(bullet.IsDead())
             {
                 mPlayerBulletList.RemoveAt(i);
-                bullet.FightObjectDestroy();
+                bullet.PlayDestroyAnimation();
             }
             else
             {
@@ -128,7 +128,7 @@ public class FightModel
             if(enemy.IsDead())
             {
                 mEnemyBulletList.RemoveAt(i);
-                enemy.FightObjectDestroy();
+                enemy.PlayDestroyAnimation();
             }
             else
             {

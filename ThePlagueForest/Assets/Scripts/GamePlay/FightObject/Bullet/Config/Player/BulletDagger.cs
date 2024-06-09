@@ -16,6 +16,11 @@ public class BulletDagger: Bullet
     }
    public override void OnUpdate()
     {
+        base.OnUpdate();
+        if(mIsDead)
+        {
+            return;
+        }
         FightUtility.Move(gameObject,mBulletMoveSpeed);
     }
 }
