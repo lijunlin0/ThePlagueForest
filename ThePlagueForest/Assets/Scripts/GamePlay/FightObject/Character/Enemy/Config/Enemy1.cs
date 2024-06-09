@@ -14,7 +14,8 @@ public class Enemy1 : Enemy
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=new Vector3(900,500,-1);
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
-        enemy.Init();
+        PropertySheet propertySheet=CharacterPropertySheet.GetBasePropertySheet("Enemy1",1);
+        enemy.Init(propertySheet);
         return enemy;
     }
     public override void Move()

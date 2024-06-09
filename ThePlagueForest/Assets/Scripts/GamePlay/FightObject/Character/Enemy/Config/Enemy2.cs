@@ -15,7 +15,8 @@ public class Enemy2 : Enemy
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=new Vector3(-400,400,-1);
         Enemy2 enemy=enemyObject.AddComponent<Enemy2>();
-        enemy.Init();
+        PropertySheet propertySheet=CharacterPropertySheet.GetBasePropertySheet("Enemy2",1);
+        enemy.Init(propertySheet);
         return enemy;
     }
     protected override void Init()

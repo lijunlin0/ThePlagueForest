@@ -8,10 +8,10 @@ public class Character : FightObject
     protected StatusEffectList mStatusEffectList;
     protected PropertySheet mBasePropertySheet;
     protected PropertySheet mCurrentPropertySheet;
-    protected override void Init()
+    protected void Init(PropertySheet basePropertySheet)
     {
         base.Init();
-        mBasePropertySheet=new PropertySheet();
+        mBasePropertySheet=basePropertySheet;
         mStatusEffectList=new StatusEffectList(this,OnStatusEffectChanged);
         mCurrentPropertySheet=new PropertySheet(this,mBasePropertySheet,mStatusEffectList);
         mHealth=mCurrentPropertySheet.GetMaxHealth();

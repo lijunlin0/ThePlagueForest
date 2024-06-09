@@ -27,6 +27,5 @@ public class Enemy2Bullet : Bullet
     protected override void Init()
     {
         base.Init();
-        mLiveTime = Time.time;
     }
 }

@@ -1,0 +1,19 @@
+{
+    "Comment":"角色属性配置",
+    
+    "Player1" : {
+        "Health" : [100, 20],
+        "HealthRecovery" : [5.0, 1.0],
+        "MoveSpeed" : 400
+    },
+    "Enemy1" : {
+        "Health" : [100, 20],
+        "HealthRecovery" : [5.0, 1.0],
+        "MoveSpeed" : 400
+    },
+    "Enemy2" : {
+        "Health" : [100, 20],
+        "HealthRecovery" : [5.0, 1.0],
+        "MoveSpeed" : 400
+    }
+}
