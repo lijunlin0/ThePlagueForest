@@ -7,9 +7,9 @@ public class Player : Character
 {
     private static Player sCurrent;
     protected static List<Weapon> mWeapons;
-    protected override void Init()
+    protected override void Init(PropertySheet basePropertySheet)
     {
-        base.Init();
+        base.Init(basePropertySheet);
         sCurrent=this;
         mWeapons=new List<Weapon>();
         Camera.main.transform.SetParent(this.transform,false);
@@ -37,7 +37,7 @@ public class Player : Character
             horizontalDistance-=1;
         }
         Vector3 direction=new Vector3(horizontalDistance,verticalDistance,0f).normalized;
-        transform.Translate(direction*(float)mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
+        transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
     }
 
     public void OnUpdate()

@@ -3,17 +3,17 @@
     
     "Player1" : {
         "Health" : [100, 20],
-        "HealthRecovery" : [5.0, 1.0],
-        "MoveSpeed" : 400
+        "HealthRecovery" : [1.0, 0.5],
+        "MoveSpeed" : 300
     },
     "Enemy1" : {
         "Health" : [100, 20],
-        "HealthRecovery" : [5.0, 1.0],
-        "MoveSpeed" : 400
+        "HealthRecovery" : [0.0, 0.0],
+        "MoveSpeed" : 200
     },
     "Enemy2" : {
         "Health" : [100, 20],
-        "HealthRecovery" : [5.0, 1.0],
-        "MoveSpeed" : 400
+        "HealthRecovery" : [0.0, 0.0],
+        "MoveSpeed" : 200
     }
 }

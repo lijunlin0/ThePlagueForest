@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 public class Enemy : Character
 {
     protected bool CanShootFlag=false;
-    protected override void Init()
+    protected override void Init(PropertySheet basePropertySheet)
     {
-        base.Init();
+        base.Init(basePropertySheet);
     }
     public virtual void Move()
     {

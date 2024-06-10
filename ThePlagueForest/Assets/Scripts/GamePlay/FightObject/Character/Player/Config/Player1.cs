@@ -13,17 +13,17 @@ public class Player1 : Player
         GameObject playerPrefab=Resources.Load<GameObject>("FightObject/Character/Player1");
         GameObject playerObject=GameObject.Instantiate(playerPrefab);
         Player1 player=playerObject.AddComponent<Player1>();
-        PropertySheet propertySheet=CharacterPropertySheet.GetBasePropertySheet("Player1",1);
-        player.Init();
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Player1",2);
+        player.Init(propertySheet);
         return player;
     }
     public static Vector3 GetPosition()
     {
         return new Vector3(0, 0,0);
     }
-    protected override void Init()
+    protected override void Init(PropertySheet basePropertySheet)
     {
-        base.Init();
+        base.Init(basePropertySheet);
         Weapon weapon=new Dagger();
         weapon.Init();
         AddWeapon(weapon);

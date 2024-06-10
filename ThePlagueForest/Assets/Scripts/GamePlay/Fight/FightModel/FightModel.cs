@@ -42,7 +42,6 @@ public class FightModel
     }
     public  FightModel()
     {
-        CharacterPropertySheet.Init();
         sCurrent=this;
         mEnemyList=new List<Enemy>();
         mPlayer=Player1.Create();

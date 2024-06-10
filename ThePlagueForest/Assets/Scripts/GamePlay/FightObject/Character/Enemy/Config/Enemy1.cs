@@ -14,7 +14,7 @@ public class Enemy1 : Enemy
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=new Vector3(900,500,-1);
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
-        PropertySheet propertySheet=CharacterPropertySheet.GetBasePropertySheet("Enemy1",1);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",2);
         enemy.Init(propertySheet);
         return enemy;
     }
@@ -32,9 +32,9 @@ public class Enemy1 : Enemy
             transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
         }
     }
-    protected override void Init()
+    protected override void Init(PropertySheet basePropertySheet)
     {
-        base.Init();
+        base.Init(basePropertySheet);
         CanShootFlag=false;
         CanShootFlag=true;
     }

@@ -8,7 +8,7 @@ public class Character : FightObject
     protected StatusEffectList mStatusEffectList;
     protected PropertySheet mBasePropertySheet;
     protected PropertySheet mCurrentPropertySheet;
-    protected void Init(PropertySheet basePropertySheet)
+    protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init();
         mBasePropertySheet=basePropertySheet;

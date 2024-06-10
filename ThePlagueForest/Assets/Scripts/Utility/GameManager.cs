@@ -8,6 +8,6 @@ public class GameManager : Singleton<GameManager>
     //构造
     public void OnSingletonInit()
     {
-
+        CharacterUtility.Init();
     }
 }
