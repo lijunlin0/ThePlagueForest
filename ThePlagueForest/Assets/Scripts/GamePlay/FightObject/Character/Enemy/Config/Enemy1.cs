@@ -14,7 +14,7 @@ public class Enemy1 : Enemy
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=new Vector3(900,500,-1);
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",2);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",1);
         enemy.Init(propertySheet);
         return enemy;
     }

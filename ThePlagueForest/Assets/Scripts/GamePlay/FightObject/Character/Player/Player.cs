@@ -7,6 +7,7 @@ public class Player : Character
 {
     private static Player sCurrent;
     protected static List<Weapon> mWeapons;
+    protected float mCollideProtect=0;
     protected override void Init(PropertySheet basePropertySheet)
     {
         base.Init(basePropertySheet);
@@ -42,6 +43,10 @@ public class Player : Character
 
     public void OnUpdate()
     {
+        if(mCollideProtect>=0)
+        {
+            mCollideProtect-=Time.deltaTime;
+        }
         Move();
         foreach(Weapon weapon in mWeapons)
         {
@@ -56,4 +61,6 @@ public class Player : Character
     {
         return sCurrent;
     }
+    public void SetCollideProtect(){mCollideProtect=0.2f;}
+    public bool InCollideProtect(){return mCollideProtect>=0;}
 }

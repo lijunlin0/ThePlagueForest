@@ -4,9 +4,10 @@ using UnityEditor.Playables;
 using System;
 using UnityEngine;
 
+
 public enum Property
 {
-    AttackAddition,             //攻击力提升
+    DamageAddition,             //攻击力提升
     AttackSpeedAddition,        //攻击速度提升
     BaseHealth,                 //基础生命值
     HealthAddition,             //生命值提升
@@ -19,6 +20,7 @@ public enum Property
 
 public class PropertySheet
 {
+    public const int CollideDamage=10;
     private Character mCharacter;
     private Dictionary<Property,float> mProperties=new Dictionary<Property,float>();
     public PropertySheet(Character character,PropertySheet mBaseProperty,StatusEffectList statusEffectList)
@@ -59,9 +61,9 @@ public class PropertySheet
         mProperties[property]+=value;  
     }
     //获取攻击力倍率
-    public float GetAttackFactor()
+    public float GetDamageFactor()
     {
-        return (mProperties[Property.AttackAddition]+100)/100;
+        return (mProperties[Property.DamageAddition]+100)/100;
     }
     //获取攻击速度倍率
     public float GetAttackSpeedFactor()

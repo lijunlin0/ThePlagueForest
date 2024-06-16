@@ -23,6 +23,10 @@ public class FightManager
     }
     public void OnUpdate()
     {
+        if(Player.GetCurrent().IsDead())
+        {
+            return;
+        }
         mFightModel.OnUpdate();
     }
 }

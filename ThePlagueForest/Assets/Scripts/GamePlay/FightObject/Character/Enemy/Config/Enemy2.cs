@@ -15,7 +15,7 @@ public class Enemy2 : Enemy
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=new Vector3(-400,400,-1);
         Enemy2 enemy=enemyObject.AddComponent<Enemy2>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",2);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",1);
         enemy.Init(propertySheet);
         return enemy;
     }
@@ -29,7 +29,7 @@ public class Enemy2 : Enemy
     protected override void Shoot()
     {
         //创建子弹
-        Enemy2Bullet bullet=Enemy2Bullet.Create(this);
+        Enemy2Bullet bullet=Enemy2Bullet.Create(this,10);
         bullet.transform.position=transform.position;
 
         //方向朝着玩家

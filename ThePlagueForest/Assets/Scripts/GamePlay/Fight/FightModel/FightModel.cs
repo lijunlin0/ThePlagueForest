@@ -61,6 +61,7 @@ public class FightModel
     public void OnUpdate()
     {
        UpdateObjects();
+       CollisionHelper.Collide();
        RemoveInvalidObjects();
     }
 
@@ -127,7 +128,7 @@ public class FightModel
             Enemy enemy=mEnemyList[i];
             if(enemy.IsDead())
             {
-                mEnemyBulletList.RemoveAt(i);
+                mEnemyList.RemoveAt(i);
                 enemy.PlayDestroyAnimation();
             }
             else

@@ -13,7 +13,7 @@ public class Player1 : Player
         GameObject playerPrefab=Resources.Load<GameObject>("FightObject/Character/Player1");
         GameObject playerObject=GameObject.Instantiate(playerPrefab);
         Player1 player=playerObject.AddComponent<Player1>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Player1",2);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Player1",1);
         player.Init(propertySheet);
         return player;
     }

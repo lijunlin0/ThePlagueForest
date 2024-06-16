@@ -38,7 +38,7 @@ public static class FightUtility
             {
                 res=enemy;
                 minDistance=distance;
-                Debug.Log(minDistance);
+                //Debug.Log(minDistance);
             }
         }
         return res;

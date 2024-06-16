@@ -28,5 +28,4 @@ public class Enemy : Character
     {
         mHealth+=health;
     }
-    public int GetHealth(){return mHealth;}
 }

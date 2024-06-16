@@ -6,12 +6,12 @@ using UnityEngine;
 //Enemy1直线普通子弹
 public class Enemy2Bullet : Bullet
 {
-    public static Enemy2Bullet Create(Enemy enemy)
+    public static Enemy2Bullet Create(Enemy enemy,int points)
     {
         GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/DefaultBullet");
         GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
         Enemy2Bullet bullet=bulletObject.AddComponent<Enemy2Bullet>();
-        bullet.Init();
+        bullet.Init(enemy,points);
         return bullet;
     }
     public override void OnUpdate()
@@ -22,10 +22,5 @@ public class Enemy2Bullet : Bullet
             return;
         }
         FightUtility.Move(gameObject,mBulletMoveSpeed);
-    }
-
-    protected override void Init()
-    {
-        base.Init();
     }
 }

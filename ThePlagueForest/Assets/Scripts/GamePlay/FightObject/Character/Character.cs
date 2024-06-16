@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class Character : FightObject
         mHealth=mCurrentPropertySheet.GetMaxHealth();
     }
     public StatusEffectList GetStatusEffectList(){return mStatusEffectList;}
+    public PropertySheet GetCurrentPropertySheet(){return mCurrentPropertySheet;}
+
     //状态效果改变
     private void OnStatusEffectChanged()
     {
@@ -32,5 +35,13 @@ public class Character : FightObject
         {
             mHealth=currMaxHealth;
         }
+    }
+
+    public int GetHealth(){return mHealth;}
+    public void SetDead(){mIsDead=true;}
+    public void SetHealth(int health)
+    {
+        mHealth=Mathf.Clamp(health,0,mCurrentPropertySheet.GetMaxHealth());
+        Debug.Log(gameObject.name+":"+health);
     }
 }

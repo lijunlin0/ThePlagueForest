@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948273960426938161}
   - component: {fileID: 4371501978493437481}
+  - component: {fileID: 1391204464884359079}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -84,3 +85,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &1391204464884359079
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380228524332507470}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 60, y: 60}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 12.629078, y: 29.443615}
+      - {x: -1.6721109, y: 30.472462}
+      - {x: -11.589004, y: 27.774471}
+      - {x: -17.486584, y: 25.572786}
+      - {x: -22.476238, y: 19.701775}
+      - {x: -28.330854, y: 12.145391}
+      - {x: -31.326958, y: -3.5685945}
+      - {x: -27.032627, y: -14.436175}
+      - {x: -15.258162, y: -26.47625}
+      - {x: -6.8817916, y: -29.30685}
+      - {x: 5.1945906, y: -29.552439}
+      - {x: 15.7344, y: -27.032612}
+      - {x: 28.887238, y: -13.887232}
+      - {x: 31.112764, y: 6.0251713}
+      - {x: 26.357786, y: 17.043825}
+      - {x: 18.774471, y: 24.887234}
+  m_UseDelaunayMesh: 0
