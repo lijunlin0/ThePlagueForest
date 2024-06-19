@@ -9,6 +9,7 @@ public class Character : FightObject
     protected StatusEffectList mStatusEffectList;
     protected PropertySheet mBasePropertySheet;
     protected PropertySheet mCurrentPropertySheet;
+    protected HealthBar mHealthBar;
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init();
@@ -36,12 +37,17 @@ public class Character : FightObject
             mHealth=currMaxHealth;
         }
     }
-
+    protected virtual void OnHealthChanged()
+    {
+        mHealthBar.UpdateContent();
+    }
     public int GetHealth(){return mHealth;}
     public void SetDead(){mIsDead=true;}
     public void SetHealth(int health)
     {
+        Debug.Log("设置的血量: "+health);
         mHealth=Mathf.Clamp(health,0,mCurrentPropertySheet.GetMaxHealth());
-        Debug.Log(gameObject.name+":"+health);
+        OnHealthChanged();
+        //Debug.Log(gameObject.name+":"+health);
     }
 }

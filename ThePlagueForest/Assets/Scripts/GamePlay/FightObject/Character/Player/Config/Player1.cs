@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class Player1 : Player
 {
-    
     public static Player1 Create()
     {
         GameObject playerPrefab=Resources.Load<GameObject>("FightObject/Character/Player1");

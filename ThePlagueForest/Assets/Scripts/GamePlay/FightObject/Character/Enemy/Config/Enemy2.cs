@@ -7,8 +7,6 @@ using UnityEngine.UIElements;
 //巫师
 public class Enemy2 : Enemy
 {
-    float mShootTime=2f;
-    float defaultTime=0;
     public static Enemy2 Create()
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy2");
@@ -18,12 +16,6 @@ public class Enemy2 : Enemy
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",1);
         enemy.Init(propertySheet);
         return enemy;
-    }
-    protected override void Init(PropertySheet basePropertySheet)
-    {
-        base.Init(basePropertySheet);
-        defaultTime=mShootTime;
-        CanShootFlag=true;
     }
     
     protected override void Shoot()
@@ -36,17 +28,7 @@ public class Enemy2 : Enemy
         Vector3 direction=(FightModel.GetCurrent().GetPlayer().transform.position-bullet.transform.position).normalized;
         bullet.transform.localRotation=FightUtility.DirectionToRotation(direction);
         
-        FightModel.GetCurrent().GetEnemyBullets().Add(bullet);
-    }
-
-    public override void OnUpdate()
-    {
-        if(defaultTime>=mShootTime)
-        {
-            Shoot();
-            defaultTime=0;
-        }
-        defaultTime+=Time.deltaTime;
+        FightModel.GetCurrent().AddEnemyBullets(bullet);
     }
 
 }

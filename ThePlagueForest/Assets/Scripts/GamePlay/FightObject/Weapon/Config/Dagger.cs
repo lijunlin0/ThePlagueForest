@@ -7,8 +7,8 @@ public class Dagger:Weapon
 {
     public override void Init()
     {
-         BulletShooter shooter = new BulletShooter();
-        shooter.SetShootCallback(()=>{
+         BulletShooter shooter = new BulletShooter(()=>
+         {
             //方向朝着最近的敌人
             Enemy nearEnemy=FightUtility.GetNearEnemy();
             if(nearEnemy==null)

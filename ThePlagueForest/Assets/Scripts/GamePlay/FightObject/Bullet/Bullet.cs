@@ -29,8 +29,9 @@ public class Bullet : FightObject
         mMaxLifeTime=5;
         mIgnoreList=new List<Character>();
     }
-    public virtual void OnUpdate()
+    public override void OnUpdate()
     {
+        base.OnUpdate();
         mLiveTime+=Time.deltaTime;
         if(mLiveTime>=mMaxLifeTime)
         {

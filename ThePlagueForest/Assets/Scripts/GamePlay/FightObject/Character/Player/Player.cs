@@ -11,6 +11,7 @@ public class Player : Character
     protected override void Init(PropertySheet basePropertySheet)
     {
         base.Init(basePropertySheet);
+        mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mWeapons=new List<Weapon>();
         Camera.main.transform.SetParent(this.transform,false);
@@ -41,8 +42,9 @@ public class Player : Character
         transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
     }
 
-    public void OnUpdate()
+    public override void OnUpdate()
     {
+        base.OnUpdate();
         if(mCollideProtect>=0)
         {
             mCollideProtect-=Time.deltaTime;
@@ -53,6 +55,11 @@ public class Player : Character
             weapon.OnUpdate();
         }
     }
+    public override void PlayDestroyAnimation()
+    {
+        mHealthBar.gameObject.SetActive(false);
+    }
+
     public static void AddWeapon(Weapon weapon)
     {
         mWeapons.Add(weapon);

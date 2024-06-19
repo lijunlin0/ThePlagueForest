@@ -6,10 +6,17 @@ using UnityEngine.UIElements;
 
 public class Enemy : Character
 {
+    protected BulletShooter mBulletShooter;
     protected bool CanShootFlag=false;
     protected override void Init(PropertySheet basePropertySheet)
     {
         base.Init(basePropertySheet);
+        mHealthBar=HealthBar.Create(this);
+        //添加子弹发射器
+        mBulletShooter = new BulletShooter(()=>
+        {
+            Shoot();
+        },1);
     }
     public virtual void Move()
     {
@@ -20,9 +27,15 @@ public class Enemy : Character
     {
         return CanShootFlag;
     }
-    public virtual void OnUpdate()
+    public override void OnUpdate()
     {
-       
+        base.OnUpdate();
+       mBulletShooter.OnUpdate();
+    }
+    public override void PlayDestroyAnimation()
+    {
+        base.PlayDestroyAnimation();
+        Destroy(mHealthBar.gameObject);
     }
     public  void HealthChange(int health)
     {

@@ -8,7 +8,7 @@ public class BulletShooter
     private float mShootTime;
     private float defaultTime=0;
     
-    public void SetShootCallback(Callback callback,float shootTime)
+    public BulletShooter(Callback callback,float shootTime)
     {
         mShootCallback = callback;
         mShootTime = shootTime;

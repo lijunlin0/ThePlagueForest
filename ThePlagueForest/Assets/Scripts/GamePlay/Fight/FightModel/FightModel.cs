@@ -28,6 +28,11 @@ public class FightModel
     {
         mPlayerBulletList.Add(bullet);
     }
+    public void AddEnemyBullets(Bullet bullet)
+    {
+        Debug.Log("敌人发射子弹");
+        mEnemyBulletList.Add(bullet);
+    }
     public List<Enemy> GetEnemies()
     {
         return mEnemyList;

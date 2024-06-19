@@ -40,6 +40,7 @@ public class Enemy1 : Enemy
     }
     public override void OnUpdate()
     {
+        base.OnUpdate();
         Move();
     }
 }
