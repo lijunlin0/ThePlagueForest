@@ -16,7 +16,7 @@ public class Dagger:Weapon
                 return;
             }
             //创建子弹
-            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),10);
+            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),40);
             bulletDagger.transform.position=FightModel.GetCurrent().GetPlayer().transform.position;
            
             Vector3 direction=(nearEnemy.transform.position-bulletDagger.transform.position).normalized;

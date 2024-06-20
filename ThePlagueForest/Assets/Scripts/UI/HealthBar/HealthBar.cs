@@ -8,8 +8,9 @@ public class HealthBar : MonoBehaviour
     private const int YOffset=60;
     private Character mCharacter;
     private Slider mHealthSlider;
-    private RectTransform mHealthRectTransform;
+    private Slider mDamageSlider;
     private TMP_Text mHealthPointsText;
+    private Tween mTween;
     public static HealthBar Create(Character character)
     {
         GameObject prefab=Resources.Load<GameObject>("UI/HealthBar");
@@ -23,7 +24,7 @@ public class HealthBar : MonoBehaviour
     {
         mCharacter=character;
         mHealthSlider=transform.Find("Health").GetComponent<Slider>();
-        mHealthRectTransform=transform.GetComponent<RectTransform>();
+        mDamageSlider=transform.Find("Damage").GetComponent<Slider>();
     }
 
     public void OnHealthChanged()
@@ -33,6 +34,21 @@ public class HealthBar : MonoBehaviour
         float targetValue=currentHealth/maxHealth;
         Debug.Log(mCharacter.name+":最大生命值"+maxHealth+"当前生命值:"+currentHealth+",Value:"+targetValue);
         mHealthSlider.value=targetValue;
+        if(mDamageSlider.value<targetValue)
+        {
+            mDamageSlider.value=targetValue;
+        }
+        else
+        {
+            if(mTween!=null)
+            {
+                mTween.Kill();
+            }
+            mTween=mDamageSlider.DOValue(targetValue,0.2f).SetEase(Ease.InQuint).OnComplete(()=>
+            {
+                mTween=null;
+            });
+        }
     }
 
     public void Update()
