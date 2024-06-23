@@ -16,7 +16,7 @@ public class StatusEffect
 
     private Character mTarget;
     private StatusEffectId mId;
-
+    private Callback<FightEventData> mFightEventCallback;
     public StatusEffect(StatusEffectId id,Character target)
     {
         mId = id;
@@ -28,5 +28,18 @@ public class StatusEffect
     public Dictionary<Property,float> GetPropertyCorrections() { return mPropertyCorrections;}
     public void SetPropertyCorrections(Dictionary<Property,float> corrections) {mPropertyCorrections=corrections;}
     public StatusEffectId GetId(){return mId;}
+
+    public void SetFightEventCallback(Callback<FightEventData> callback)
+    {
+        mFightEventCallback = callback;
+    }
+
+    public void OnFightEvent(FightEventData eventData)
+    {
+        if(mFightEventCallback!=null)
+        {
+            mFightEventCallback(eventData);
+        }
+    }
     
 }

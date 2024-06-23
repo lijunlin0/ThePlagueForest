@@ -46,6 +46,8 @@ public static class FightSystem
         if(character.GetHealth()<=0)
         {
             character.SetDead();
+            FightEventDataDeath dyingEndedEventData=new FightEventDataDeath(character);
+            FightEventDispatcher.Dispatch(dyingEndedEventData);
         }
         return true;
     }
