@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+//短剑--增加 10% 攻击力 
 public class Sword : Equipment
 {
     private const int mDamageAddition=10;
