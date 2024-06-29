@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //鹰爪--增加 10% 攻击速度
 public class Karambit : Equipment
 {
-    private int mAttackSpeedAddition=10;
+    private const int mAttackSpeedAddition=10;
     public Karambit():base(EquipmentType.Passive,EquipmentId.Karambit)
     {
 

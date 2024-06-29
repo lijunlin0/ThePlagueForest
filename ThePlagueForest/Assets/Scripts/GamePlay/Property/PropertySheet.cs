@@ -15,7 +15,7 @@ public enum Property
     BaseMoveSpeed,              //基础移动速度
     MoveSpeedAddition,          //移动速度提升
     LifeSteal,                  //生命偷取率
-    
+    AoeRange                    //范围攻击的范围   
 }
 
 public class PropertySheet
@@ -84,6 +84,7 @@ public class PropertySheet
         float healthAddition=mProperties[Property.HealthAddition];
         return (int)(baseHealth*(healthAddition+100)/100);
     }
+
     // 获取生命恢复速度
     public float GetHealthRecoveryRate()
     {
@@ -94,5 +95,10 @@ public class PropertySheet
     public float GetLifeSteal()
     {
         return mProperties[Property.LifeSteal];
+    }
+
+    public float GetAoeRangeFacter()
+    {
+        return (mProperties[Property.AoeRange]+100)/100;
     }
 }

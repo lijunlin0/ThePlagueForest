@@ -8,9 +8,9 @@ public class Enemy : Character
 {
     protected BulletShooter mBulletShooter;
     protected bool CanShootFlag=false;
-    protected override void Init(PropertySheet basePropertySheet)
+    protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
-        base.Init(basePropertySheet);
+        base.Init(characterId,basePropertySheet);
         mHealthBar=HealthBar.Create(this);
         //添加子弹发射器
         mBulletShooter = new BulletShooter(()=>

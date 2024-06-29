@@ -32,9 +32,9 @@ public class Enemy1 : Enemy
             transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
         }
     }
-    protected override void Init(PropertySheet basePropertySheet)
+    protected void Init(PropertySheet basePropertySheet)
     {
-        base.Init(basePropertySheet);
+        base.Init(CharacterId.Enemy1,basePropertySheet);
         CanShootFlag=false;
         CanShootFlag=true;
     }

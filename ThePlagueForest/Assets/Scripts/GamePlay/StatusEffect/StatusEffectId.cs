@@ -1,5 +1,8 @@
 public enum StatusEffectId
 {
-    //无效Id
-    None = 0,
+    
+    None,       //无效Id
+    Burn,       //燃烧
+    Frozen,     //冰冻
+
 }

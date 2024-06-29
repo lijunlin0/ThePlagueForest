@@ -3,10 +3,10 @@ using System.Collections.Generic;
 //全能护身符--增加 3% 攻击力,3% 攻击速度, 3% 生命值, 3% 移动速度
 public class Amulet  : Equipment
 {
-    private int mDamageAddition=3;
-    private int mAttackSpeedAddition=3;
-    private int mMaxHealthAddition=3;
-    private int mMoveSpeedAddition=3;
+    private const int mDamageAddition=3;
+    private const int mAttackSpeedAddition=3;
+    private const int mMaxHealthAddition=3;
+    private const int mMoveSpeedAddition=3;
 
     public Amulet():base(EquipmentType.Passive,EquipmentId.Amulet)
     {

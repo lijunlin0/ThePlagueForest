@@ -72,11 +72,19 @@ public class FightModel
 
     public void AddEquipment(Equipment equipment)
     {
+        if(!mEquipments.ContainsKey(equipment))
+        {
+            mEquipments.Add(equipment, 0);
+        }
         mEquipments[equipment]+=1;
     }
 
     public int GetEquipmentLayer(Equipment equipment)
     {
+        if(!mEquipments.ContainsKey(equipment))
+        {
+            return 0;
+        }
         return mEquipments[equipment];
     }
 

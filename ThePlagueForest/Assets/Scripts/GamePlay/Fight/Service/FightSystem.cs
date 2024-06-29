@@ -21,16 +21,22 @@ public static class FightSystem
         {
             SetHealth(target, target.GetHealth() - points);
         }
+        FightEventDataDamage damageEventData=new FightEventDataDamage(source,target,damageInfo);
+        FightEventDispatcher.Dispatch(damageEventData);
         return true;
     }
 
-
-
-    //正常伤害流程
-    private static void NormalDamage(DamageInfo damageInfo,int points,ref int healthRealPoints)
+    //恢复
+    //return: 是否成功恢复
+    public static bool Recovery(RecoveryInfo recoveryInfo)
     {
-        Character target=damageInfo.GetTarget();
-        
+        Character target=recoveryInfo.GetTarget();
+        int points=recoveryInfo.GetPoints();
+        if(points>0)
+        {
+            SetHealth(target,target.GetHealth()+points);
+        }
+        return true;
     }
 
     //设置生命值
@@ -52,6 +58,7 @@ public static class FightSystem
         return true;
     }
 
+
     //玩家得到装备
     public static void GetEquipment(Equipment equipment)
     {
@@ -69,7 +76,7 @@ public static class FightSystem
         }
         else
         {
-            new StatusEffect(statusEffectId,player);
+            effect=new StatusEffect(statusEffectId,player);
         }
         
         //添加装备

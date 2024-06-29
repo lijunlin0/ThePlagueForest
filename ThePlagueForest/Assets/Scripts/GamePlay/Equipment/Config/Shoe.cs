@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //布鞋--增加 10% 移动速度
 public class Shoe : Equipment
 {
-    private int mMoveSpeedAddition=10;
+    private const int mMoveSpeedAddition=10;
     public Shoe():base(EquipmentType.Passive,EquipmentId.Shoe)
     {
 

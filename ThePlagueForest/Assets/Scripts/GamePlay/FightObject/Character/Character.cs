@@ -3,16 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterId
+{
+    Player,
+    Enemy1,
+    Enemy2,
+    Boss1,
+}
+
 public class Character : FightObject
 {
+    private CharacterId mCharacterId;
     protected int mHealth;
     protected StatusEffectList mStatusEffectList;
     protected PropertySheet mBasePropertySheet;
     protected PropertySheet mCurrentPropertySheet;
     protected HealthBar mHealthBar;
-    protected virtual void Init(PropertySheet basePropertySheet)
+    protected virtual void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
+
         base.Init();
+        mCharacterId=characterId;
         mBasePropertySheet=basePropertySheet;
         mStatusEffectList=new StatusEffectList(this,OnStatusEffectChanged);
         mCurrentPropertySheet=new PropertySheet(this,mBasePropertySheet,mStatusEffectList);
@@ -42,6 +53,7 @@ public class Character : FightObject
         mHealthBar.UpdateContent();
     }
     public int GetHealth(){return mHealth;}
+    public CharacterId GetCharacterId(){return mCharacterId;}
     public void SetDead(){mIsDead=true;}
     public void SetHealth(int health)
     {
@@ -49,5 +61,17 @@ public class Character : FightObject
         mHealth=Mathf.Clamp(health,0,mCurrentPropertySheet.GetMaxHealth());
         OnHealthChanged();
         //Debug.Log(gameObject.name+":"+health);
+    }
+    public bool IsPlayer()
+    {
+        return mCharacterId==CharacterId.Player;
+    }
+    public bool IsBoss()
+    {
+        return mCharacterId>=CharacterId.Boss1;
+    }
+    public bool IsEnemy()
+    {
+        return mCharacterId!=CharacterId.Player;
     }
 }

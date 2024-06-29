@@ -8,9 +8,9 @@ public class Player : Character
     private static Player sCurrent;
     protected static List<Weapon> mWeapons;
     protected float mCollideProtect=0;
-    protected override void Init(PropertySheet basePropertySheet)
+    protected virtual void Init(PropertySheet basePropertySheet)
     {
-        base.Init(basePropertySheet);
+        base.Init(CharacterId.Player,basePropertySheet);
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mWeapons=new List<Weapon>();

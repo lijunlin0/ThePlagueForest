@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //盔甲--最大生命值增加 100
 public class Armour : Equipment
 {
-    private int mMaxHealthAddition=100;
+    private const int mMaxHealthAddition=100;
     public Armour():base(EquipmentType.Passive,EquipmentId.Armour)
     {
 

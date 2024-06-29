@@ -14,7 +14,7 @@ public class Enemy2 : Enemy
         enemyObject.transform.position=new Vector3(-400,400,-1);
         Enemy2 enemy=enemyObject.AddComponent<Enemy2>();
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",1);
-        enemy.Init(propertySheet);
+        enemy.Init(CharacterId.Enemy2,propertySheet);
         return enemy;
     }
     
@@ -30,5 +30,6 @@ public class Enemy2 : Enemy
         
         FightModel.GetCurrent().AddEnemyBullets(bullet);
     }
+    
 
 }

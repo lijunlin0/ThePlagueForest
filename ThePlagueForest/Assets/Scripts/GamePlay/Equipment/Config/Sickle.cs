@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //镰刀--增加 0.5% 生命偷取率
 public class Sickle : Equipment
 {
-    private float mLifeSteal=0.5f;
+    private const float mLifeSteal=0.5f;
     public Sickle():base(EquipmentType.Passive,EquipmentId.Sickle)
     {
 
