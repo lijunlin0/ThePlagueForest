@@ -19,19 +19,20 @@ public class StatusEffect
 
     private Character mTarget;
     private StatusEffectId mId;
+    private int mMaxLayer;//todo
     private Dictionary<string,string> mUserData;
     private Callback<FightEventData> mFightEventCallback;
 
     //燃烧,冰冻默认持续时间
-    public const float BurnEffectDuration = 4f;
-    public const float FrozenEffectDuration = 4f;
+    public const float BurnDuration = 4f;
+    public const float FrozenDuration = 4f;
 
     //燃烧每次伤害最大生命值比例
     public const float BurnTickDamageWithMaxHealth=4;
     public const float BurnTickDamageWithMaxHealthBoss=1;
 
     //冰冻减速比例
-    public const float FrozenMoveSpeedFactor=-40;
+    public const float FrozenMoveSpeedAddition=-90;
 
 
     public const float BurnTick = 0.5f;
@@ -56,8 +57,10 @@ public class StatusEffect
         mTotalTickDuration=999999;
         mElapsedTickDuration=0;
         mIsDead=false;
-
+        mMaxLayer=InfiniteLayer;
     }
+    public int GetMaxLayer(){return mMaxLayer;}
+    public void SetMaxLayer(int layer){mMaxLayer=layer;}
     public bool IsDead(){return mIsDead;}
     public Character GetTarget(){return mTarget;}
     public Dictionary<Property,float> GetPropertyCorrections() { return mPropertyCorrections;}
@@ -74,9 +77,10 @@ public class StatusEffect
         if(mTickCallback!=null)
         {
             mElapsedTickDuration+=Time.deltaTime;
-            if(mElapsedTickDuration>mTotalDuration)
+            if(mElapsedTickDuration>mTotalTickDuration)
             {
                 mElapsedTickDuration-=mTotalTickDuration;
+                Debug.Log("tick");
                 mTickCallback();
             }
         }
@@ -90,17 +94,12 @@ public class StatusEffect
 
     }
 
-    public void Tick()
-    {
-        if(mTickCallback!=null)
-        {
-            mTickCallback();
-        }
-    }
-
+    public float GetElapsedTickDuration(){return mElapsedTickDuration;}
+    public void  SetElapsedTickDuration(float duration){mElapsedTickDuration=duration;}
     public void SetTick(float tickDuration, Callback tickCallback)
     {
         mTotalTickDuration=tickDuration;
+        Debug.Log("mTotalTickDuration:"+mTotalTickDuration);
         mTickCallback=tickCallback;
     }
     public string GetUserData(string key)

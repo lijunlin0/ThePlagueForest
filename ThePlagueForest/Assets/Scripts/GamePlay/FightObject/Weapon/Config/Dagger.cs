@@ -7,6 +7,7 @@ public class Dagger:Weapon
 {
     public override void Init()
     {
+        mAttack=1;
          BulletShooter shooter = new BulletShooter(()=>
          {
             //方向朝着最近的敌人
@@ -16,7 +17,7 @@ public class Dagger:Weapon
                 return;
             }
             //创建子弹
-            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),40);
+            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),mAttack);
             bulletDagger.transform.position=FightModel.GetCurrent().GetPlayer().transform.position;
            
             Vector3 direction=(nearEnemy.transform.position-bulletDagger.transform.position).normalized;

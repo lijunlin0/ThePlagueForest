@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 //执行战斗逻辑
@@ -11,16 +12,21 @@ public static class FightSystem
     {
         Character source=damageInfo.GetSource();
         Character target=damageInfo.GetTarget();
-        
+        Bullet bullet=damageInfo.GetBullet();
+        if(target.GetStatusEffectList().IsInvincible())
+        {
+            Debug.Log("无敌状态抵挡伤害");
+            return false;
+        }
         int points=damageInfo.GetPoints();
         //伤害提升
         PropertySheet sourceProcertySheet=source.GetCurrentPropertySheet();
         points=(int)(points*sourceProcertySheet.GetDamageFactor());
-
-        if(points>0)
+        if(points==0)
         {
-            SetHealth(target, target.GetHealth() - points);
+            return false;
         }
+        SetHealth(target, target.GetHealth() - points);
         FightEventDataDamage damageEventData=new FightEventDataDamage(source,target,damageInfo);
         FightEventDispatcher.Dispatch(damageEventData);
         return true;
@@ -93,7 +99,14 @@ public static class FightSystem
     public static bool AddStatusEffect(StatusEffectChangeInfo changeInfo)
     {
         StatusEffect statusEffect=changeInfo.GetStatusEffect();
-        statusEffect.GetTarget().GetStatusEffectList().AddStatusEffect(statusEffect);
+        StatusEffectList statusEffectList=statusEffect.GetTarget().GetStatusEffectList();
+        List<StatusEffect> statusEffects=statusEffectList.GetStatusEffectsWithId(statusEffect.GetId());
+        if(statusEffects.Count>=statusEffect.GetMaxLayer())
+        {
+            statusEffect.SetElapsedTickDuration(statusEffects[0].GetElapsedTickDuration());
+            statusEffectList.RemoveStatusEffect(statusEffects[0]);
+        }
+        statusEffectList.AddStatusEffect(statusEffect);
         return true;
     }
 }

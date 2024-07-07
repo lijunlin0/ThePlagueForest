@@ -16,7 +16,7 @@ public class FightObject : MonoBehaviour
         // 检查是否成功获取到组件
         if (mCollider == null)
         {
-            Debug.LogError("未能找到PolygonCollider2D组件！");
+            //Debug.LogError("未能找到PolygonCollider2D组件！");
         }
         mIsDead=false;
     }

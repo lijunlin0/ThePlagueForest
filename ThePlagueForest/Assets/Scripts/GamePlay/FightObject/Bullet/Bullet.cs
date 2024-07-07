@@ -22,7 +22,7 @@ public class Bullet : FightObject
         mSource = source;
         if(mSource==null)
         {
-            Debug.Log("null");
+            //Debug.Log("null");
         }
         mPoints = points;
         mLiveTime=0;
@@ -60,6 +60,11 @@ public class Bullet : FightObject
             mIsDead=true;
             FightSystem.Damage(damageInfo);
         }
+    }
+
+    public Character GetSource()
+    {
+        return mSource;
     }
 
 }

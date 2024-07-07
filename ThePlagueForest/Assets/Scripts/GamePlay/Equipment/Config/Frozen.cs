@@ -4,7 +4,7 @@ using System.Collections.Generic;
 //炽焰弹--10% 子弹附带燃烧效果
 public class Frozen : Equipment
 {
-    private const int FrozenBulletChance=20;
+    private const int FrozenBulletChance=10;
     public Frozen():base(EquipmentType.Passive,EquipmentId.Frozen)
     {
 

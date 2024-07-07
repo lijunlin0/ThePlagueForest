@@ -34,10 +34,4 @@ public class Heartstone : Equipment
                     
         });
     }
-
-    public void OnFightEvent(FightEventData eventData)
-    {
-       
-        
-    }
 }

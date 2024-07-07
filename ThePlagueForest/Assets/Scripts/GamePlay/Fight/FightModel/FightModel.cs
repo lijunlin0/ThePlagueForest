@@ -30,7 +30,6 @@ public class FightModel
     }
     public void AddEnemyBullets(Bullet bullet)
     {
-        Debug.Log("敌人发射子弹");
         mEnemyBulletList.Add(bullet);
     }
     public List<Enemy> GetEnemies()
@@ -54,12 +53,15 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         EnemyCreate();
+        Equipment equipment=new BurnCircle();
+        FightSystem.GetEquipment(equipment);
+
     }
     public void EnemyCreate()
     {
-        Enemy1 enemy1= Enemy1.Create();
+        //Enemy1 enemy1= Enemy1.Create();
         Enemy2 enemy2= Enemy2.Create();
-        mEnemyList.Add(enemy1);
+        //mEnemyList.Add(enemy1);
         mEnemyList.Add(enemy2);
     }
 

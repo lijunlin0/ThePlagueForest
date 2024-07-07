@@ -23,10 +23,11 @@ public class Enemy2 : Enemy
         //创建子弹
         Enemy2Bullet bullet=Enemy2Bullet.Create(this,10);
         bullet.transform.position=transform.position;
-
+        //Debug.Log("敌人发射子弹,位置:"+bullet.transform.position);
         //方向朝着玩家
         Vector3 direction=(FightModel.GetCurrent().GetPlayer().transform.position-bullet.transform.position).normalized;
         bullet.transform.localRotation=FightUtility.DirectionToRotation(direction);
+    
         
         FightModel.GetCurrent().AddEnemyBullets(bullet);
     }

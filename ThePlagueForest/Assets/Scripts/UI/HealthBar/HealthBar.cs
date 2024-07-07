@@ -32,7 +32,7 @@ public class HealthBar : MonoBehaviour
         float maxHealth=mCharacter.GetCurrentPropertySheet().GetMaxHealth();
         float currentHealth=mCharacter.GetHealth();
         float targetValue=currentHealth/maxHealth;
-        Debug.Log(mCharacter.name+":最大生命值"+maxHealth+"当前生命值:"+currentHealth+",Value:"+targetValue);
+        //Debug.Log(mCharacter.name+":最大生命值"+maxHealth+"当前生命值:"+currentHealth+",Value:"+targetValue);
         mHealthSlider.value=targetValue;
         if(mDamageSlider.value<targetValue)
         {

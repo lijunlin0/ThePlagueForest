@@ -5,7 +5,7 @@ using System.Collections.Generic;
 //炽焰弹--10% 子弹附带燃烧效果
 public class Burn : Equipment
 {
-    private const int BurnBulletChance=20;
+    private const int BurnBulletChance=10;
     public Burn():base(EquipmentType.Passive,EquipmentId.Burn)
     {
 

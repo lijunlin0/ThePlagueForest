@@ -30,6 +30,7 @@ public class Enemy1 : Enemy
         {   
             transform.localRotation=Quaternion.LookRotation(Vector3.forward, direction);
             transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
+            //Debug.Log("移动速度:"+mCurrentPropertySheet.GetMoveSpeed());
         }
     }
     protected void Init(PropertySheet basePropertySheet)

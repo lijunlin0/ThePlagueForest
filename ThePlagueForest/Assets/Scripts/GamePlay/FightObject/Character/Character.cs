@@ -74,4 +74,10 @@ public class Character : FightObject
     {
         return mCharacterId!=CharacterId.Player;
     }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        mStatusEffectList.OnUpdate();
+    }
 }
