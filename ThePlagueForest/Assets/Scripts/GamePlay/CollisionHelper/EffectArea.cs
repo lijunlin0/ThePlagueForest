@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EffectArea:MonoBehaviour
 {
-    private PolygonCollider2D mCollider;
+    private MyCollider mCollider;
     private Callback<Character> mCollideCallback;
 
     
@@ -21,7 +21,12 @@ public class EffectArea:MonoBehaviour
     private void Init(Callback<Character> collideCallback)
     {
         mCollideCallback=collideCallback;
-        mCollider=GetComponent<PolygonCollider2D>();
+        mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
+    }
+
+    public void Update()
+    {
+        mCollider.OnUpdate();
     }
 
     public void Collide()
@@ -29,7 +34,7 @@ public class EffectArea:MonoBehaviour
         List<Enemy> enemies=FightModel.GetCurrent().GetEnemies();
         foreach(Enemy enemy in enemies)
         {
-            PolygonCollider2D collider2=enemy.GetCollider();
+            MyCollider collider2=enemy.GetCollider();
             if(CollisionHelper.IsColliding(mCollider,collider2))
             {
                 mCollideCallback(enemy);

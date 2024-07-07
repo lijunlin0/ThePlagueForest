@@ -55,7 +55,6 @@ public class StatusEffect
         mTotalDuration=totalDuration;
         mElapsedTickDuration=0;
         mTotalTickDuration=999999;
-        mElapsedTickDuration=0;
         mIsDead=false;
         mMaxLayer=InfiniteLayer;
     }
@@ -80,7 +79,6 @@ public class StatusEffect
             if(mElapsedTickDuration>mTotalTickDuration)
             {
                 mElapsedTickDuration-=mTotalTickDuration;
-                Debug.Log("tick");
                 mTickCallback();
             }
         }

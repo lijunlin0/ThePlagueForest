@@ -4,9 +4,13 @@ using UnityEngine;
 
 public static class CollisionHelper
 {
-    public static bool IsColliding(PolygonCollider2D collider1,PolygonCollider2D collider2)
+    public static bool IsColliding(MyCollider collider1,MyCollider collider2)
     {
-        return collider1.Distance(collider2).isOverlapped;
+        if(!collider1.IsEnable()||!collider2.IsEnable())
+        {
+            return false;
+        }
+        return collider1.GetCollider().Distance(collider2.GetCollider()).isOverlapped;
     }
 
     public static void Collide()
@@ -25,10 +29,10 @@ public static class CollisionHelper
         {
             return;  
         }
-        PolygonCollider2D collider1=player.GetCollider();
+        MyCollider collider1=player.GetCollider();
         foreach(Enemy enemy in enemies)
         {
-            PolygonCollider2D collider2=enemy.GetCollider();
+            MyCollider collider2=enemy.GetCollider();
             if(IsColliding(collider1,collider2))
             {
                 
@@ -46,10 +50,10 @@ public static class CollisionHelper
     {
         foreach(Bullet bullet in bullets)
         {
-            PolygonCollider2D collider1=bullet.GetCollider();
+            MyCollider collider1=bullet.GetCollider();
             foreach(Character enemy in enemies)
             {
-                PolygonCollider2D collider2=enemy.GetCollider();
+                MyCollider collider2=enemy.GetCollider();
                 if(IsColliding(collider1,collider2))
                 {
                     bullet.OnCollideCharacter(enemy);
@@ -62,10 +66,10 @@ public static class CollisionHelper
     private static void EnemyBulletHitPlayer(List<Bullet> bullets)
     {
         Player player=Player.GetCurrent();
-        PolygonCollider2D collider1=player.GetCollider();
+        MyCollider collider1=player.GetCollider();
         foreach(Bullet bullet in bullets)
         {
-            PolygonCollider2D collider2=bullet.GetCollider();
+            MyCollider collider2=bullet.GetCollider();
             if(IsColliding(collider1,collider2)) 
             {
                 bullet.OnCollideCharacter(player);

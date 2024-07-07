@@ -18,7 +18,7 @@ public class Bullet : FightObject
     protected bool mIsPenetrate=false;
     protected virtual void Init(Character source,int points)
     {
-        mCollider=GetComponent<PolygonCollider2D>();
+        mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
         mSource = source;
         if(mSource==null)
         {
