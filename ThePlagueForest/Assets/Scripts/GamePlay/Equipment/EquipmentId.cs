@@ -15,5 +15,6 @@ public enum EquipmentId
     Crown,              //王冠
     BurnCircle,         //火圈
     FrozenCircle,       //冰圈
+    DeathBomb,          //死亡炸弹
 
 }

@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class EffectArea:MonoBehaviour
 {
     private MyCollider mCollider;
     private Callback<Character> mCollideCallback;
+    private Callback mCollisionEnabledCallback;
+
 
     
     public static EffectArea Create(string prefabName,Callback<Character> collideCallback)
@@ -17,6 +20,14 @@ public class EffectArea:MonoBehaviour
         effectArea.Init(collideCallback);
         return effectArea; 
     }
+    public static EffectArea BombCircleCreate(Vector3 position,Callback<Character> collideCallback)
+    {
+        GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/BombCircle");
+        GameObject effectAreaArea=Instantiate(effectAreaPrefab,position,Quaternion.identity);
+        EffectArea effectArea=effectAreaArea.AddComponent<EffectArea>();
+        effectArea.Init(collideCallback);
+        return effectArea; 
+    }
 
     private void Init(Callback<Character> collideCallback)
     {
@@ -24,9 +35,27 @@ public class EffectArea:MonoBehaviour
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
     }
 
+    public void PlayDestroyAnimation()
+    {
+        SpriteRenderer spriteRenderer=GetComponent<SpriteRenderer>();
+        spriteRenderer.DOFade(0f,1f).OnComplete(()=>
+        {
+            Destroy(gameObject);
+        });
+    }
+
     public void Update()
     {
         mCollider.OnUpdate();
+        if(mCollider.IsEnable()&&mCollisionEnabledCallback!=null)
+        {
+           mCollisionEnabledCallback();
+           mCollisionEnabledCallback=null;
+        }
+    }
+    public void SetCollisionEnabledCallback(Callback callback)
+    {
+        mCollisionEnabledCallback=callback;
     }
 
     public void Collide()

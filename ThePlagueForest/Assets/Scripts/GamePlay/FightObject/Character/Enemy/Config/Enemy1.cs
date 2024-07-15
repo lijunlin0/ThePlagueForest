@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 public class Enemy1 : Enemy
 {
 
-    public static Enemy1 Create()
+    public static Enemy1 Create(Vector3 position)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy1");
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
-        enemyObject.transform.position=new Vector3(900,500,-1);
+        enemyObject.transform.position=position;
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",1);
         enemy.Init(propertySheet);
@@ -42,6 +42,7 @@ public class Enemy1 : Enemy
     public override void OnUpdate()
     {
         base.OnUpdate();
+        Debug.Log("移动速度:"+mCurrentPropertySheet.GetMoveSpeed());
         Move();
     }
 }

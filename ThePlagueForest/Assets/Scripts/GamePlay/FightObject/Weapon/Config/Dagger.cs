@@ -7,7 +7,7 @@ public class Dagger:Weapon
 {
     public override void Init()
     {
-        mAttack=1;
+        mAttack=20;
          BulletShooter shooter = new BulletShooter(()=>
          {
             //方向朝着最近的敌人

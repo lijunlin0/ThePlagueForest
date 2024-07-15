@@ -32,7 +32,7 @@ public class StatusEffect
     public const float BurnTickDamageWithMaxHealthBoss=1;
 
     //冰冻减速比例
-    public const float FrozenMoveSpeedAddition=-90;
+    public const float FrozenMoveSpeedAddition=-40;
 
 
     public const float BurnTick = 0.5f;

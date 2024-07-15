@@ -7,11 +7,11 @@ using UnityEngine.UIElements;
 //巫师
 public class Enemy2 : Enemy
 {
-    public static Enemy2 Create()
+    public static Enemy2 Create(Vector3 position)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy2");
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
-        enemyObject.transform.position=new Vector3(-400,400,-1);
+        enemyObject.transform.position=position;
         Enemy2 enemy=enemyObject.AddComponent<Enemy2>();
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",1);
         enemy.Init(CharacterId.Enemy2,propertySheet);
