@@ -15,7 +15,8 @@ public enum Property
     BaseMoveSpeed,              //基础移动速度
     MoveSpeedAddition,          //移动速度提升
     LifeSteal,                  //生命偷取率
-    AoeRange                    //范围攻击的范围   
+    AoeRange,                   //范围攻击的范围
+    Lucky,                      //幸运值 
 }
 
 public class PropertySheet
@@ -100,5 +101,11 @@ public class PropertySheet
     public float GetAoeRangeFacter()
     {
         return (mProperties[Property.AoeRange]+100)/100;
+    }
+
+    public float GetLuckyFactor()
+    {
+        float lucky=mProperties[Property.Lucky];
+        return (100+lucky)/100;
     }
 }

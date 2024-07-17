@@ -23,8 +23,7 @@ public class Frozen : Equipment
             {
                 return;
             }
-            Random random=new Random();
-            bool isFrozen = random.Next(100)<FrozenBulletChance;
+            bool isFrozen = RandomHelper.PlayerRandomResultWithLucky(FrozenBulletChance*layer);;
             if(!isFrozen)
             {
                 return;

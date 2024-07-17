@@ -24,8 +24,7 @@ public class Burn : Equipment
             {
                 return;
             }
-            Random random=new Random();
-            bool isBurn = random.Next(100)<BurnBulletChance;
+            bool isBurn = RandomHelper.PlayerRandomResultWithLucky(BurnBulletChance*layer);
             if(!isBurn)
             {
                 return;

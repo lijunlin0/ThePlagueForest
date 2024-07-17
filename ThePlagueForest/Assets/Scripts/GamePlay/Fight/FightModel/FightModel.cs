@@ -53,11 +53,8 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         EnemyCreate();
-        Equipment equipment=new DeathBomb();
+        Equipment equipment=new LuckyStone();
         FightSystem.GetEquipment(equipment);
-        Equipment equipment1=new BurnCircle();
-        FightSystem.GetEquipment(equipment1);
-
     }
     public void EnemyCreate()
     {
