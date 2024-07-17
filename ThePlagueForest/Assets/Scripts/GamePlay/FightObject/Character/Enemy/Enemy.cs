@@ -16,7 +16,7 @@ public class Enemy : Character
         mBulletShooter = new BulletShooter(()=>
         {
             Shoot();
-        },1);
+        },2);
     }
     public virtual void Move()
     {

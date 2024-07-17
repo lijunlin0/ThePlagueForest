@@ -15,6 +15,7 @@ public class Player1 : Player
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Player1",1);
         player.Init(propertySheet);
         GameObject attackRangeArea=Instantiate(Resources.Load<GameObject>("FightObject/Area/AttackRange"),Player.GetCurrent().transform);
+        player.mAttackRangeArea=attackRangeArea;
         return player;
     }
     public static Vector3 GetPosition()

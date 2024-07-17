@@ -28,8 +28,17 @@ public class StunGun:Weapon
                 FightModel.GetCurrent().AddPlayerBullet(bullet);
                 character=nearEnemy;
             }
-            mTargets.Insert(0,Player.GetCurrent());
-            FightUtility.ChainEffect(mTargets);
+            if(mTargets.Count==0)
+            {
+                mIsShoot=false;
+            }
+            else
+            {
+                mTargets.Insert(0,Player.GetCurrent());
+                mIsShoot=true;
+                FightUtility.ChainEffect(mTargets);
+            }
+           
 
         },mShootTime);
         mBulletShooter=shooter;

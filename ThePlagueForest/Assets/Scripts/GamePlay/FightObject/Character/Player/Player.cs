@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class Player : Character
@@ -8,6 +9,9 @@ public class Player : Character
     private static Player sCurrent;
     protected static List<Weapon> mWeapons;
     protected float mCollideProtect=0;
+    protected bool mIsShoot=false;
+    protected bool mShootflickerFlag=true;
+    protected GameObject mAttackRangeArea=null;
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Player,basePropertySheet);
@@ -44,6 +48,7 @@ public class Player : Character
 
     public override void OnUpdate()
     {
+        mIsShoot=false;
         base.OnUpdate();
         if(mCollideProtect>=0)
         {
@@ -52,7 +57,39 @@ public class Player : Character
         Move();
         foreach(Weapon weapon in mWeapons)
         {
+            if(weapon.IsShoot())
+            {
+                mIsShoot=true;
+            }
             weapon.OnUpdate();
+        }
+        AttackRangeAreaFlicker();
+        
+    }
+    protected void AttackRangeAreaFlicker()
+    {
+        SpriteRenderer renderer=mAttackRangeArea.GetComponent<SpriteRenderer>();
+        if(mIsShoot)
+        {
+            renderer.DOFade(0f,0.5f);
+        }
+        //未发射状态闪烁
+        else
+        {
+            if(mShootflickerFlag==true)
+            {
+                renderer.DOFade(0f,0.75f).OnComplete(()=>
+                {
+                    mShootflickerFlag=false;
+                });
+            }
+            else
+            {
+                renderer.DOFade(1f,0.75f).OnComplete(()=>
+                {
+                    mShootflickerFlag=true;
+                });
+            }
         }
     }
     public override void PlayDestroyAnimation()

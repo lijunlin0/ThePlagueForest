@@ -29,10 +29,6 @@ public static class FightUtility
 
     public static void ChainEffect(List<Character> targets)
     {
-        if(targets.Count<2)
-        {
-            return;
-        }
         GameObject prefab=Resources.Load<GameObject>("FightObject/Effect/Bullet/StunChain");
         for(int i=1;i<targets.Count;i++)
         {
@@ -46,7 +42,7 @@ public static class FightUtility
             };
             updatePosition();
 
-            DOVirtual.Float(0,1,0.15f,(float f)=>
+            DOVirtual.Float(0,1,0.05f,(float f)=>
             {
                 updatePosition();
             }).OnComplete(()=>

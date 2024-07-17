@@ -59,14 +59,17 @@ public class FightModel
     public void EnemyCreate()
     {
         Enemy2 enemy1= Enemy2.Create(new Vector3(900,500,-1));
-        Enemy2 enemy2= Enemy2.Create(new Vector3(900,440,-1));
-        Enemy2 enemy3= Enemy2.Create(new Vector3(860,500,-1));
+        Enemy2 enemy2= Enemy2.Create(new Vector3(900,300,-1));
+        Enemy2 enemy3= Enemy2.Create(new Vector3(700,400,-1));
+        Enemy2 enemy4= Enemy2.Create(new Vector3(-300,100,-1));
         Enemy1 enemy100= Enemy1.Create(new Vector3(200,460,-1));
         Enemy1 enemy101= Enemy1.Create(new Vector3(-900,200,-1));
         Enemy1 enemy102= Enemy1.Create(new Vector3(-400,100,-1));
+       
         mEnemyList.Add(enemy1);
         mEnemyList.Add(enemy2);
         mEnemyList.Add(enemy3);
+        mEnemyList.Add(enemy4);
         mEnemyList.Add(enemy100);
         mEnemyList.Add(enemy101);
         mEnemyList.Add(enemy102);

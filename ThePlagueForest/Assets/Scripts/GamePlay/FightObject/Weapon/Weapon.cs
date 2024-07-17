@@ -11,6 +11,7 @@ public class Weapon
     public static float mAttackRange=400;
     //攻击力
     protected int mAttack=10;
+    protected bool mIsShoot=true;
     public virtual void Init()
     {
        
@@ -24,4 +25,6 @@ public class Weapon
     {
         return mAttack;
     }
+
+    public bool IsShoot(){return mIsShoot;}
 }
