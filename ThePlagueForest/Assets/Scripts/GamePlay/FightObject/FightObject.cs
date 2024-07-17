@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FightObject : MonoBehaviour
@@ -20,7 +21,11 @@ public class FightObject : MonoBehaviour
 
     public virtual void PlayDestroyAnimation()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        DOVirtual.DelayedCall(5,()=>
+        {
+            Destroy(gameObject);
+        });
     }
     public MyCollider GetCollider(){return mCollider;}
     public bool IsDead() {return mIsDead;}

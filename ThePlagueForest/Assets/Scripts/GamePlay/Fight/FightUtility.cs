@@ -1,6 +1,7 @@
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public static class FightUtility
@@ -26,15 +27,52 @@ public static class FightUtility
         return Quaternion.Euler(0,0,radian*Mathf.Rad2Deg);
     }
 
-    public static Enemy GetNearEnemy()
+    public static void ChainEffect(List<Character> targets)
     {
+        if(targets.Count<2)
+        {
+            return;
+        }
+        GameObject prefab=Resources.Load<GameObject>("FightObject/Effect/Bullet/StunChain");
+        for(int i=1;i<targets.Count;i++)
+        {
+            Character startEnemy=targets[i-1];
+            Character endEnemy=targets[i];
+            GameObject effect=GameObject.Instantiate(prefab);
+            Callback updatePosition=()=>
+            {
+
+                LineLink(effect,startEnemy.transform.position,endEnemy.transform.position);
+            };
+            updatePosition();
+
+            DOVirtual.Float(0,1,0.15f,(float f)=>
+            {
+                updatePosition();
+            }).OnComplete(()=>
+            {
+                GameObject.Destroy(effect);
+            });
+        }
+    }
+
+    public static Enemy GetNearEnemy(Character character,List<Character> ignoreList=null)
+    {
+        if(character.IsEnemy())
+        {
+            ignoreList.Add(character as Enemy);
+        }
         float minDistance = float.MaxValue;
         Enemy res=null;
         List<Enemy> enemies=FightModel.GetCurrent().GetEnemies();
         foreach(Enemy enemy in enemies)
         {
-            float distance=Vector3.Distance(FightModel.GetCurrent().GetPlayer().transform.position,enemy.transform.position);
-            if(Vector3.Distance(FightModel.GetCurrent().GetPlayer().transform.position,enemy.transform.position)<minDistance)
+            if(ignoreList.Contains(enemy))
+            {
+                continue;
+            }
+            float distance=Vector3.Distance(character.transform.position,enemy.transform.position);
+            if(distance<Weapon.mAttackRange&&distance<minDistance)
             {
                 res=enemy;
                 minDistance=distance;
@@ -42,6 +80,25 @@ public static class FightUtility
             }
         }
         return res;
+    }
+
+    public static void LineLink(GameObject fightObject,Vector3 startPosition,Vector3 endPosition,float xFactor=0.1f)
+    {
+        Vector3 direction=endPosition-startPosition;
+        fightObject.transform.localPosition=(startPosition+endPosition)/2;
+        fightObject.transform.localRotation=DirectionToRotation(direction);
+        float distance=Mathf.Sqrt(SqrDistance2D(startPosition,endPosition));
+        float scaleY=fightObject.transform.localScale.y;
+
+        fightObject.transform.localScale=new Vector3(distance*xFactor,scaleY,1);
+
+    }
+    
+    public static float SqrDistance2D(Vector3 position1,Vector3 position2)
+    {
+        float dx=position1.x-position2.x;
+        float dy=position1.y-position2.y;
+        return dx*dx+dy*dy;
     }
 
     public static void Move(GameObject gameObject,float moveSpeed)

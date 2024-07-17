@@ -11,7 +11,7 @@ public class Dagger:Weapon
          BulletShooter shooter = new BulletShooter(()=>
          {
             //方向朝着最近的敌人
-            Enemy nearEnemy=FightUtility.GetNearEnemy();
+            Enemy nearEnemy=FightUtility.GetNearEnemy(Player.GetCurrent());
             if(nearEnemy==null)
             {
                 return;

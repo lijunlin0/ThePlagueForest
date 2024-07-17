@@ -21,6 +21,6 @@ public class Enemy2Bullet : Bullet
         {
             return;
         }
-        FightUtility.Move(gameObject,mBulletMoveSpeed);
+        FightUtility.Move(gameObject,mMoveSpeed);
     }
 }

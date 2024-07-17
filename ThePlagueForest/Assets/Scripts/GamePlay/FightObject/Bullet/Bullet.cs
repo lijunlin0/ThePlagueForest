@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bullet : FightObject
 {    
     //子弹移动速度
-    protected int mBulletMoveSpeed=900;
+    protected int mMoveSpeed=900;
     protected double mLiveTime;
     protected double mMaxLifeTime;
     //子弹来源角色

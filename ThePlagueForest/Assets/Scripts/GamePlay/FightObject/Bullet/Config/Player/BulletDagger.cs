@@ -21,6 +21,6 @@ public class BulletDagger: Bullet
         {
             return;
         }
-        FightUtility.Move(gameObject,mBulletMoveSpeed);
+        FightUtility.Move(gameObject,mMoveSpeed);
     }
 }

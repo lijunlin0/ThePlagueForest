@@ -42,7 +42,6 @@ public class Enemy1 : Enemy
     public override void OnUpdate()
     {
         base.OnUpdate();
-        Debug.Log("移动速度:"+mCurrentPropertySheet.GetMoveSpeed());
         Move();
     }
 }
