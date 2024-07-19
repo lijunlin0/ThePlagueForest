@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 5715505915148379908}
   - component: {fileID: 3860540075549904358}
   m_Layer: 0
-  m_Name: DefaultBullet
+  m_Name: BulletDagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

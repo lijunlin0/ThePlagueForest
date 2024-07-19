@@ -20,25 +20,24 @@ public class EffectArea:MonoBehaviour
         effectArea.Init(collideCallback);
         return effectArea; 
     }
-    public static EffectArea BombCircleCreate(Vector3 position,Callback<Character> collideCallback)
+    public static EffectArea CircleWithPositonCreate(string prefabName,Vector3 position,Callback<Character> collideCallback)
     {
-        GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/BombCircle");
+        GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/"+prefabName);
         GameObject effectAreaArea=Instantiate(effectAreaPrefab,position,Quaternion.identity);
         EffectArea effectArea=effectAreaArea.AddComponent<EffectArea>();
         effectArea.Init(collideCallback);
         return effectArea; 
     }
-
     private void Init(Callback<Character> collideCallback)
     {
         mCollideCallback=collideCallback;
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
     }
 
-    public void PlayDestroyAnimation()
+    public void PlayDestroyAnimation(float fadeOutDuration)
     {
         SpriteRenderer spriteRenderer=GetComponent<SpriteRenderer>();
-        spriteRenderer.DOFade(0f,1f).OnComplete(()=>
+        spriteRenderer.DOFade(0f,fadeOutDuration).OnComplete(()=>
         {
             Destroy(gameObject);
         });

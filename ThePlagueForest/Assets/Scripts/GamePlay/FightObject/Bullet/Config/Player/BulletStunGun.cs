@@ -8,7 +8,7 @@ public class BulletStunGun: Bullet
 { 
     public static BulletStunGun Create(Character character,int points)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/StunBullet");
+        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletStunGun");
         GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
         BulletStunGun bullet=bulletObject.AddComponent<BulletStunGun>();
         bullet.Init(character,points);

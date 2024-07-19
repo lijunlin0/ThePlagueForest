@@ -3,15 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//匕首
-public class Dagger:Weapon
+//火焰魔杖
+public class FireWand:Weapon
 {
     public override void Init()
     {
-        mAttack=20;
+        mAttack=10;
          BulletShooter shooter = new BulletShooter(()=>
          {
-            //方向朝着最近的敌人
             Enemy nearEnemy=FightUtility.GetNearEnemy(Player.GetCurrent());
             if(nearEnemy==null)
             {
@@ -20,12 +19,13 @@ public class Dagger:Weapon
             }
             mIsShoot=true;
             //创建子弹
-            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),mAttack);
-            bulletDagger.transform.position=Player.GetCurrent().transform.position;
-           
-            Vector3 direction=(nearEnemy.transform.position-bulletDagger.transform.position).normalized;
-            bulletDagger.transform.rotation=FightUtility.DirectionToRotation(direction);
-            FightModel.GetCurrent().AddPlayerBullet(bulletDagger);
+            BulletFireWand bulletFireWand = BulletFireWand.Create(Player.GetCurrent(),mAttack);
+            bulletFireWand.transform.position=Player.GetCurrent().transform.position;
+
+            //方向朝着最近的敌人
+            Vector3 direction=(nearEnemy.transform.position-bulletFireWand.transform.position).normalized;
+            bulletFireWand.transform.rotation=FightUtility.DirectionToRotation(direction);
+            FightModel.GetCurrent().AddPlayerBullet(bulletFireWand);
         },mShootTime);
         mBulletShooter=shooter;
     }

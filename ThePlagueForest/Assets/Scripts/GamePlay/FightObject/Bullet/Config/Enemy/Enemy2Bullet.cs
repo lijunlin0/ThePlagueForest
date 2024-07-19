@@ -8,7 +8,7 @@ public class Enemy2Bullet : Bullet
 {
     public static Enemy2Bullet Create(Enemy enemy,int points)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/DefaultBullet");
+        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletDagger");
         GameObject bulletObject=Instantiate(bulletPrefab);
         Enemy2Bullet bullet=bulletObject.AddComponent<Enemy2Bullet>();
         bullet.Init(enemy,points);

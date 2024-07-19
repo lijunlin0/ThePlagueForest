@@ -22,7 +22,7 @@ public class DeathBomb : Equipment
             }
             Player player = Player.GetCurrent();
             Character enemy=eventData.GetTarget();
-            EffectArea area= EffectArea.BombCircleCreate(enemy.gameObject.transform.position,(Character target)=>
+            EffectArea area= EffectArea.CircleWithPositonCreate("BombCircle",enemy.gameObject.transform.position,(Character target)=>
             {
                 int points=target.GetCurrentPropertySheet().GetMaxHealth()*mBombDamagePercent/100;
                 DamageInfo damageInfo=new DamageInfo(player,target,points,null,statusEffect);
@@ -30,7 +30,7 @@ public class DeathBomb : Equipment
             });
             area.SetCollisionEnabledCallback(()=>
             {
-                area.PlayDestroyAnimation();
+                area.PlayDestroyAnimation(0.15f);
                 area.Collide();
             });
         });

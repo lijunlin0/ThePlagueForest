@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//匕首
+//匕首子弹
 public class BulletDagger: Bullet
 { 
     public static BulletDagger Create(Character character,int points)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/DefaultBullet");
+        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletDagger");
         GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
         BulletDagger bullet=bulletObject.AddComponent<BulletDagger>();
         bullet.Init(character,points);

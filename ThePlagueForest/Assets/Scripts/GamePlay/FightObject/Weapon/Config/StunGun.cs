@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//电击枪
+
 public class StunGun:Weapon
 {
     private const int BulletCount=5;

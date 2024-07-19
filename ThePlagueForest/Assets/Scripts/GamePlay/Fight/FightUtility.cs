@@ -42,7 +42,7 @@ public static class FightUtility
             };
             updatePosition();
 
-            DOVirtual.Float(0,1,0.05f,(float f)=>
+            DOVirtual.Float(0,1,0.1f,(float f)=>
             {
                 updatePosition();
             }).OnComplete(()=>
@@ -63,7 +63,7 @@ public static class FightUtility
         List<Enemy> enemies=FightModel.GetCurrent().GetEnemies();
         foreach(Enemy enemy in enemies)
         {
-            if(ignoreList.Contains(enemy))
+            if(ignoreList!=null&&ignoreList.Contains(enemy))
             {
                 continue;
             }
