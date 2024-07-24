@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bullet : FightObject
 {    
     //子弹移动速度
-    protected int mMoveSpeed=900;
+    protected float mMoveSpeed=900;
     protected double mLiveTime;
     protected double mMaxLifeTime;
     //子弹来源角色
@@ -18,6 +18,7 @@ public class Bullet : FightObject
     protected bool mIsPenetrate=false;
     protected virtual void Init(Character source,int points)
     {
+        base.Init();
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
         mSource = source;
         if(mSource==null)
@@ -30,7 +31,7 @@ public class Bullet : FightObject
         mIgnoreList=new List<Character>();
     }
     public override void OnUpdate()
-    {
+    { 
         base.OnUpdate();
         mLiveTime+=Time.deltaTime;
         if(mLiveTime>=mMaxLifeTime)

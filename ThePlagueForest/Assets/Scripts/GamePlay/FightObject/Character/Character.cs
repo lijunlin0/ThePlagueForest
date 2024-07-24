@@ -48,18 +48,19 @@ public class Character : FightObject
             mHealth=currMaxHealth;
         }
     }
-    protected virtual void OnHealthChanged()
+    protected virtual void OnHealthChanged(int theoryChangePoints)
     {
         mHealthBar.UpdateContent();
+        HealthChangeText healthChangeText=HealthChangeText.Create(theoryChangePoints,this);
     }
     public int GetHealth(){return mHealth;}
     public CharacterId GetCharacterId(){return mCharacterId;}
     public void SetDead(){mIsDead=true;}
-    public void SetHealth(int health)
+    public void SetHealth(int health,int theoryChangePoints)
     {
-        Debug.Log("设置的血量: "+health);
+        //Debug.Log("设置的血量: "+health);
         mHealth=Mathf.Clamp(health,0,mCurrentPropertySheet.GetMaxHealth());
-        OnHealthChanged();
+        OnHealthChanged(theoryChangePoints);
         //Debug.Log(gameObject.name+":"+health);
     }
     public bool IsPlayer()

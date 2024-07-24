@@ -8,7 +8,7 @@ public class EffectArea:MonoBehaviour
     private MyCollider mCollider;
     private Callback<Character> mCollideCallback;
     private Callback mCollisionEnabledCallback;
-
+    private GameObject mDisplay;
 
     
     public static EffectArea Create(string prefabName,Callback<Character> collideCallback)
@@ -30,13 +30,14 @@ public class EffectArea:MonoBehaviour
     }
     private void Init(Callback<Character> collideCallback)
     {
+        mDisplay=transform.Find("Display").gameObject;
         mCollideCallback=collideCallback;
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
     }
 
     public void PlayDestroyAnimation(float fadeOutDuration)
     {
-        SpriteRenderer spriteRenderer=GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0f,fadeOutDuration).OnComplete(()=>
         {
             Destroy(gameObject);

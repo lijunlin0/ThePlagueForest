@@ -6,10 +6,12 @@ using UnityEngine;
 public class FightObject : MonoBehaviour
 {    
     protected MyCollider mCollider;
+    protected GameObject mDisplay;
     protected bool mIsDead;
 
     protected virtual void Init()
     {
+        mDisplay=transform.Find("Display").gameObject;
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
         mIsDead=false;
     }

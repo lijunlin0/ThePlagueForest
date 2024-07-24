@@ -9,8 +9,6 @@ public class CharacterUtility
     { 
         TextAsset configText=Resources.Load<TextAsset>("Config/CharacterConfig");
         Config=JsonMapper.ToObject(configText.text);
-        Debug.Log("eee");
-
     }
     //根据角色名字生成属性配置表
     public static PropertySheet GetBasePropertySheet(string characterName,int level)

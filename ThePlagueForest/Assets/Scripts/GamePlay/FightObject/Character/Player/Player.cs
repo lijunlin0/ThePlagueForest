@@ -18,6 +18,7 @@ public class Player : Character
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mWeapons=new List<Weapon>();
+        AttackRangeAreaCreate();
         Camera.main.transform.SetParent(this.transform,false);
 
     }
@@ -57,6 +58,10 @@ public class Player : Character
         Move();
         foreach(Weapon weapon in mWeapons)
         {
+            if(weapon is Boomerang)
+            {
+                ChangeAttackRangeAreaSize(1.3f);
+            }
             if(weapon.IsShoot())
             {
                 mIsShoot=true;
@@ -91,6 +96,16 @@ public class Player : Character
                 });
             }
         }
+    }
+
+    protected void AttackRangeAreaCreate()
+    {
+        GameObject attackRangeArea=Instantiate(Resources.Load<GameObject>("FightObject/Area/AttackRange"),this.transform);
+        this.mAttackRangeArea=attackRangeArea;
+    }
+    protected void ChangeAttackRangeAreaSize(float Size)
+    {
+        mAttackRangeArea.transform.localScale = new Vector3(Size,Size,0);
     }
     public override void PlayDestroyAnimation()
     {

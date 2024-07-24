@@ -18,7 +18,7 @@ public class BulletThunderWand: Bullet
 
     public override void PlayDestroyAnimation()
     {
-        SpriteRenderer spriteRenderer=GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0f,0.15f);
          DOVirtual.DelayedCall(5,()=>
         {

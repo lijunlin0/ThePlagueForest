@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//火焰魔杖
-public class FireWand:Weapon
+//回旋镖
+public class Boomerang:Weapon
 {
     public override void Init()
     {
         mAttack=10;
-        mShootTime=1.8f;
+        mAttackRange=520;
+        mShootTime=1.2f;
          BulletShooter shooter = new BulletShooter(()=>
          {
+            //方向朝着最近的敌人
             Enemy nearEnemy=FightUtility.GetNearEnemy(Player.GetCurrent());
             if(nearEnemy==null)
             {
@@ -20,13 +22,12 @@ public class FireWand:Weapon
             }
             mIsShoot=true;
             //创建子弹
-            BulletFireWand bulletFireWand = BulletFireWand.Create(Player.GetCurrent(),mAttack);
-            bulletFireWand.transform.position=Player.GetCurrent().transform.position;
-
-            //方向朝着最近的敌人
-            Vector3 direction=(nearEnemy.transform.position-bulletFireWand.transform.position).normalized;
-            bulletFireWand.transform.rotation=FightUtility.DirectionToRotation(direction);
-            FightModel.GetCurrent().AddPlayerBullet(bulletFireWand);
+            BulletBoomerang bulletBoomerang = BulletBoomerang.Create(Player.GetCurrent(),mAttack);
+            bulletBoomerang.transform.position=Player.GetCurrent().transform.position;
+           
+            Vector3 direction=(nearEnemy.transform.position-bulletBoomerang.transform.position).normalized;
+            bulletBoomerang.transform.rotation=FightUtility.DirectionToRotation(direction);
+            FightModel.GetCurrent().AddPlayerBullet(bulletBoomerang);
         },mShootTime);
         mBulletShooter=shooter;
     }

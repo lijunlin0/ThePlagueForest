@@ -26,7 +26,7 @@ public static class FightSystem
         {
             return false;
         }
-        SetHealth(target, target.GetHealth() - points);
+        SetHealth(target, target.GetHealth() - points,-points);
         FightEventDataDamage damageEventData=new FightEventDataDamage(source,target,damageInfo);
         FightEventDispatcher.Dispatch(damageEventData);
         return true;
@@ -40,20 +40,20 @@ public static class FightSystem
         int points=recoveryInfo.GetPoints();
         if(points>0)
         {
-            SetHealth(target,target.GetHealth()+points);
+            SetHealth(target,target.GetHealth()+points,points);
         }
         return true;
     }
 
     //设置生命值
     //return:生命值是否设置成功
-    public static bool SetHealth(Character character,int health)
+    public static bool SetHealth(Character character,int health,int theoryChangePoints)
     {
         if(character.IsDead())
         {
             return false;
         }
-        character.SetHealth(health);
+        character.SetHealth(health,theoryChangePoints);
         //如果血量为 0 设置目标死亡
         if(character.GetHealth()<=0)
         {

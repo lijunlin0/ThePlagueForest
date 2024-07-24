@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &719214920491854632
+--- !u!1 &942554332968384459
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5205683835650701987}
-  - component: {fileID: 5515002438706381165}
+  - component: {fileID: 202454093602677664}
+  - component: {fileID: 4953726340864751407}
   m_Layer: 0
   m_Name: Display
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5205683835650701987
+--- !u!4 &202454093602677664
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719214920491854632}
+  m_GameObject: {fileID: 942554332968384459}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 131322719435476829}
+  m_Father: {fileID: 5715505915148379908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5515002438706381165
+--- !u!212 &4953726340864751407
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719214920491854632}
+  m_GameObject: {fileID: 942554332968384459}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 06b4364255c28844d9b8ee58851443d9, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.47058824}
+  m_Sprite: {fileID: 21300000, guid: a8c5446b48c2ab74ab4a37ae97fbb5b2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8748039545172976835
+--- !u!1 &9048315048290361999
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,38 +92,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 131322719435476829}
-  - component: {fileID: 251315031000093787}
+  - component: {fileID: 5715505915148379908}
+  - component: {fileID: 3860540075549904358}
   m_Layer: 0
-  m_Name: BombCircle
+  m_Name: BulletSacredSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &131322719435476829
+--- !u!4 &5715505915148379908
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8748039545172976835}
+  m_GameObject: {fileID: 9048315048290361999}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5205683835650701987}
+  - {fileID: 202454093602677664}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &251315031000093787
+--- !u!60 &3860540075549904358
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8748039545172976835}
+  m_GameObject: {fileID: 9048315048290361999}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -146,7 +146,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -161,18 +161,21 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 93.48663, y: -85.91087}
-      - {x: 53.763657, y: -115.59784}
-      - {x: -4.1316624, y: -127.41316}
-      - {x: -9.969679, y: -128.03973}
-      - {x: -33.60041, y: -120.95044}
-      - {x: -80.63986, y: -95.2952}
-      - {x: -119.99087, y: -50.201664}
-      - {x: -124.944496, y: 33.750923}
-      - {x: -85.66443, y: 92.23698}
-      - {x: -42.186466, y: 118.26713}
-      - {x: 8.138298, y: 122.74704}
-      - {x: 72.26408, y: 107.01858}
-      - {x: 115.99193, y: 47.76519}
-      - {x: 122.05853, y: -20.663214}
+    - - {x: -12.7767315, y: -48.455685}
+      - {x: 7.418804, y: -27.577698}
+      - {x: 12.642996, y: -3.1760235}
+      - {x: 7.846039, y: 19.319668}
+      - {x: 3.1142483, y: 31.745255}
+      - {x: -15.59399, y: 47.234646}
+      - {x: -38.989025, y: 48.064644}
+      - {x: -39.027054, y: 61.51294}
+      - {x: -23.279236, y: 72.85831}
+      - {x: 7.4951973, y: 69.32082}
+      - {x: 38.942684, y: 50.496807}
+      - {x: 53.337357, y: 31.036865}
+      - {x: 51.96116, y: -20.58888}
+      - {x: 10.96241, y: -69.84905}
+      - {x: -32.004753, y: -69.36272}
+      - {x: -39.324173, y: -62.24578}
+      - {x: -38.862415, y: -52.653866}
   m_UseDelaunayMesh: 0

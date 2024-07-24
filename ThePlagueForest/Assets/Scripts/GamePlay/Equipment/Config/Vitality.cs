@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 
-//活力戒指--击杀敌人恢复 1% 最大生命值
+//活力戒指--击杀敌人有 25% 概率恢复 4% 最大生命值
 public class Vitality : Equipment
 {
-    private const int HealthPercent=1;
+    private const float mTriggerChance=25;
+    private const int HealthPercent=4;
     public Vitality():base(EquipmentType.Passive,EquipmentId.Vitality)
     {
 
@@ -20,11 +21,18 @@ public class Vitality : Equipment
         {
             return;
         }
-        if(eventData.GetSource().IsPlayer())
+        if(eventData.GetTarget().IsPlayer())
         {
             return;
         }
+       
         Player player=Player.GetCurrent();
+        float chance=player.GetCurrentPropertySheet().GetLuckyFactor()*mTriggerChance;
+        bool IsTrigger=RandomHelper.RandomResult(chance);
+        if(!IsTrigger)
+        {
+            return;
+        }
         int points=player.GetCurrentPropertySheet().GetMaxHealth()*HealthPercent/100;
         RecoveryInfo recoveryInfo=new RecoveryInfo(player,player,points);
         FightSystem.Recovery(recoveryInfo);

@@ -14,7 +14,12 @@ public class BulletFireWand: Bullet
         bullet.Init(character,points);
         return bullet;
     }
-   public override void OnUpdate()
+    protected override void Init(Character character,int points)
+    {
+        base.Init(character,points);
+        mMoveSpeed=600;
+    }
+    public override void OnUpdate()
     {
         base.OnUpdate();
         if(mIsDead)

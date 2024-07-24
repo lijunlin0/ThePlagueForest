@@ -10,7 +10,8 @@ public class StunGun:Weapon
     private const int BulletCount=5;
     public override void Init()
     {
-        mAttack=20;
+        mAttack=5;
+        mShootTime=1f;
          BulletShooter shooter = new BulletShooter(()=>
          {
             List<Character> mTargets=new List<Character>(); 

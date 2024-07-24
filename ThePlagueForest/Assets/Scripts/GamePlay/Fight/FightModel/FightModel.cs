@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class FightModel
 {
@@ -53,27 +54,46 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         EnemyCreate();
-        Equipment equipment=new LuckyStone();
+        Equipment equipment=new Sickle();
         FightSystem.GetEquipment(equipment);
     }
     public void EnemyCreate()
     {
-        Enemy2 enemy1= Enemy2.Create(new Vector3(900,500,-1));
-        Enemy2 enemy2= Enemy2.Create(new Vector3(900,300,-1));
-        Enemy2 enemy3= Enemy2.Create(new Vector3(700,400,-1));
-        Enemy2 enemy4= Enemy2.Create(new Vector3(-300,100,-1));
-        Enemy1 enemy100= Enemy1.Create(new Vector3(200,460,-1));
-        Enemy1 enemy101= Enemy1.Create(new Vector3(-900,200,-1));
-        Enemy1 enemy102= Enemy1.Create(new Vector3(-400,100,-1));
-       
-        mEnemyList.Add(enemy1);
-        mEnemyList.Add(enemy2);
-        mEnemyList.Add(enemy3);
-        mEnemyList.Add(enemy4);
-        mEnemyList.Add(enemy100);
-        mEnemyList.Add(enemy101);
-        mEnemyList.Add(enemy102);
-        //mEnemyList.Add(enemy100);
+       //Enemy2 enemy1= Enemy2.Create(new Vector3(900,500,-1));
+       //Enemy2 enemy2= Enemy2.Create(new Vector3(900,300,-1));
+       //Enemy2 enemy3= Enemy2.Create(new Vector3(700,400,-1));
+       //Enemy2 enemy4= Enemy2.Create(new Vector3(-300,100,-1));
+       //Enemy2 enemy5= Enemy2.Create(new Vector3(-900,200,-1));
+       //Enemy2 enemy6= Enemy2.Create(new Vector3(-300,300,-1));
+       //Enemy2 enemy7= Enemy2.Create(new Vector3(700,0,-1));
+       //Enemy2 enemy8= Enemy2.Create(new Vector3(-300,100,-1));
+       //Enemy1 enemy100= Enemy1.Create(new Vector3(200,460,-1));
+       //Enemy1 enemy101= Enemy1.Create(new Vector3(-900,200,-1));
+       //Enemy1 enemy102= Enemy1.Create(new Vector3(-400,100,-1));
+       //Enemy1 enemy103= Enemy1.Create(new Vector3(-200,200,-1));
+       //Enemy1 enemy104= Enemy1.Create(new Vector3(100,450,-1));
+       //Enemy1 enemy105= Enemy1.Create(new Vector3(-30,900,-1));
+        var sequence = DOTween.Sequence();
+        sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(900,500,-1)));});
+                sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(200,460,-1)));});
+        sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(900,300,-1)));});
+                sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-900,200,-1)));});
+        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(700,400,-1)));});
+                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-400,100,-1)));});
+        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,100,-1)));});
+                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add( Enemy1.Create(new Vector3(-200,200,-1)));});
+        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-900,200,-1)));});
+                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(100,450,-1)));});
+        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,300,-1)));});
+                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-30,900,-1)));});
+        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(700,0,-1)));});
+        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,100,-1)));});
+
+
+
+
+
+
     }
 
     public void OnUpdate()
@@ -140,6 +160,7 @@ public class FightModel
             Bullet bullet=mPlayerBulletList[i];
             if(bullet.IsDead())
             {
+                //Debug.Log("销毁子弹");
                 mPlayerBulletList.RemoveAt(i);
                 bullet.PlayDestroyAnimation();
             }

@@ -14,8 +14,6 @@ public class Player1 : Player
         Player1 player=playerObject.AddComponent<Player1>();
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Player1",1);
         player.Init(propertySheet);
-        GameObject attackRangeArea=Instantiate(Resources.Load<GameObject>("FightObject/Area/AttackRange"),Player.GetCurrent().transform);
-        player.mAttackRangeArea=attackRangeArea;
         return player;
     }
     public static Vector3 GetPosition()
@@ -25,8 +23,20 @@ public class Player1 : Player
     protected override void Init(PropertySheet basePropertySheet)
     {
         base.Init(basePropertySheet);
-        Weapon weapon=new StunGun();
+        Weapon weapon=new SacredSword();
+        Weapon weapon1=new StunGun();
+        Weapon weapon2=new FireWand();
+        Weapon weapon3=new Boomerang();
+        Weapon weapon4=new Dagger();
         weapon.Init();
+        weapon1.Init();
+        weapon2.Init();
+        weapon3.Init();
+        weapon4.Init();
         AddWeapon(weapon);
+        AddWeapon(weapon1);
+        AddWeapon(weapon2);
+        AddWeapon(weapon3);
+        AddWeapon(weapon4);
     }
 }

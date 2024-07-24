@@ -12,9 +12,10 @@ public class HealthBar : MonoBehaviour
     private TMP_Text mHealthPointsText;
     private Tween mTween;
     public static HealthBar Create(Character character)
+
     {
         GameObject prefab=Resources.Load<GameObject>("UI/HealthBar");
-        GameObject healthObject=GameObject.Instantiate(prefab,GameObject.Find("Canvas").transform);
+        GameObject healthObject=GameObject.Instantiate(prefab,character.transform.position,Quaternion.identity,GameObject.Find("Canvas").transform);
         HealthBar healthBar=healthObject.AddComponent<HealthBar>();
         healthBar.Init(character);
         return healthBar;

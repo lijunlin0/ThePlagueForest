@@ -97,7 +97,7 @@ public class StatusEffect
     public void SetTick(float tickDuration, Callback tickCallback)
     {
         mTotalTickDuration=tickDuration;
-        Debug.Log("mTotalTickDuration:"+mTotalTickDuration);
+        //Debug.Log("mTotalTickDuration:"+mTotalTickDuration);
         mTickCallback=tickCallback;
     }
     public string GetUserData(string key)
