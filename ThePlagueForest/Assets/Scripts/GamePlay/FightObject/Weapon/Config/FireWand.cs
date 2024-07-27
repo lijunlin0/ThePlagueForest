@@ -6,7 +6,11 @@ using UnityEngine;
 //火焰魔杖
 public class FireWand:Weapon
 {
-    public override void Init()
+    public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)
+    {
+        
+    }
+    public override void OnGet(StatusEffect statusEffect,int layer)
     {
         mAttack=10;
         mShootTime=1.8f;
@@ -29,11 +33,6 @@ public class FireWand:Weapon
             FightModel.GetCurrent().AddPlayerBullet(bulletFireWand);
         },mShootTime);
         mBulletShooter=shooter;
-    }
-
-    public override void OnUpdate()
-    {
-        mBulletShooter.OnUpdate();
     }
 
 }

@@ -6,7 +6,11 @@ using UnityEngine;
 //回旋镖
 public class Boomerang:Weapon
 {
-    public override void Init()
+    public Boomerang():base(EquipmentType.Active,EquipmentId.Boomerang)
+    {
+        
+    }
+    public override void OnGet(StatusEffect statusEffect,int layer)
     {
         mAttack=10;
         mAttackRange=520;
@@ -30,11 +34,6 @@ public class Boomerang:Weapon
             FightModel.GetCurrent().AddPlayerBullet(bulletBoomerang);
         },mShootTime);
         mBulletShooter=shooter;
-    }
-
-    public override void OnUpdate()
-    {
-        mBulletShooter.OnUpdate();
     }
 
 }

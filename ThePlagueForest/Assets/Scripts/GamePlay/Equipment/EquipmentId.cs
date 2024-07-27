@@ -1,5 +1,7 @@
 public enum EquipmentId
 {
+    None,
+    //被动类
     Sword,              //短剑
     Karambit,           //鹰爪
     Shoe,               //布鞋
@@ -17,5 +19,13 @@ public enum EquipmentId
     FrozenCircle,       //冰圈
     DeathBomb,          //死亡炸弹
     LuckyStone,         //幸运石
+    
+    //主动类
+    Boomerang,          //回旋镖
+    Dagger,             //匕首
+    FireWand,           //火焰魔杖
+    SacredSword,        //圣剑
+    StunGun,            //电击枪
+    ThunderWand,        //雷电魔杖
 
 }

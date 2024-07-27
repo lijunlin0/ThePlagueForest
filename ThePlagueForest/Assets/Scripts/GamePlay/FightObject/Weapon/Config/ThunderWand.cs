@@ -6,7 +6,12 @@ using UnityEngine;
 //闪电魔杖
 public class ThunderWand:Weapon
 {
-    public override void Init()
+    public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)
+    {
+        
+    }
+
+    public override void OnGet(StatusEffect statusEffect,int layer)
     {
         mShootTime=3;
         mAttack=20;
@@ -31,9 +36,5 @@ public class ThunderWand:Weapon
         mBulletShooter=shooter;
     }
   
-    public override void OnUpdate()
-    {
-        mBulletShooter.OnUpdate();
-    }
 
 }

@@ -54,8 +54,16 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         EnemyCreate();
-        Equipment equipment=new Sickle();
-        FightSystem.GetEquipment(equipment);
+        
+        DOVirtual.DelayedCall(5,()=>
+        {
+            List<Equipment> equipments=new List<Equipment>();
+            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.FrozenCircle));
+            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
+            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.Dagger));
+            EquipmentSelectWindow.Open(equipments);
+        }).SetLoops(-1);
+        
     }
     public void EnemyCreate()
     {
@@ -88,11 +96,7 @@ public class FightModel
                 sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-30,900,-1)));});
         sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(700,0,-1)));});
         sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,100,-1)));});
-
-
-
-
-
+        
 
     }
 
@@ -110,6 +114,10 @@ public class FightModel
             mEquipments.Add(equipment, 0);
         }
         mEquipments[equipment]+=1;
+        if(equipment is Weapon)
+        {
+            mPlayer.AddWeapon(equipment as Weapon);
+        }
     }
 
     public int GetEquipmentLayer(Equipment equipment)

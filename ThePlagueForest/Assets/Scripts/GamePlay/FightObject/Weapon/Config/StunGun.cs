@@ -7,8 +7,12 @@ using UnityEngine;
 
 public class StunGun:Weapon
 {
+    public StunGun():base(EquipmentType.Active,EquipmentId.StunGun)
+    {
+        
+    }
     private const int BulletCount=5;
-    public override void Init()
+    public override void OnGet(StatusEffect statusEffect,int layer)
     {
         mAttack=5;
         mShootTime=1f;
@@ -45,11 +49,6 @@ public class StunGun:Weapon
 
         },mShootTime);
         mBulletShooter=shooter;
-    }
-
-    public override void OnUpdate()
-    {
-        mBulletShooter.OnUpdate();
     }
 
 }

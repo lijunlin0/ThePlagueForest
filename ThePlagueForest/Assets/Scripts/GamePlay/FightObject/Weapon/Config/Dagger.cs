@@ -6,7 +6,11 @@ using UnityEngine;
 //匕首
 public class Dagger:Weapon
 {
-    public override void Init()
+    public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
+    {
+        
+    }
+    public override void OnGet(StatusEffect statusEffect,int layer)
     {
         mAttack=20;
          BulletShooter shooter = new BulletShooter(()=>
@@ -29,10 +33,4 @@ public class Dagger:Weapon
         },mShootTime);
         mBulletShooter=shooter;
     }
-
-    public override void OnUpdate()
-    {
-        mBulletShooter.OnUpdate();
-    }
-
 }

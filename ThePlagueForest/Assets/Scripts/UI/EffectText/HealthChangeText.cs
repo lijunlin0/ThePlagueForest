@@ -60,7 +60,7 @@ public class HealthChangeText : MonoBehaviour
         {
             mText.DOFade(0,0.2f).OnComplete(()=>
             {
-                 Destroy(gameObject);
+                 Destroy(gameObject,1);
             });
             
         });

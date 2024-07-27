@@ -6,7 +6,11 @@ using UnityEngine;
 //圣剑
 public class SacredSword:Weapon
 {
-    public override void Init()
+    public SacredSword():base(EquipmentType.Active,EquipmentId.SacredSword)
+    {
+        
+    }
+    public override void OnGet(StatusEffect statusEffect,int layer)
     {
         mAttack=15;
         mShootTime=2.2f;
@@ -29,11 +33,6 @@ public class SacredSword:Weapon
             FightModel.GetCurrent().AddPlayerBullet(bulletSacredSword);
         },mShootTime);
         mBulletShooter=shooter;
-    }
-
-    public override void OnUpdate()
-    {
-        mBulletShooter.OnUpdate();
     }
 
 }

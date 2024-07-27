@@ -23,20 +23,20 @@ public class Player1 : Player
     protected override void Init(PropertySheet basePropertySheet)
     {
         base.Init(basePropertySheet);
-        Weapon weapon=new SacredSword();
-        Weapon weapon1=new StunGun();
-        Weapon weapon2=new FireWand();
-        Weapon weapon3=new Boomerang();
-        Weapon weapon4=new Dagger();
-        weapon.Init();
-        weapon1.Init();
-        weapon2.Init();
-        weapon3.Init();
-        weapon4.Init();
-        AddWeapon(weapon);
-        AddWeapon(weapon1);
-        AddWeapon(weapon2);
-        AddWeapon(weapon3);
-        AddWeapon(weapon4);
+        //Weapon weapon=new SacredSword();
+        //Weapon weapon1=new StunGun();
+        //Weapon weapon2=new FireWand();
+        //Weapon weapon3=new Boomerang();
+        //Weapon weapon4=new Dagger();
+        //weapon.Init();
+        //weapon1.Init();
+        //weapon2.Init();
+        //weapon3.Init();
+        //weapon4.Init();
+        //AddWeapon(weapon);
+        //AddWeapon(weapon1);
+        //AddWeapon(weapon2);
+        //AddWeapon(weapon3);
+        //AddWeapon(weapon4);
     }
 }

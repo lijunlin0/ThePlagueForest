@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : Character
 {
     private static Player sCurrent;
-    protected static List<Weapon> mWeapons;
+    protected List<Weapon> mWeapons;
     protected float mCollideProtect=0;
     protected bool mIsShoot=false;
     protected bool mShootflickerFlag=true;
@@ -112,7 +112,7 @@ public class Player : Character
         mHealthBar.gameObject.SetActive(false);
     }
 
-    public static void AddWeapon(Weapon weapon)
+    public  void AddWeapon(Weapon weapon)
     {
         mWeapons.Add(weapon);
     }
