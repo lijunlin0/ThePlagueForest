@@ -17,6 +17,8 @@ public class FightModel
     private List<Bullet> mPlayerBulletList;
     //芯片以及层数
     private Dictionary<Equipment,int> mEquipments;
+    private float EnemyCreateStartTime=0;
+    private float EnemyCreateEndTime=1;
     public List<Bullet> GetEnemyBullets()
     {
         return mEnemyBulletList;
@@ -53,55 +55,43 @@ public class FightModel
         mEnemyBulletList=new List<Bullet>();
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
-        EnemyCreate();
-        
-        DOVirtual.DelayedCall(5,()=>
+        //初始武器
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Boomerang));
+        DOVirtual.DelayedCall(10,()=>
         {
             List<Equipment> equipments=new List<Equipment>();
-            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.FrozenCircle));
+            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.BurnCircle));
             equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.Dagger));
+            equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.FireWand));
             EquipmentSelectWindow.Open(equipments);
         }).SetLoops(-1);
-        
+       
     }
     public void EnemyCreate()
     {
-       //Enemy2 enemy1= Enemy2.Create(new Vector3(900,500,-1));
-       //Enemy2 enemy2= Enemy2.Create(new Vector3(900,300,-1));
-       //Enemy2 enemy3= Enemy2.Create(new Vector3(700,400,-1));
-       //Enemy2 enemy4= Enemy2.Create(new Vector3(-300,100,-1));
-       //Enemy2 enemy5= Enemy2.Create(new Vector3(-900,200,-1));
-       //Enemy2 enemy6= Enemy2.Create(new Vector3(-300,300,-1));
-       //Enemy2 enemy7= Enemy2.Create(new Vector3(700,0,-1));
-       //Enemy2 enemy8= Enemy2.Create(new Vector3(-300,100,-1));
-       //Enemy1 enemy100= Enemy1.Create(new Vector3(200,460,-1));
-       //Enemy1 enemy101= Enemy1.Create(new Vector3(-900,200,-1));
-       //Enemy1 enemy102= Enemy1.Create(new Vector3(-400,100,-1));
-       //Enemy1 enemy103= Enemy1.Create(new Vector3(-200,200,-1));
-       //Enemy1 enemy104= Enemy1.Create(new Vector3(100,450,-1));
-       //Enemy1 enemy105= Enemy1.Create(new Vector3(-30,900,-1));
-        var sequence = DOTween.Sequence();
-        sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(900,500,-1)));});
-                sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(200,460,-1)));});
-        sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(900,300,-1)));});
-                sequence.AppendInterval(0.2f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-900,200,-1)));});
-        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(700,400,-1)));});
-                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-400,100,-1)));});
-        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,100,-1)));});
-                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add( Enemy1.Create(new Vector3(-200,200,-1)));});
-        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-900,200,-1)));});
-                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(100,450,-1)));});
-        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,300,-1)));});
-                sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy1.Create(new Vector3(-30,900,-1)));});
-        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(700,0,-1)));});
-        sequence.AppendInterval(0.5f).AppendCallback(()=>{mEnemyList.Add(Enemy2.Create(new Vector3(-300,100,-1)));});
-        
-
+        int flag=RandomHelper.RandomInt(0,2);
+        int x=RandomHelper.RandomInt(-960,960);
+        int y=RandomHelper.RandomInt(-540,540);
+        if(flag==0)
+        {
+            Enemy1 enemy1 =Enemy1.Create(new Vector3(x,y,-1));
+            mEnemyList.Add(enemy1);
+        }
+        else
+        {
+            Enemy2 enemy2 =Enemy2.Create(new Vector3(x,y,-1));
+            mEnemyList.Add(enemy2);
+        }
     }
 
     public void OnUpdate()
     {
+        EnemyCreateStartTime+=Time.deltaTime;
+        if(EnemyCreateStartTime>=EnemyCreateEndTime)
+        {
+            EnemyCreateStartTime=0;
+            EnemyCreate();
+        }
        UpdateObjects();
        CollisionHelper.Collide();
        RemoveInvalidObjects();

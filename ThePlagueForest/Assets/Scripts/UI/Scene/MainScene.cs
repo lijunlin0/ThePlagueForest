@@ -18,15 +18,6 @@ public class MainScene : MonoBehaviour
      Button startButton= buttonInstance.GetComponent<Button>();
      startButton.onClick.AddListener(StartButtonOnClick);
      TMP_Text startText=startButton.GetComponentInChildren<TMP_Text>();
-     if(InitScene.isFirst==true)
-     {
-      startText.text="Start";
-      InitScene.isFirst=false;
-     } 
-     else
-     {
-      startText.text="Again";
-     }
   }
   public void StartButtonOnClick()
   {

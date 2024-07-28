@@ -15,7 +15,7 @@ public static class FightSystem
         Bullet bullet=damageInfo.GetBullet();
         if(target.GetStatusEffectList().IsInvincible())
         {
-            Debug.Log("无敌状态抵挡伤害");
+            //Debug.Log("无敌状态抵挡伤害");
             return false;
         }
         int points=damageInfo.GetPoints();

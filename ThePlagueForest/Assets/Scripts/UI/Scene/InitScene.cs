@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class InitScene : MonoBehaviour
 {
-   public static bool isFirst=true;
    public void Awake()
    {
       Application.targetFrameRate=60;
@@ -14,6 +13,5 @@ public class InitScene : MonoBehaviour
    public void Start()
    {
       SceneManager.LoadScene("Main");
-
    }
 }

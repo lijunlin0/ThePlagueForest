@@ -23,7 +23,7 @@ public class Bullet : FightObject
         mSource = source;
         if(mSource==null)
         {
-            Debug.Log("null");
+            //Debug.Log("null");
         }
         mPoints = points;
         mLiveTime=0;
