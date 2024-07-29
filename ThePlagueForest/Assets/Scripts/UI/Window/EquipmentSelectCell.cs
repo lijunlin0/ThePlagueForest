@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +18,19 @@ public class EquipmentSelectCell : MonoBehaviour
     private void Init(Equipment equipment,Callback callback)
     {
         mEquipment=equipment;
+        //按钮点击事件
         Button button=GetComponent<Button>();
         button.onClick.AddListener(()=>
         {
             callback();
         });
+        //加载装备名称和描述
+        TMP_Text tittleText=transform.Find("TittleText").GetComponent<TMP_Text>();
+        Tuple<string,string> equipmentText=EquipmentUtility.GetEquipmentText(mEquipment.GetEquipmentId());
+        tittleText.text = equipmentText.Item1;
+        TMP_Text contentText=transform.Find("ContentText").GetComponent<TMP_Text>();
+        contentText.text = equipmentText.Item2;
+        Debug.Log(tittleText.text.ToString()+contentText.text.ToString());
     }
     public void SetSelect(bool isSelect)
     {

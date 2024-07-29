@@ -18,6 +18,7 @@ public class FightManager
     }
     public FightManager()
     {
+        DOTween.Init();
         mOver=false;
         sCurrent=this;
         mFightModel=new FightModel();
@@ -31,7 +32,6 @@ public class FightManager
         if(Player.GetCurrent().IsDead()&&!EndWindow.IsOpen())
         {
             mOver=true;
-            DOTween.KillAll();
             EndWindow.Open();
         }
         if(mOver)

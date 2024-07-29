@@ -22,10 +22,10 @@ public class EquipmentSelectWindow : MonoBehaviour
         Time.timeScale = 0;
         mCells=new List<EquipmentSelectCell>();
         mEquipments = equipments;
-        Button button=transform.Find("Button").GetComponent<Button>();
+        Button button=transform.Find("Window/Button").GetComponent<Button>();
         button.onClick.AddListener(OnButtonClicked);
 
-        GameObject content=transform.Find("Content").gameObject;
+        GameObject content=transform.Find("Window/Content").gameObject;
         foreach(Equipment equipment in mEquipments)
         {
             EquipmentSelectCell cell=null;

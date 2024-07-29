@@ -21,4 +21,5 @@ public class Equipment
     //玩家获得装备
     public virtual void OnGet(StatusEffect statusEffect,int layer){}
     public StatusEffectId GetStatusEffectsId(){return mStatusEffectId;}
+    public EquipmentId GetEquipmentId(){return mEquipmentId;}
 }

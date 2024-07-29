@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,7 +22,11 @@ public class EndWindow : MonoBehaviour
         Button button=GameObject.Find("Window/Button").GetComponent<Button>();
         button.onClick.AddListener(()=>
         {
+            Time.timeScale=1;
+            GameObject.Destroy(gameObject);
             SceneManager.LoadScene("Main");
+            DOTween.KillAll();
+
         });
     }
 

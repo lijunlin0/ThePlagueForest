@@ -1,10 +1,16 @@
+using System;
 using System.Collections.Generic;
+using LitJson;
+using UnityEngine;
 
 public class EquipmentUtility
 {
+    private static JsonData Config;
     private static Dictionary<EquipmentId,Equipment> sEquipments;
     public static void Init()
     {
+        TextAsset configText=Resources.Load<TextAsset>("Config/GameTextConfig");
+        Config=JsonMapper.ToObject(configText.text);
         sEquipments=new Dictionary<EquipmentId,Equipment>();
         sEquipments.Add(EquipmentId.Sword,new Sword());
         sEquipments.Add(EquipmentId.Karambit,new Karambit());
@@ -34,5 +40,11 @@ public class EquipmentUtility
     public static Equipment GetEquipment(EquipmentId equipmentId)
     {
         return sEquipments[equipmentId];
+    }
+    public static Tuple<string,string> GetEquipmentText(EquipmentId id)
+    {
+        JsonData EquipmentData=Config[id.ToString()];
+        var tuple=Tuple.Create(EquipmentData[0].ToString(),EquipmentData[1].ToString());
+        return tuple;
     }
 }
