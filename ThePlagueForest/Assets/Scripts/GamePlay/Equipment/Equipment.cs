@@ -25,4 +25,5 @@ public class Equipment
     public virtual void OnGet(StatusEffect statusEffect,int layer){}
     public StatusEffectId GetStatusEffectsId(){return mStatusEffectId;}
     public EquipmentId GetEquipmentId(){return mEquipmentId;}
+    public int GetMaxLayer(){return mMaxlayer;}
 }

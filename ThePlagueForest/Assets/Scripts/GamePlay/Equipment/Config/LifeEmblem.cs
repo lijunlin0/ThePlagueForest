@@ -15,7 +15,7 @@ public class LifeEmblem : Equipment
         Player player=Player.GetCurrent();
         int points=mHealthRecoveryPercent*player.GetCurrentPropertySheet().GetMaxHealth()/100;
         RecoveryInfo recoveryInfo= new RecoveryInfo(player,player,points);
-        effect.SetTick(mHealthRecoveryTick-mTickWithLayerReduce*layer-1,()=>
+        effect.SetTick(mHealthRecoveryTick-mTickWithLayerReduce*(layer-1),()=>
         {
             FightSystem.Recovery(recoveryInfo);
         });

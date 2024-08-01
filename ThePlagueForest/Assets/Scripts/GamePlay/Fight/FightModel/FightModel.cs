@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine;
 using DG.Tweening;
+using System.Diagnostics;
 
 public class FightModel
 {
+    private const int EnemyCreateDistanceWithPlayer=400;
     private static FightModel sCurrent;
     //敌人
     private List<Enemy> mEnemyList;
@@ -59,20 +61,39 @@ public class FightModel
     }
     public void EnemyCreate()
     {
-        int flag=RandomHelper.RandomInt(0,2);
-        int x=RandomHelper.RandomInt(-960,960);
-        int y=RandomHelper.RandomInt(-540,540);
-        if(flag==0)
+        //随机一个敌人id
+        List<CharacterId> idList=new List<CharacterId>();
+        for(int i=(int)CharacterId.Enemy1;i<=(int)CharacterId.Enemy2;i++)
         {
-            Enemy1 enemy1 =Enemy1.Create(new Vector3(x,y,-1));
-            mEnemyList.Add(enemy1);
+            idList.Add((CharacterId)i);
         }
-        else
+        int index=RandomHelper.RandomInt(0,idList.Count);
+        //随机一个位置
+        float distance=0;
+        float x=0;
+        float y=0;
+        while(distance<=EnemyCreateDistanceWithPlayer)
         {
-            Enemy2 enemy2 =Enemy2.Create(new Vector3(x,y,-1));
-            mEnemyList.Add(enemy2);
+            x=RandomHelper.RandomInt(-960,960)+mPlayer.transform.position.x;
+            y=RandomHelper.RandomInt(-540,540)+mPlayer.transform.position.y;
+            distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
+        }
+        //生成敌人
+        Enemy enemy = EnemyIdToEnemy(idList[index],new Vector3(x,y,0));
+        mEnemyList.Add(enemy);
+
+    }
+
+    private Enemy EnemyIdToEnemy(CharacterId id,Vector3 position)
+    {
+        switch(id)
+        {
+            case CharacterId.Enemy1:return Enemy1.Create(position);
+            case CharacterId.Enemy2:return Enemy2.Create(position);
+            default:return null;
         }
     }
+
 
     public void OnUpdate()
     {

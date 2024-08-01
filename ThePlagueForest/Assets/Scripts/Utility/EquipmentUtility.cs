@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LitJson;
 using UnityEngine;
 
 public class EquipmentUtility
 {
+    private const int EquipmentSelectCount=3;
     private static JsonData Config;
     private static Dictionary<EquipmentId,Equipment> sEquipments;
-    private static Dictionary<EquipmentId,int> mEquipmentLayer;
     public static void Init()
     {
         TextAsset configText=Resources.Load<TextAsset>("Config/GameTextConfig");
@@ -46,5 +47,27 @@ public class EquipmentUtility
         JsonData EquipmentData=Config[id.ToString()];
         var tuple=Tuple.Create(EquipmentData[0].ToString(),EquipmentData[1].ToString());
         return tuple;
+    }
+    public static List<Equipment> GetAvailableEquipments()
+    {
+        FightModel fightModel=FightModel.GetCurrent();
+        List<Equipment> equipments=sEquipments.Values.ToList();
+        List<Equipment> res=new List<Equipment>();
+        foreach(Equipment equipment in equipments)
+        {
+            if(fightModel.GetEquipmentLayer(equipment)>=equipment.GetMaxLayer())
+            {
+                continue;
+            }       
+            res.Add(equipment);
+        }
+        equipments=new List<Equipment>();
+        for(int i=0;i<EquipmentSelectCount;i++)
+        {
+            int randnum=RandomHelper.RandomInt(0,res.Count);
+            equipments.Add(res[randnum]);
+            res.RemoveAt(i);
+        }
+        return equipments;
     }
 }

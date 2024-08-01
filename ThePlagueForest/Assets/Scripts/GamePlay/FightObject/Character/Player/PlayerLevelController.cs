@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerLevelController
@@ -13,7 +14,6 @@ public class PlayerLevelController
     private Player mPlayer;
     private int mLevel;
     private float mExp;
-    private float mExpFactor;
     private Dictionary<EnemyType,int>mEnemyExp;
     Callback mExpChangedCallback;
 
@@ -23,7 +23,6 @@ public class PlayerLevelController
         mPlayer = Player.GetCurrent();
         mLevel=1;
         mExp=0;
-        mExpFactor=1;
     }
 
     public void Init()
@@ -37,26 +36,44 @@ public class PlayerLevelController
     public void AddExp(int exp)
     {
         mExp+=exp;
-        float levelUpExp=(PlayerBaseExp+mLevel-1*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
+        Debug.Log(mExp);
+        float levelUpExp=(PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
         if(mExp>=levelUpExp)
         {
             mExp-=levelUpExp;
+            OnLevelUp();
         }
     }
 
     public void OnLevelUp()
     {
-        
+        LevelUpRecovery();
+        GetEquipment();
     }
 
     public void GetEquipment()
     {
-        
+        EquipmentUtility.GetAvailableEquipments();
+        DOVirtual.DelayedCall(1,()=>
+        {
+            EquipmentSelectWindow.Open(EquipmentUtility.GetAvailableEquipments());
+        });
     }
 
     public void LevelUpRecovery()
     {
         RecoveryInfo recoveryInfo=new RecoveryInfo(mPlayer,mPlayer,mPlayer.GetCurrentPropertySheet().GetMaxHealth());
         FightSystem.Recovery(recoveryInfo);
+    }
+
+    public static int EnemyTypeToExp(EnemyType enemyType)
+    {
+        switch(enemyType)
+        {
+            case EnemyType.Normal:return NormalExp;
+            case EnemyType.Elite:return EliteExp;
+            case EnemyType.Boss:return BossExp;
+            default:return NormalExp;
+        }
     }
 }

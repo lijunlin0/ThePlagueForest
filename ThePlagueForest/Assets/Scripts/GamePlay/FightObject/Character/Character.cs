@@ -55,7 +55,10 @@ public class Character : FightObject
     }
     public int GetHealth(){return mHealth;}
     public CharacterId GetCharacterId(){return mCharacterId;}
-    public void SetDead(){mIsDead=true;}
+    public void SetDead()
+    {
+        mIsDead=true;
+    }
     public void SetHealth(int health,int theoryChangePoints)
     {
         //Debug.Log("设置的血量: "+health);

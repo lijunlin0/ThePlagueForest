@@ -12,11 +12,13 @@ public class Player : Character
     protected bool mIsShoot=false;
     protected bool mShootflickerFlag=true;
     protected GameObject mAttackRangeArea=null;
+    protected static PlayerLevelController mPlayerLevelController;
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Player,basePropertySheet);
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
+        mPlayerLevelController=new PlayerLevelController();
         mWeapons=new List<Weapon>();
         AttackRangeAreaCreate();
         Camera.main.transform.SetParent(this.transform,false);
@@ -122,4 +124,5 @@ public class Player : Character
     }
     public void SetCollideProtect(){mCollideProtect=0.2f;}
     public bool InCollideProtect(){return mCollideProtect>=0;}
+    public PlayerLevelController GetPlayerLevelController(){return mPlayerLevelController;}
 }

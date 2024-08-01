@@ -12,7 +12,7 @@ public class Boomerang:Weapon
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=10;
+        mAttack=50;
         mAttackRange=520;
         mShootTime=1.2f;
          BulletShooter shooter = new BulletShooter(()=>

@@ -12,7 +12,7 @@ public class Crown : Equipment
     }
     public override void OnGet(StatusEffect effect,int layer)
     {
-        effect.SetTick(mInvincibleTick-(TickLayerReduce*layer-1),()=>
+        effect.SetTick(mInvincibleTick-TickLayerReduce*(layer-1),()=>
         {
             StatusEffect statusEffect=new StatusEffect(StatusEffectId.Invincible,Player.GetCurrent(),mInvincibleDuration);
             StatusEffectChangeInfo changeInfo=new StatusEffectChangeInfo(statusEffect,StatusEffectChangeReason.Fight,Player.GetCurrent());

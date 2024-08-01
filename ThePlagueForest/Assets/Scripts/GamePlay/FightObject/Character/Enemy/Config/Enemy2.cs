@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 //巫师
 public class Enemy2 : Enemy
