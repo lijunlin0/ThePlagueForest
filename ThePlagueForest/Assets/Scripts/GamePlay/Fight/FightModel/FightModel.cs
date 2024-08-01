@@ -14,11 +14,10 @@ public class FightModel
     private List<Bullet> mEnemyBulletList;
     //玩家子弹
     private List<Bullet> mPlayerBulletList;
-    //芯片以及层数
+    //装备以及层数
     private Dictionary<Equipment,int> mEquipments;
     private float EnemyCreateStartTime=0;
     private float EnemyCreateEndTime=1;
-    //public static Sequence sequence;
     public List<Bullet> GetEnemyBullets()
     {
         return mEnemyBulletList;
@@ -49,7 +48,6 @@ public class FightModel
     }
     public  FightModel()
     {
-        SettingsButton.Create();
         sCurrent=this;
         mEnemyList=new List<Enemy>();
         mPlayer=Player1.Create();
@@ -58,18 +56,6 @@ public class FightModel
         mEquipments=new Dictionary<Equipment,int>();
         //初始武器
         FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Boomerang));
-
-        //Sequence sequence = DOTween.Sequence();
-
-        //// 添加延时调用
-        //sequence.Append(DOVirtual.DelayedCall(3f, () =>
-        //{
-        //    List<Equipment> equipments=new List<Equipment>();
-        //    equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.BurnCircle));
-        //    equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-        //    equipments.Add(EquipmentUtility.GetEquipment(EquipmentId.FireWand));
-        //    EquipmentSelectWindow.Open(equipments);
-        //})).SetLoops(-1);
     }
     public void EnemyCreate()
     {

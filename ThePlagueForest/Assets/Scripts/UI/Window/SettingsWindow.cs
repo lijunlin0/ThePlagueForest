@@ -19,19 +19,22 @@ public class SettingsWindow : MonoBehaviour
     }
     private void Init()
     {
+        FightManager.GetCurrent().SetPause(true);
         mMusicIsOn=true;
         //按钮点击事件
         Button mainMenuButton=transform.Find("Window/MainMenuButton").GetComponent<Button>();
         mainMenuButton.onClick.AddListener(()=>
         {
+            DOTween.KillAll();
             SceneManager.LoadScene("Main");
+            GameObject.Destroy(gameObject);
         });
         Button continueButton=transform.Find("Window/ContinueButton").GetComponent<Button>();
         continueButton.onClick.AddListener(()=>
         {
+            FightManager.GetCurrent().SetPause(false);
             GameObject.Destroy(gameObject);
-            Time.timeScale=1;
-            //FightModel.sequence.Pause();
+
         });
         Button MusicButton=transform.Find("Window/MusicButton").GetComponent<Button>();
         Image onImgae=transform.Find("Window/MusicButton/MusicOnImage").GetComponent<Image>();

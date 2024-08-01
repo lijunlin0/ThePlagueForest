@@ -6,7 +6,6 @@ public class Sword : Equipment
     private const int mDamageAddition=10;
     public Sword():base(EquipmentType.Passive,EquipmentId.Sword)
     {
-
     }
     public override void OnGet(StatusEffect effect,int layer)
     {

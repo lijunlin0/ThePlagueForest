@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class FightManager
 {
-    private bool mOver;
+    private bool mPause;
     private static FightManager sCurrent;
     protected FightModel mFightModel;
     public static FightManager GetCurrent()
@@ -19,26 +19,26 @@ public class FightManager
     public FightManager()
     {
         DOTween.Init();
-        mOver=false;
+        mPause=false;
         sCurrent=this;
         mFightModel=new FightModel();
-    }
-    ~FightManager()
-    {
-        sCurrent=null;
     }
     public void OnUpdate()
     {
         if(Player.GetCurrent().IsDead()&&!EndWindow.IsOpen())
         {
-            mOver=true;
+            mPause=true;
+            EndWindow.SetOpen(mPause);
             EndWindow.Open();
         }
-        if(mOver)
+        if(mPause)
         {
             return;
         }
         mFightModel.OnUpdate();
     }
-
+    public void SetPause(bool pause)
+    {
+        mPause=pause;
+    }
 }

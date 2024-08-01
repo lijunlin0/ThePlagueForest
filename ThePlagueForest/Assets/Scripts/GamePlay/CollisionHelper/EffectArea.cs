@@ -39,7 +39,7 @@ public class EffectArea:MonoBehaviour
         SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0f,fadeOutDuration).OnComplete(()=>
         {
-            Destroy(gameObject);
+            Destroy(gameObject,1f);
         });
     }
 

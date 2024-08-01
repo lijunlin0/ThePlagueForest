@@ -14,7 +14,7 @@ public class Weapon : Equipment
     protected bool mIsShoot=true;
     public Weapon(EquipmentType equipmentType,EquipmentId equipmentId):base(equipmentType,equipmentId)
     {
-
+        mMaxlayer=5;
     }
 
     public virtual void OnUpdate()

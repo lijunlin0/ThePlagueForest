@@ -6,7 +6,7 @@ public class LuckyStone : Equipment
     private const int mLuckyPercent=30;
     public LuckyStone():base(EquipmentType.Passive,EquipmentId.LuckyStone)
     {
-
+        mMaxlayer=3;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

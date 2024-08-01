@@ -6,7 +6,7 @@ public class Spear : Equipment
     private const int mAoeRangeAddition=20;
     public Spear():base(EquipmentType.Passive,EquipmentId.Spear)
     {
-
+        mMaxlayer=5;
     }
     public override void OnGet(StatusEffect effect,int layer)
     {

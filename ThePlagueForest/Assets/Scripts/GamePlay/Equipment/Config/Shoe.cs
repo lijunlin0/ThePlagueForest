@@ -6,7 +6,7 @@ public class Shoe : Equipment
     private const int mMoveSpeedAddition=10;
     public Shoe():base(EquipmentType.Passive,EquipmentId.Shoe)
     {
-
+        mMaxlayer=20;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

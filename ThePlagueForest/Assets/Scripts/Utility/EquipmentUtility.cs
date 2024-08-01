@@ -7,6 +7,7 @@ public class EquipmentUtility
 {
     private static JsonData Config;
     private static Dictionary<EquipmentId,Equipment> sEquipments;
+    private static Dictionary<EquipmentId,int> mEquipmentLayer;
     public static void Init()
     {
         TextAsset configText=Resources.Load<TextAsset>("Config/GameTextConfig");
@@ -35,7 +36,6 @@ public class EquipmentUtility
         sEquipments.Add(EquipmentId.SacredSword,new SacredSword());
         sEquipments.Add(EquipmentId.ThunderWand,new ThunderWand());
         sEquipments.Add(EquipmentId.StunGun,new StunGun());
- 
     }
     public static Equipment GetEquipment(EquipmentId equipmentId)
     {

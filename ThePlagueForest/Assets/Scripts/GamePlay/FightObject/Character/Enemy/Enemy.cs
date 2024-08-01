@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+public enum EnemyType
+{
+    None,
+    Normal=1,
+    Elite=2,
+    Boss=3,
+}
+
 public class Enemy : Character
 {
     protected BulletShooter mBulletShooter;

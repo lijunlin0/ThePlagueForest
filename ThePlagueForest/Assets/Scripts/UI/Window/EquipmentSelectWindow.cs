@@ -19,7 +19,7 @@ public class EquipmentSelectWindow : MonoBehaviour
 
     public void Init(List<Equipment> equipments)
     {  
-        Time.timeScale = 0;
+        FightManager.GetCurrent().SetPause(true);
         mCells=new List<EquipmentSelectCell>();
         mEquipments = equipments;
         Button button=transform.Find("Window/Button").GetComponent<Button>();
@@ -48,7 +48,7 @@ public class EquipmentSelectWindow : MonoBehaviour
         //增加装备
         FightSystem.GetEquipment(mSelectCell.GetEquipment());
         GameObject.Destroy(gameObject);
-        Time.timeScale=1;
+        FightManager.GetCurrent().SetPause(false);
     }
 
     private void UpdateContent()

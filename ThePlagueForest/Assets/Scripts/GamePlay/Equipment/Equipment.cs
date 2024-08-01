@@ -9,14 +9,17 @@ public enum EquipmentType
 
 public class Equipment
 {
+    public const int infiniteLayer=9999;
     protected EquipmentType mEquipmentType;
     protected EquipmentId mEquipmentId;
     protected StatusEffectId mStatusEffectId;
+    protected int mMaxlayer;
     public Equipment(EquipmentType equipmentType, EquipmentId equipmentId)
     {
         mEquipmentType = equipmentType;
         mEquipmentId = equipmentId;
         mStatusEffectId=StatusEffectId.None;
+        mMaxlayer=infiniteLayer;
     }
     //玩家获得装备
     public virtual void OnGet(StatusEffect statusEffect,int layer){}

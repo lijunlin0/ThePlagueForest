@@ -6,7 +6,7 @@ public class FrozenCircle : Equipment
     private const float mFrozenTick=0.1f;
     public FrozenCircle():base(EquipmentType.Passive,EquipmentId.FrozenCircle)
     {
-
+        mMaxlayer=1;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

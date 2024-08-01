@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 
-//镰刀--子弹命中敌人时 30% 概率恢复 2 生命值
+//镰刀--子弹命中敌人时 30% 概率恢复 2+((layer-1)*1) 生命值
 public class Sickle : Equipment
 {
     private const float mTriggerChance=30; 
     private const int mRecoveryPoints=2;
+    private const int mRecoveryPointsLayerAddition=1;
     public Sickle():base(EquipmentType.Passive,EquipmentId.Sickle)
     {
-
+        mMaxlayer=3;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)
@@ -36,7 +37,8 @@ public class Sickle : Equipment
             {
                 return;
             }
-            RecoveryInfo recoveryInfo=new RecoveryInfo(player,player,mRecoveryPoints);
+            int points=mRecoveryPoints+mRecoveryPointsLayerAddition*(layer-1);
+            RecoveryInfo recoveryInfo=new RecoveryInfo(player,player,points);
             FightSystem.Recovery(recoveryInfo);        
         });
     }

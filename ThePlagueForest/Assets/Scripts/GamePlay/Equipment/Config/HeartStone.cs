@@ -7,7 +7,6 @@ public class Heartstone : Equipment
     private const int mMaxHealthAddition=150;
     public Heartstone():base(EquipmentType.Passive,EquipmentId.Heartstone)
     {
-
     }
     public override void OnGet(StatusEffect effect,int layer)
     {
@@ -24,7 +23,7 @@ public class Heartstone : Equipment
                 effect.SetUserData("HeartStone","0");
             }
             int mCurrentHealthAddition=Utility.StrToInt(mCurrentHealthAdditionStr);
-            if(mCurrentHealthAddition<mMaxHealthAddition)
+            if(mCurrentHealthAddition<mMaxHealthAddition*layer)
             {
                 Player player=Player.GetCurrent();
                 Dictionary<Property,int> corrections=new Dictionary<Property,int>();

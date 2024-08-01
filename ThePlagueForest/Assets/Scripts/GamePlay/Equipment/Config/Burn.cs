@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 
 
-//炽焰弹--10% 子弹附带燃烧效果
+//炽焰弹--10% *(layer)子弹附带燃烧效果
 public class Burn : Equipment
 {
     private const int BurnBulletChance=10;
     public Burn():base(EquipmentType.Passive,EquipmentId.Burn)
     {
-
+        mMaxlayer=4;
     }
 
     public override void OnGet(StatusEffect effect, int layer)

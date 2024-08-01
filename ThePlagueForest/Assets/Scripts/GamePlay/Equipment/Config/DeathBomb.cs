@@ -9,7 +9,7 @@ public class DeathBomb : Equipment
     private const int mBombDamagePercent=5;
     public DeathBomb():base(EquipmentType.Passive,EquipmentId.DeathBomb)
     {
-
+        mMaxlayer=1;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

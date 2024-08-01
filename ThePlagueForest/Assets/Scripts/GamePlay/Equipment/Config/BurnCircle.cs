@@ -6,7 +6,7 @@ public class BurnCircle : Equipment
     private const float mBurnTick=0.1f;
     public BurnCircle():base(EquipmentType.Passive,EquipmentId.BurnCircle)
     {
-
+        mMaxlayer=1;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

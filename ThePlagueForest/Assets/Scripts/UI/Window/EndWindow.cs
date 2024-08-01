@@ -22,11 +22,9 @@ public class EndWindow : MonoBehaviour
         Button button=GameObject.Find("Window/Button").GetComponent<Button>();
         button.onClick.AddListener(()=>
         {
-            Time.timeScale=1;
-            GameObject.Destroy(gameObject);
-            SceneManager.LoadScene("Main");
             DOTween.KillAll();
-
+            SceneManager.LoadScene("Main");
+            GameObject.Destroy(gameObject);
         });
     }
 
@@ -34,6 +32,10 @@ public class EndWindow : MonoBehaviour
     {
         return mIsOpen;
     } 
+    public static void SetOpen(bool open)
+    {
+        mIsOpen=open;
+    }
 
     private void OnDestroy()
     {

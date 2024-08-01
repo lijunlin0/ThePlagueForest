@@ -22,9 +22,11 @@ public class SettingsButton : MonoBehaviour
         Button button=GetComponent<Button>();
         button.onClick.AddListener(()=>
         {
+            if(EndWindow.IsOpen())
+            {
+                return;
+            }
             SettingsWindow.Open();
-            Time.timeScale = 0;
-            //FightModel.sequence.Pause();
         });
     }
 }
