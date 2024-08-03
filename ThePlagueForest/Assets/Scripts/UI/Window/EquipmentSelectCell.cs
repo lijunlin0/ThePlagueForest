@@ -7,6 +7,7 @@ public class EquipmentSelectCell : MonoBehaviour
 {
     private Callback mCallback;
     private Equipment mEquipment;
+    private Image mIcon;
     public  static EquipmentSelectCell Create(Equipment equipment,GameObject parent,Callback callback)
     {
         GameObject prefab=Resources.Load<GameObject>("UI/Equipment Select Cell");
@@ -18,6 +19,9 @@ public class EquipmentSelectCell : MonoBehaviour
     private void Init(Equipment equipment,Callback callback)
     {
         mEquipment=equipment;
+        //加载图标
+        GameObject prefab=Resources.Load<GameObject>("UI/Icon/"+EquipmentUtility.GetEquipmentText(equipment.GetEquipmentId()).Item3);
+        GameObject icon=GameObject.Instantiate(prefab,transform.Find("Icon"));
         //按钮点击事件
         Button button=GetComponent<Button>();
         button.onClick.AddListener(()=>
@@ -26,7 +30,7 @@ public class EquipmentSelectCell : MonoBehaviour
         });
         //加载装备名称和描述
         TMP_Text tittleText=transform.Find("TittleText").GetComponent<TMP_Text>();
-        Tuple<string,string> equipmentText=EquipmentUtility.GetEquipmentText(mEquipment.GetEquipmentId());
+        Tuple<string,string,string> equipmentText=EquipmentUtility.GetEquipmentText(mEquipment.GetEquipmentId());
         tittleText.text = equipmentText.Item1;
         TMP_Text contentText=transform.Find("ContentText").GetComponent<TMP_Text>();
         contentText.text = equipmentText.Item2;

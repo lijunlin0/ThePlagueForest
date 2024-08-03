@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LitJson;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentUtility
 {
@@ -14,6 +15,15 @@ public class EquipmentUtility
         TextAsset configText=Resources.Load<TextAsset>("Config/GameTextConfig");
         Config=JsonMapper.ToObject(configText.text);
         sEquipments=new Dictionary<EquipmentId,Equipment>();
+        
+        sEquipments.Add(EquipmentId.Burn,new Burn());
+        
+        sEquipments.Add(EquipmentId.Boomerang,new Boomerang());
+        sEquipments.Add(EquipmentId.Dagger,new Dagger());
+
+        return;
+
+        sEquipments.Add(EquipmentId.Crown,new Crown());
         sEquipments.Add(EquipmentId.Sword,new Sword());
         sEquipments.Add(EquipmentId.Karambit,new Karambit());
         sEquipments.Add(EquipmentId.Shoe,new Shoe());
@@ -23,15 +33,14 @@ public class EquipmentUtility
         sEquipments.Add(EquipmentId.Vitality,new Vitality());
         sEquipments.Add(EquipmentId.Spear,new Spear());
         sEquipments.Add(EquipmentId.Heartstone,new Heartstone());
-        sEquipments.Add(EquipmentId.Burn,new Burn());
+
+
         sEquipments.Add(EquipmentId.Frozen,new Frozen());
         sEquipments.Add(EquipmentId.LifeEmblem,new LifeEmblem());
-        sEquipments.Add(EquipmentId.Crown,new Crown());
         sEquipments.Add(EquipmentId.BurnCircle,new BurnCircle());
         sEquipments.Add(EquipmentId.FrozenCircle,new FrozenCircle());
         sEquipments.Add(EquipmentId.LuckyStone,new LuckyStone());
-        sEquipments.Add(EquipmentId.Boomerang,new Boomerang());
-        sEquipments.Add(EquipmentId.Dagger,new Dagger());
+
         sEquipments.Add(EquipmentId.DeathBomb,new DeathBomb());
         sEquipments.Add(EquipmentId.FireWand,new FireWand());
         sEquipments.Add(EquipmentId.SacredSword,new SacredSword());
@@ -42,12 +51,13 @@ public class EquipmentUtility
     {
         return sEquipments[equipmentId];
     }
-    public static Tuple<string,string> GetEquipmentText(EquipmentId id)
+    public static Tuple<string,string,string> GetEquipmentText(EquipmentId id)
     {
         JsonData EquipmentData=Config[id.ToString()];
-        var tuple=Tuple.Create(EquipmentData[0].ToString(),EquipmentData[1].ToString());
+        var tuple=Tuple.Create(EquipmentData[0].ToString(),EquipmentData[1].ToString(),EquipmentData[2].ToString());
         return tuple;
     }
+
     public static List<Equipment> GetAvailableEquipments()
     {
         FightModel fightModel=FightModel.GetCurrent();
@@ -55,18 +65,19 @@ public class EquipmentUtility
         List<Equipment> res=new List<Equipment>();
         foreach(Equipment equipment in equipments)
         {
-            if(fightModel.GetEquipmentLayer(equipment)>=equipment.GetMaxLayer())
+            if(fightModel.GetEquipmentLayer(equipment)>equipment.GetMaxLayer())
             {
                 continue;
             }       
             res.Add(equipment);
         }
-        equipments=new List<Equipment>();
+        equipments.Clear();
+        
         for(int i=0;i<EquipmentSelectCount;i++)
         {
-            int randnum=RandomHelper.RandomInt(0,res.Count);
-            equipments.Add(res[randnum]);
-            res.RemoveAt(i);
+            int randnumIndex=RandomHelper.RandomInt(0,res.Count-1);
+            equipments.Add(res[randnumIndex]);
+            res.RemoveAt(randnumIndex);
         }
         return equipments;
     }

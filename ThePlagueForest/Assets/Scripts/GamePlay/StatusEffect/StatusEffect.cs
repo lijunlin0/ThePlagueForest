@@ -55,6 +55,7 @@ public class StatusEffect
         mTotalDuration=totalDuration;
         mElapsedTickDuration=0;
         mTotalTickDuration=999999;
+        mElapseDuration=0;
         mIsDead=false;
         mMaxLayer=InfiniteLayer;
     }
@@ -78,9 +79,11 @@ public class StatusEffect
             mElapsedTickDuration+=Time.deltaTime;
             if(mElapsedTickDuration>mTotalTickDuration)
             {
+                Debug.Log("添加无敌");
                 mElapsedTickDuration-=mTotalTickDuration;
                 mTickCallback();
             }
+
         }
 
         //状态效果持续时间是否结束

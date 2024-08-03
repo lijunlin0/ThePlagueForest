@@ -19,7 +19,7 @@ public class Frozen : Equipment
                 return;
             }
             DamageInfo damageInfo=(eventData as FightEventDataDamage).GetDamageInfo();
-            if(damageInfo.GetBullet()==null&&damageInfo.GetSource().IsPlayer())
+            if(damageInfo.GetBullet()==null||damageInfo.GetTarget().IsPlayer())
             {
                 return;
             }

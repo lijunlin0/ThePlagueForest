@@ -82,6 +82,10 @@ public class Character : FightObject
     public override void OnUpdate()
     {
         base.OnUpdate();
+        if(mIsDead)
+        {
+            return;
+        }
         mStatusEffectList.OnUpdate();
     }
 }

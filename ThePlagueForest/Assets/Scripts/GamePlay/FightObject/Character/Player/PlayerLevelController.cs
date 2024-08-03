@@ -36,10 +36,10 @@ public class PlayerLevelController
     public void AddExp(int exp)
     {
         mExp+=exp;
-        Debug.Log(mExp);
         float levelUpExp=(PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
         if(mExp>=levelUpExp)
         {
+            mLevel+=1;
             mExp-=levelUpExp;
             OnLevelUp();
         }
