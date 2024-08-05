@@ -8,6 +8,7 @@ public class Frozen : Equipment
     public Frozen():base(EquipmentType.Passive,EquipmentId.Frozen)
     {
         mMaxlayer=4;
+        mStatusEffectId=StatusEffectId.Equipment_Frozen;
     }
 
     public override void OnGet(StatusEffect effect, int layer)

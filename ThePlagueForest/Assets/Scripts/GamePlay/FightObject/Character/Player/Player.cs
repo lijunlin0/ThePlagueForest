@@ -5,7 +5,9 @@ using DG.Tweening;
 using UnityEngine;
 
 public class Player : Character
-{
+{    
+    public static CrownObject mCrownObject;
+    protected Animator mAnimator;
     private static Player sCurrent;
     protected List<Weapon> mWeapons;
     protected float mCollideProtect=0;
@@ -16,16 +18,19 @@ public class Player : Character
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Player,basePropertySheet);
+        mAnimator=mDisplay.GetComponent<Animator>();
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mPlayerLevelController=new PlayerLevelController();
         mWeapons=new List<Weapon>();
         AttackRangeAreaCreate();
         Camera.main.transform.SetParent(this.transform,false);
-
+         //创建王冠图片
+        mCrownObject=CrownObject.Create();
     }
     public void Move()
     {
+        
         float horizontalDistance=0f;
         float verticalDistance=0f;
 
@@ -45,8 +50,27 @@ public class Player : Character
         {
             horizontalDistance-=1;
         }
+        Vector3 prePosition=transform.position;
         Vector3 direction=new Vector3(horizontalDistance,verticalDistance,0f).normalized;
         transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
+        if(prePosition==transform.position)
+        {
+            mAnimator.Play("Idle");
+        }
+        else
+        {
+            mAnimator.Play("Walk");
+        }
+        //根据位移方向转向
+        if(transform.position.x-prePosition.x>0)
+        {
+            
+            mSpriteRenderer.flipX=false;
+        }
+        else
+        {
+            mSpriteRenderer.flipX=true;
+        }
     }
 
     public override void OnUpdate()
@@ -72,6 +96,10 @@ public class Player : Character
         }
         AttackRangeAreaFlicker();
         
+    }
+    public CrownObject GetCrownObject()
+    {
+        return mCrownObject;
     }
     protected void AttackRangeAreaFlicker()
     {

@@ -79,7 +79,6 @@ public class StatusEffect
             mElapsedTickDuration+=Time.deltaTime;
             if(mElapsedTickDuration>mTotalTickDuration)
             {
-                Debug.Log("添加无敌");
                 mElapsedTickDuration-=mTotalTickDuration;
                 mTickCallback();
             }

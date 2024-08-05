@@ -43,7 +43,7 @@ public class BulletFireWand: Bullet
             });
             area.SetCollisionEnabledCallback(()=>
             {
-                area.PlayDestroyAnimation(0.15f);
+                area.PlayDestroyAnimation(0.5f);
                 area.Collide();
             });
     }

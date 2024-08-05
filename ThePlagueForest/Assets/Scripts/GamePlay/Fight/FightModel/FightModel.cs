@@ -1,8 +1,6 @@
-using System.Collections;
+
 using System.Collections.Generic; 
 using UnityEngine;
-using DG.Tweening;
-using System.Diagnostics;
 
 public class FightModel
 {
@@ -57,7 +55,7 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         //初始武器
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Boomerang));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.FireWand));
     }
     public void EnemyCreate()
     {

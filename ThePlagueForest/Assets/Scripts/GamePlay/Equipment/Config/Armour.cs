@@ -6,6 +6,7 @@ public class Armour : Equipment
     private const int mMaxHealthAddition=100;
     public Armour():base(EquipmentType.Passive,EquipmentId.Armour)
     {
+        mStatusEffectId=StatusEffectId.Equipment_Armour;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

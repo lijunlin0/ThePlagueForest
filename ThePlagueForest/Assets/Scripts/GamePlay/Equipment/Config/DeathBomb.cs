@@ -10,6 +10,7 @@ public class DeathBomb : Equipment
     public DeathBomb():base(EquipmentType.Passive,EquipmentId.DeathBomb)
     {
         mMaxlayer=1;
+        mStatusEffectId=StatusEffectId.Equipment_DeathBomb;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

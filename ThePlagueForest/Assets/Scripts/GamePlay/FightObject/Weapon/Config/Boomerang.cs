@@ -8,11 +8,11 @@ public class Boomerang:Weapon
 {
     public Boomerang():base(EquipmentType.Active,EquipmentId.Boomerang)
     {
-        
+        mStatusEffectId=StatusEffectId.Equipment_Boomerang;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=50;
+        mAttack=20;
         mAttackRange=520;
         mShootTime=1.2f;
          BulletShooter shooter = new BulletShooter(()=>

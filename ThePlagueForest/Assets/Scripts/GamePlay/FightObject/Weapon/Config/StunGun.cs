@@ -9,7 +9,7 @@ public class StunGun:Weapon
 {
     public StunGun():base(EquipmentType.Active,EquipmentId.StunGun)
     {
-        
+        mStatusEffectId=StatusEffectId.Equipment_StunGun;
     }
     private const int BulletCount=5;
     public override void OnGet(StatusEffect statusEffect,int layer)

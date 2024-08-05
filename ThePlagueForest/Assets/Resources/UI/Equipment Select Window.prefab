@@ -284,8 +284,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5347\u7EA7!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c219b9898d48e6748ab2c45c423e649c, type: 2}
-  m_sharedMaterial: {fileID: -3986966004389114505, guid: c219b9898d48e6748ab2c45c423e649c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c11525b3c94234e80523d9b6082d87, type: 2}
+  m_sharedMaterial: {fileID: 7433318766785674994, guid: b9c11525b3c94234e80523d9b6082d87, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -309,13 +309,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -384,9 +384,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2241410207333388187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -160}
   m_SizeDelta: {x: 800, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7052290802001118674
@@ -745,8 +745,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u786E\u8BA4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c219b9898d48e6748ab2c45c423e649c, type: 2}
-  m_sharedMaterial: {fileID: -3986966004389114505, guid: c219b9898d48e6748ab2c45c423e649c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c11525b3c94234e80523d9b6082d87, type: 2}
+  m_sharedMaterial: {fileID: 7433318766785674994, guid: b9c11525b3c94234e80523d9b6082d87, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -770,13 +770,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

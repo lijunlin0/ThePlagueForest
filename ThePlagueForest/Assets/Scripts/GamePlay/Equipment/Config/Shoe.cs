@@ -7,6 +7,7 @@ public class Shoe : Equipment
     public Shoe():base(EquipmentType.Passive,EquipmentId.Shoe)
     {
         mMaxlayer=20;
+        mStatusEffectId=StatusEffectId.Equipment_Shoe;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

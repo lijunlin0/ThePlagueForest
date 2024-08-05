@@ -7,6 +7,7 @@ public class Heartstone : Equipment
     private const int mMaxHealthAddition=150;
     public Heartstone():base(EquipmentType.Passive,EquipmentId.Heartstone)
     {
+        mStatusEffectId=StatusEffectId.Equipment_Heartstone;
     }
     public override void OnGet(StatusEffect effect,int layer)
     {

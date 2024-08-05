@@ -29,7 +29,7 @@ public class BulletBoomerang: Bullet
         mIsPenetrate=true;
         mMoveSpeed=3000;
         mMoveSpeedReduction=100;
-        mRotateTween = mDisplay.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f,RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+        mRotateTween = mDisplay.transform.DOLocalRotate(new Vector3(0, 0, 2160), 3f,RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
     }
    public override void OnUpdate()
     {

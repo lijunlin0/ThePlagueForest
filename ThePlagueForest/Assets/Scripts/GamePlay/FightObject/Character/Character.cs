@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using DG.Tweening;
 using UnityEngine;
 
 public enum CharacterId
@@ -19,10 +21,12 @@ public class Character : FightObject
     protected PropertySheet mBasePropertySheet;
     protected PropertySheet mCurrentPropertySheet;
     protected HealthBar mHealthBar;
+    protected SpriteRenderer mSpriteRenderer;
     protected virtual void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
 
         base.Init();
+        mSpriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         mCharacterId=characterId;
         mBasePropertySheet=basePropertySheet;
         mStatusEffectList=new StatusEffectList(this,OnStatusEffectChanged);
@@ -50,8 +54,18 @@ public class Character : FightObject
     }
     protected virtual void OnHealthChanged(int theoryChangePoints)
     {
+        OnDamage();
         mHealthBar.UpdateContent();
         HealthChangeText healthChangeText=HealthChangeText.Create(theoryChangePoints,this);
+    }
+    //被攻击
+    protected virtual void OnDamage()
+    {
+        Color color=mSpriteRenderer.color;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(mSpriteRenderer.material.DOColor(Color.red,0.1f));
+        sequence.Append(mSpriteRenderer.material.DOColor(color,0.1f));
+        sequence.Play();
     }
     public int GetHealth(){return mHealth;}
     public CharacterId GetCharacterId(){return mCharacterId;}

@@ -8,7 +8,7 @@ public class Dagger:Weapon
 {
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
     {
-        
+        mStatusEffectId=StatusEffectId.Equipment_Dagger;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {

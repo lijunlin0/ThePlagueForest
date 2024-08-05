@@ -8,7 +8,7 @@ public class ThunderWand:Weapon
 {
     public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)
     {
-        
+        mStatusEffectId=StatusEffectId.Equipment_ThunderWand;
     }
 
     public override void OnGet(StatusEffect statusEffect,int layer)

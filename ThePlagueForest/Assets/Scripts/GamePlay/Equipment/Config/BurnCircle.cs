@@ -7,6 +7,7 @@ public class BurnCircle : Equipment
     public BurnCircle():base(EquipmentType.Passive,EquipmentId.BurnCircle)
     {
         mMaxlayer=1;
+        mStatusEffectId=StatusEffectId.Equipment_BurnCircle;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

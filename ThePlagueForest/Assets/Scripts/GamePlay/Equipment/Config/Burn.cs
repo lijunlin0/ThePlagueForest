@@ -9,6 +9,7 @@ public class Burn : Equipment
     public Burn():base(EquipmentType.Passive,EquipmentId.Burn)
     {
         mMaxlayer=4;
+        mStatusEffectId=StatusEffectId.Equipment_Burn;
     }
 
     public override void OnGet(StatusEffect effect, int layer)

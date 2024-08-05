@@ -8,7 +8,7 @@ public class SacredSword:Weapon
 {
     public SacredSword():base(EquipmentType.Active,EquipmentId.SacredSword)
     {
-        
+        mStatusEffectId=StatusEffectId.Equipment_SacredSword;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {

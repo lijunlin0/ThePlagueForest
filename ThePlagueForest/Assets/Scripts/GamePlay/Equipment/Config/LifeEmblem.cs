@@ -9,6 +9,7 @@ public class LifeEmblem : Equipment
     public LifeEmblem():base(EquipmentType.Passive,EquipmentId.LifeEmblem)
     {
         mMaxlayer=5;
+        mStatusEffectId=StatusEffectId.Equipment_LifeEmblem;
     }
     public override void OnGet(StatusEffect effect,int layer)
     {

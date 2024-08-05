@@ -8,11 +8,11 @@ public class FireWand:Weapon
 {
     public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)
     {
-        
+        mStatusEffectId=StatusEffectId.Equipment_FireWand;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=10;
+        mAttack=100;
         mShootTime=1.8f;
          BulletShooter shooter = new BulletShooter(()=>
          {

@@ -10,6 +10,7 @@ public class Amulet  : Equipment
 
     public Amulet():base(EquipmentType.Passive,EquipmentId.Amulet)
     {
+        mStatusEffectId=StatusEffectId.Equipment_Amulet;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

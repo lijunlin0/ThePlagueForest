@@ -1,23 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 //王冠--每 N 秒无敌 Y 秒
 public class Crown : Equipment
 {
-    private const int mInvincibleTick=4;
+    private const int mInvincibleTick=8;
     private const int mInvincibleDuration=2;
     private const int TickLayerReduce=1;
     public Crown():base(EquipmentType.Passive,EquipmentId.Crown)
     {
         mMaxlayer=3;
+        mStatusEffectId=StatusEffectId.Equipment_Crown;
     }
     public override void OnGet(StatusEffect effect,int layer)
-    {
-
-        effect.SetTick(mInvincibleTick,()=>
+    {     
+        SpriteRenderer spriteRenderer=Player.GetCurrent().GetCrownObject().GetComponent<SpriteRenderer>();
+        int tick=mInvincibleTick-TickLayerReduce*(layer-1);
+        effect.SetTick(tick,()=>
         {
-            Debug.Log("setTick");
+            Debug.Log("无敌");
+            spriteRenderer.color=new Color(1, 1, 1,1);
+            DOVirtual.DelayedCall(mInvincibleDuration,()=>
+            {
+               spriteRenderer.color=new Color(1, 1, 1,0);
+            });
+
             StatusEffect statusEffect=new StatusEffect(StatusEffectId.Invincible,Player.GetCurrent(),mInvincibleDuration);
             StatusEffectChangeInfo changeInfo=new StatusEffectChangeInfo(statusEffect,StatusEffectChangeReason.Fight,Player.GetCurrent());
             FightSystem.AddStatusEffect(changeInfo);

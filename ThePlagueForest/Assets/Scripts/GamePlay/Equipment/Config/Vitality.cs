@@ -10,6 +10,7 @@ public class Vitality : Equipment
     public Vitality():base(EquipmentType.Passive,EquipmentId.Vitality)
     {
         mMaxlayer=3;
+        mStatusEffectId=StatusEffectId.Equipment_Vitality;
     }
     public override void OnGet(StatusEffect effect,int layer)
     {

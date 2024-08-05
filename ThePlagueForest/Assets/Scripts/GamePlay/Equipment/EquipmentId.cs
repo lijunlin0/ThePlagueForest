@@ -9,7 +9,7 @@ public enum EquipmentId
     Sickle,             //镰刀
     Amulet,             //全能护身符
     Vitality,           //活力戒指
-    Spear,              //长矛
+    Mace,               //狼牙棒
     Heartstone,         //心石
     Burn,               //炽焰弹
     Frozen,             //极寒弹

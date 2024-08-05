@@ -7,6 +7,7 @@ public class LuckyStone : Equipment
     public LuckyStone():base(EquipmentType.Passive,EquipmentId.LuckyStone)
     {
         mMaxlayer=3;
+        mStatusEffectId=StatusEffectId.Equipment_LuckyStone;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

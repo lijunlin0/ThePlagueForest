@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202454093602677664}
   - component: {fileID: 4953726340864751407}
+  - component: {fileID: 669774455923165157}
   m_Layer: 0
   m_Name: Display
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5715505915148379908}
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 06b4364255c28844d9b8ee58851443d9, type: 3}
-  m_Color: {r: 0.7924528, g: 0.3337046, b: 0.10715541, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5cc730dfe956f2b4fa972e1857d719c8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &669774455923165157
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942554332968384459}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a198a335225acb46bf37ef6f6e3d622, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9048315048290361999
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,17 +183,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 9.0145445, y: 13.595132}
-      - {x: 5.240745, y: 15.371262}
-      - {x: -0.93105316, y: 15.89686}
-      - {x: -6.1945744, y: 15.344429}
-      - {x: -13.221857, y: 9.810493}
-      - {x: -15.487124, y: 2.447544}
-      - {x: -14.451335, y: -7.139412}
-      - {x: -10.385622, y: -12.267639}
-      - {x: -4.622352, y: -15.395535}
-      - {x: 4.0016494, y: -15.39552}
-      - {x: 9.898323, y: -12.292015}
-      - {x: 14.944965, y: -5.914769}
-      - {x: 15.227212, y: 5.2746363}
+    - - {x: 62.616924, y: -26.490355}
+      - {x: 60.784256, y: 0.9999962}
+      - {x: 40.28448, y: 18.94139}
+      - {x: -3.089197, y: 7.0288773}
+      - {x: -4.8640633, y: -24.32857}
+      - {x: 12.194826, y: -45.40451}
+      - {x: 41.88114, y: -45.508263}
   m_UseDelaunayMesh: 0

@@ -6,6 +6,7 @@ public class Karambit : Equipment
     private const int mAttackSpeedAddition=10;
     public Karambit():base(EquipmentType.Passive,EquipmentId.Karambit)
     {
+        mStatusEffectId=StatusEffectId.Equipment_Karambit;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

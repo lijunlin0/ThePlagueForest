@@ -7,6 +7,7 @@ public class FrozenCircle : Equipment
     public FrozenCircle():base(EquipmentType.Passive,EquipmentId.FrozenCircle)
     {
         mMaxlayer=1;
+        mStatusEffectId=StatusEffectId.Equipment_FrozenCircle;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

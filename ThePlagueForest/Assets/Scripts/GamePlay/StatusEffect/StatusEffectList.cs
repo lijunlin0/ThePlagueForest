@@ -44,6 +44,7 @@ public class StatusEffectList
     //添加新的状态效果
     public void AddStatusEffect(StatusEffect effect)
     {
+        Debug.Log("加");
         mStatucEffects.Add(effect);
         if(effect.GetId()==StatusEffectId.Invincible)
         {

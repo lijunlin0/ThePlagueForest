@@ -9,6 +9,7 @@ public class Sickle : Equipment
     public Sickle():base(EquipmentType.Passive,EquipmentId.Sickle)
     {
         mMaxlayer=3;
+        mStatusEffectId=StatusEffectId.Equipment_Sickle;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)

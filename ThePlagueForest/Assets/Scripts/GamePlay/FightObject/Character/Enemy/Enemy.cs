@@ -38,10 +38,21 @@ public class Enemy : Character
         float distance=direction.sqrMagnitude;
         if(distance>1)
         {   
+            Vector3 prePosition=transform.position;
             transform.localRotation=Quaternion.LookRotation(Vector3.forward, direction);
             transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
-            //Debug.Log("移动速度:"+mCurrentPropertySheet.GetMoveSpeed());
+            //根据位移方向转向
+            if(transform.position.x-prePosition.x>0)
+            {
+            
+                mSpriteRenderer.flipX=false;
+            }
+            else
+            {
+                mSpriteRenderer.flipX=true;
+            }
         }
+        
     }
     protected virtual void Shoot(){}
     protected virtual bool CanShoot()
