@@ -31,7 +31,7 @@ public class DeathBomb : Equipment
             });
             area.SetCollisionEnabledCallback(()=>
             {
-                area.PlayDestroyAnimation(0.15f);
+                area.PlayDestroyAnimation(0.25f);
                 area.Collide();
             });
         });

@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 4, y: 5, z: 1}
+  m_LocalScale: {x: 4, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5808181723344152708}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 64, y: 64}
+  m_Size: {x: 100, y: 100}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 507541761571056760}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0c0e28a452f31b440922814893b5e4db, type: 2}
+  m_Controller: {fileID: 9100000, guid: 66fb2af2e1be7424683aa4641a87bd36, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,13 +183,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 76.78198, y: -66.68547}
-      - {x: 117.336174, y: -19.439201}
-      - {x: 124.14924, y: 30.523293}
-      - {x: 67.17963, y: 101.748024}
-      - {x: -54.935646, y: 102.20791}
-      - {x: -105.81184, y: 36.284348}
-      - {x: -100.5601, y: -10.621294}
-      - {x: -74.355934, y: -62.883713}
-      - {x: 3.9790878, y: -82.96182}
+    - - {x: 37.755127, y: 41.517708}
+      - {x: -28.57676, y: 121.862144}
+      - {x: -91.75247, y: 48.917244}
+      - {x: -58.805138, y: -56.74492}
+      - {x: -37.167374, y: -64.34813}
+      - {x: 22.130714, y: -39.287792}
   m_UseDelaunayMesh: 0

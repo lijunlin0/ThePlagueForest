@@ -77,7 +77,7 @@ public class FightModel
             distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
         }
         //生成敌人
-        Enemy enemy = EnemyIdToEnemy(idList[index],new Vector3(x,y,0));
+        Enemy enemy = EnemyIdToEnemy(idList[index],new Vector3(x,y,-1));
         mEnemyList.Add(enemy);
 
     }

@@ -9,6 +9,7 @@ public class FightScene : MonoBehaviour
      public void Awake()
      {
           mFightManager=new FightManager();
+          Map.Create();
           SettingsButton.Create();
      }
      public void Update()

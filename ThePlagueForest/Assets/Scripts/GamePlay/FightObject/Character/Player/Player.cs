@@ -28,6 +28,29 @@ public class Player : Character
          //创建王冠图片
         mCrownObject=CrownObject.Create();
     }
+
+    private void IsBorder()
+    {
+        int widthHalf=Map.Width/2*Map.ImgSize;
+        int heightHalf=Map.Height/2*Map.ImgSize;
+        int offset=160;
+        if(transform.position.x<-widthHalf)
+        {
+            transform.position=new Vector3(-widthHalf,transform.position.y,transform.position.z);
+        }
+        if(transform.position.y<-heightHalf)
+        {
+            transform.position=new Vector3(transform.position.x,-heightHalf,transform.position.z);
+        }
+        if(transform.position.x>widthHalf-offset)
+        {
+           transform.position=new Vector3(widthHalf-offset,transform.position.y,transform.position.z);
+        }
+        if(transform.position.y>heightHalf-offset)
+        {
+            transform.position=new Vector3(transform.position.x,heightHalf-offset,transform.position.z);
+        }
+    }
     public void Move()
     {
         
@@ -53,6 +76,8 @@ public class Player : Character
         Vector3 prePosition=transform.position;
         Vector3 direction=new Vector3(horizontalDistance,verticalDistance,0f).normalized;
         transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
+        IsBorder();
+        
         if(prePosition==transform.position)
         {
             mAnimator.Play("Idle");

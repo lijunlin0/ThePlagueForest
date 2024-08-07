@@ -14,7 +14,7 @@ public class StunGun:Weapon
     private const int BulletCount=5;
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=5;
+        mAttack=20;
         mShootTime=1f;
          BulletShooter shooter = new BulletShooter(()=>
          {

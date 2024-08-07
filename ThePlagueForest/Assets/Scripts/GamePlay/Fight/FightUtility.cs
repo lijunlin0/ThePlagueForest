@@ -42,7 +42,7 @@ public static class FightUtility
             };
             updatePosition();
 
-            DOVirtual.Float(0,1,0.1f,(float f)=>
+            DOVirtual.Float(0,1,0.3f,(float f)=>
             {
                 updatePosition();
             }).OnComplete(()=>
@@ -78,7 +78,7 @@ public static class FightUtility
         return res;
     }
 
-    public static void LineLink(GameObject fightObject,Vector3 startPosition,Vector3 endPosition,float xFactor=0.1f)
+    public static void LineLink(GameObject fightObject,Vector3 startPosition,Vector3 endPosition,float xFactor=0.01f)
     {
         Vector3 direction=endPosition-startPosition;
         fightObject.transform.localPosition=(startPosition+endPosition)/2;
