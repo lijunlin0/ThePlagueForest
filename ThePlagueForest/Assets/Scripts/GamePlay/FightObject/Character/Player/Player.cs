@@ -171,6 +171,17 @@ public class Player : Character
     {
         mWeapons.Add(weapon);
     }
+    public void RemoveWeaponWithStatusEffectId(StatusEffectId id)
+    {
+        for(int i=0;i<mWeapons.Count;i++)
+        {
+            if(mWeapons[i].GetStatusEffectsId()==id)
+            {
+                mWeapons.RemoveAt(i);
+                return;
+            }
+        }
+    }
     public static Player GetCurrent()
     {
         return sCurrent;

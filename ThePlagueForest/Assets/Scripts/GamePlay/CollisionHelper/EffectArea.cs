@@ -110,9 +110,10 @@ public class EffectArea:MonoBehaviour
     public void PlayDestroyAnimation(float fadeOutDuration)
     {
         SpriteRenderer spriteRenderer=GetComponent<SpriteRenderer>();
-        DOVirtual.DelayedCall(fadeOutDuration,()=>
+        spriteRenderer.DOFade(0,fadeOutDuration).OnComplete(()=>
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Destroy(gameObject,3);
         });
         
     }

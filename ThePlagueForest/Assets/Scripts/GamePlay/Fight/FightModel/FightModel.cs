@@ -55,7 +55,11 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         //初始武器
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.FireWand));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
+
     }
     public void EnemyCreate()
     {

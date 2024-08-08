@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class EquipmentSelectWindow : MonoBehaviour 
 {
+    public static int windowCount=0;
     private List<EquipmentSelectCell> mCells;
     private EquipmentSelectCell mSelectCell;
     private List<Equipment> mEquipments;
@@ -19,6 +20,7 @@ public class EquipmentSelectWindow : MonoBehaviour
 
     public void Init(List<Equipment> equipments)
     {  
+        windowCount++;
         FightManager.GetCurrent().SetPause(true);
         mCells=new List<EquipmentSelectCell>();
         mEquipments = equipments;
@@ -47,8 +49,13 @@ public class EquipmentSelectWindow : MonoBehaviour
         }
         //增加装备
         FightSystem.GetEquipment(mSelectCell.GetEquipment());
-        GameObject.Destroy(gameObject);
-        FightManager.GetCurrent().SetPause(false);
+        Destroy(gameObject);
+        //判断是否有多个装备选择窗口
+        if(windowCount<=1)
+        {
+            FightManager.GetCurrent().SetPause(false);
+        }
+        windowCount--;
     }
 
     private void UpdateContent()

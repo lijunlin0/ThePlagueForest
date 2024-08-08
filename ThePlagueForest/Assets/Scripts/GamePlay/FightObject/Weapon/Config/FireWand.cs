@@ -6,14 +6,24 @@ using UnityEngine;
 //火焰魔杖
 public class FireWand:Weapon
 {
+     private int mAttackAddition=10;
+    private float mShootTimeReduce=0.1f;
     public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)
     {
+         mBaseAttack=20;
+        mShootTime=1.2f;
+        mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_FireWand;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=100;
-        mShootTime=1.8f;
+        if(layer!=1)
+        {
+            mAttack+=mBaseAttack*mAttackAddition/100;
+            mShootTime-=mShootTimeReduce;
+            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
+            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
+        }
          BulletShooter shooter = new BulletShooter(()=>
          {
             Enemy nearEnemy=FightUtility.GetNearEnemy(Player.GetCurrent());

@@ -6,17 +6,27 @@ using UnityEngine;
 //回旋镖
 public class Boomerang:Weapon
 {
+    private int mAttackAddition=10;
+    private float mShootTimeReduce=0.1f;
     public Boomerang():base(EquipmentType.Active,EquipmentId.Boomerang)
     {
+        mBaseAttack=20;
+        mShootTime=1.2f;
+        mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_Boomerang;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=20;
-        mAttackRange=520;
-        mShootTime=1.2f;
-         BulletShooter shooter = new BulletShooter(()=>
-         {
+        if(layer!=1)
+        {
+            mAttack+=mBaseAttack*mAttackAddition/100;
+            mShootTime-=mShootTimeReduce;
+            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
+            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
+        }
+
+        BulletShooter shooter = new BulletShooter(()=>
+        {
             //方向朝着最近的敌人
             Enemy nearEnemy=FightUtility.GetNearEnemy(Player.GetCurrent());
             if(nearEnemy==null)

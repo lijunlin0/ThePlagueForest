@@ -9,6 +9,7 @@ public class Weapon : Equipment
     //攻击间隔
     protected float mShootTime=1f;
     public static float mAttackRange=400;
+    protected int mBaseAttack=10;
     //攻击力
     protected int mAttack=10;
     protected bool mIsShoot=true;

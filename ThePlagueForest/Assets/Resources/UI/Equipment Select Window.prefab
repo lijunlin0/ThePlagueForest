@@ -823,7 +823,7 @@ GameObject:
   - component: {fileID: 3832429858373590357}
   m_Layer: 0
   m_Name: Equipment Select Window
-  m_TagString: Untagged
+  m_TagString: EquipmentSelectWindow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

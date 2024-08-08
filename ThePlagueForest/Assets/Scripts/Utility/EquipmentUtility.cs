@@ -22,12 +22,12 @@ public class EquipmentUtility
         sEquipments.Add(EquipmentId.FireWand,new FireWand());
         sEquipments.Add(EquipmentId.Boomerang,new Boomerang());
         sEquipments.Add(EquipmentId.Dagger,new Dagger());
-        sEquipments.Add(EquipmentId.FrozenCircle,new FrozenCircle());
-        sEquipments.Add(EquipmentId.DeathBomb,new DeathBomb());
         sEquipments.Add(EquipmentId.SacredSword,new SacredSword());
 
 
         return;
+        sEquipments.Add(EquipmentId.FrozenCircle,new FrozenCircle());
+        sEquipments.Add(EquipmentId.DeathBomb,new DeathBomb());
         sEquipments.Add(EquipmentId.Sword,new Sword());
         sEquipments.Add(EquipmentId.Karambit,new Karambit());
         sEquipments.Add(EquipmentId.Shoe,new Shoe());
@@ -72,7 +72,7 @@ public class EquipmentUtility
         
         for(int i=0;i<EquipmentSelectCount;i++)
         {
-            int randnumIndex=RandomHelper.RandomInt(0,res.Count-1);
+            int randnumIndex=RandomHelper.RandomInt(0,res.Count);
             equipments.Add(res[randnumIndex]);
             res.RemoveAt(randnumIndex);
         }

@@ -24,7 +24,7 @@ public class EndWindow : MonoBehaviour
         {
             DOTween.KillAll();
             SceneManager.LoadScene("Main");
-            GameObject.Destroy(gameObject);
+            Destroy(gameObject);
         });
     }
 

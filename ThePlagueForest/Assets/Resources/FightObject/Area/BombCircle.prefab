@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5205683835650701987}
-  - component: {fileID: 5515002438706381165}
   m_Layer: 0
   m_Name: Display
   m_TagString: Untagged
@@ -27,63 +26,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 131322719435476829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5515002438706381165
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719214920491854632}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 64, y: 64}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &8748039545172976835
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5205683835650701987}
@@ -163,13 +110,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 141.6893, y: -7.123131}
-      - {x: 89.9916, y: 71.18374}
-      - {x: -42.73225, y: 57.820908}
-      - {x: -124.84043, y: 9.924402}
-      - {x: -103.553116, y: -87.306854}
-      - {x: 3.6436539, y: -109.35443}
-      - {x: 115.46124, y: -84.31669}
+    - - {x: 29.015736, y: 27.096638}
+      - {x: 16.409454, y: 31.68361}
+      - {x: -13.70651, y: 30.938444}
+      - {x: -30.586973, y: 24.644955}
+      - {x: -27.509663, y: 12}
+      - {x: -30.567648, y: -9.822493}
+      - {x: -20.293488, y: -20.057983}
+      - {x: 18.509663, y: -21.84182}
+      - {x: 31.54831, y: -19.33215}
+      - {x: 31, y: -8}
+      - {x: 31, y: 9}
+      - {x: 31.606285, y: 17.567646}
   m_UseDelaunayMesh: 0
 --- !u!95 &6121200081200130818
 Animator:
@@ -233,7 +185,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 387996850, guid: e3cacf94467871d449ee15013abec280, type: 3}
+  m_Sprite: {fileID: 1070622924, guid: e3cacf94467871d449ee15013abec280, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

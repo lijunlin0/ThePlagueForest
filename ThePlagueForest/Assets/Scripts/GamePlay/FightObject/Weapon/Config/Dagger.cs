@@ -6,13 +6,24 @@ using UnityEngine;
 //匕首
 public class Dagger:Weapon
 {
+     private int mAttackAddition=10;
+    private float mShootTimeReduce=0.1f;
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
     {
+        mBaseAttack=20;
+        mShootTime=1.2f;
+        mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_Dagger;
     }
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=20;
+        if(layer!=1)
+        {
+            mAttack+=mBaseAttack*mAttackAddition/100;
+            mShootTime-=mShootTimeReduce;
+            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
+            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
+        }
          BulletShooter shooter = new BulletShooter(()=>
          {
             //方向朝着最近的敌人

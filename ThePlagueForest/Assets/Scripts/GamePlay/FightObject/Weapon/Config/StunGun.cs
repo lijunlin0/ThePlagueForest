@@ -7,15 +7,31 @@ using UnityEngine;
 
 public class StunGun:Weapon
 {
+    private int mAttackAddition=10;
+    private float mShootTimeReduce=0.1f;
+    private int BulletCount=5;
     public StunGun():base(EquipmentType.Active,EquipmentId.StunGun)
     {
+        mBaseAttack=20;
+        mShootTime=1.2f;
+        mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_StunGun;
     }
-    private const int BulletCount=5;
+
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mAttack=20;
-        mShootTime=1f;
+        if(layer!=1)
+        {
+            if(layer==mMaxlayer)
+            {
+                BulletCount+=5;
+            }
+            mAttack+=mBaseAttack*mAttackAddition/100;
+            mShootTime-=mShootTimeReduce;
+            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
+            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
+        }
+
          BulletShooter shooter = new BulletShooter(()=>
          {
             List<Character> mTargets=new List<Character>(); 

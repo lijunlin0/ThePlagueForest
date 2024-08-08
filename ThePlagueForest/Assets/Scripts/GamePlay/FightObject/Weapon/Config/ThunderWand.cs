@@ -6,15 +6,25 @@ using UnityEngine;
 //闪电魔杖
 public class ThunderWand:Weapon
 {
+    private int mAttackAddition=10;
+    private float mShootTimeReduce=0.1f;
     public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)
     {
+        mBaseAttack=20;
+        mShootTime=2f;
+        mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_ThunderWand;
     }
 
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        mShootTime=3;
-        mAttack=20;
+        if(layer!=1)
+        {
+           mAttack+=mBaseAttack*mAttackAddition/100;
+            mShootTime-=mShootTimeReduce;
+            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
+            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
+        }
          BulletShooter shooter = new BulletShooter(()=>
          {
             //随机选择一名敌人
