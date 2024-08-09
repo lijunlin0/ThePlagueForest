@@ -16,6 +16,7 @@ public enum CharacterId
 public class Character : FightObject
 {
     private CharacterId mCharacterId;
+    protected Animator mAnimator;
     protected int mHealth;
     protected StatusEffectList mStatusEffectList;
     protected PropertySheet mBasePropertySheet;
@@ -32,6 +33,7 @@ public class Character : FightObject
         mStatusEffectList=new StatusEffectList(this,OnStatusEffectChanged);
         mCurrentPropertySheet=new PropertySheet(this,mBasePropertySheet,mStatusEffectList);
         mHealth=mCurrentPropertySheet.GetMaxHealth();
+        mAnimator=mDisplay.GetComponent<Animator>();
     }
     public StatusEffectList GetStatusEffectList(){return mStatusEffectList;}
     public PropertySheet GetCurrentPropertySheet(){return mCurrentPropertySheet;}

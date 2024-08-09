@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 //巫师
@@ -13,7 +14,16 @@ public class Enemy2 : Enemy
         enemy.Init(CharacterId.Enemy2,propertySheet);
         return enemy;
     }
-    
+
+    protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
+    {
+        base.Init(characterId,basePropertySheet);
+        //添加子弹发射器
+        mBulletShooter = new BulletShooter(()=>
+        {
+            Shoot();
+        },3,2,()=>{mAnimator.Play("Enemy2Attack");});
+    }
     protected override void Shoot()
     {
         //创建子弹
@@ -23,9 +33,23 @@ public class Enemy2 : Enemy
         //方向朝着玩家
         Vector3 direction=(FightModel.GetCurrent().GetPlayer().transform.position-bullet.transform.position).normalized;
         bullet.transform.localRotation=FightUtility.DirectionToRotation(direction);
-    
-        
         FightModel.GetCurrent().AddEnemyBullets(bullet);
+        mIsOnShoot=true;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if(mIsOnShoot)
+        {
+            mAnimator.Play("Enemy2Attack");
+        }
+        AnimatorStateInfo stateInfo = mAnimator.GetCurrentAnimatorStateInfo(0);
+        if(stateInfo.IsName("Enemy2Attack")&&stateInfo.normalizedTime>=1)
+        {
+            mIsOnShoot=false;
+            mAnimator.Play("Enemy2Walk");
+        }
     }
     
 

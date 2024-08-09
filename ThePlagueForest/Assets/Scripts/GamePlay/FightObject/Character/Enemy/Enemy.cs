@@ -17,20 +17,27 @@ public class Enemy : Character
 {
     protected EnemyType enemyType;
     protected BulletShooter mBulletShooter;
-    protected bool CanShootFlag=false;
+    protected bool mIsOnCollidePlayer;
+    protected bool mIsOnShoot;
+
     protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
-        enemyType=EnemyType.Normal;
         base.Init(characterId,basePropertySheet);
+        enemyType=EnemyType.Normal;
+        mIsOnShoot=false;
         mHealthBar=HealthBar.Create(this);
-        //添加子弹发射器
-        mBulletShooter = new BulletShooter(()=>
-        {
-            Shoot();
-        },3);
     }
     public virtual void Move()
     {
+        if(mIsOnShoot)
+        {
+            return;
+        }
+        AnimatorStateInfo stateInfo = mAnimator.GetCurrentAnimatorStateInfo(0);
+        if(!stateInfo.IsName("Walk"))
+        {
+            
+        }
         Vector3 playerPosition=Player.GetCurrent().transform.position;
         Vector3 enemyPosition=transform.position;
         Vector3 direction=playerPosition-enemyPosition;
@@ -39,7 +46,7 @@ public class Enemy : Character
         if(distance>1)
         {   
             Vector3 prePosition=transform.position;
-            transform.localRotation=Quaternion.LookRotation(Vector3.forward, direction);
+            //transform.localRotation=Quaternion.LookRotation(Vector3.forward, direction);
             transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
             //根据位移方向转向
             if(transform.position.x-prePosition.x>0)
@@ -55,14 +62,17 @@ public class Enemy : Character
         
     }
     protected virtual void Shoot(){}
-    protected virtual bool CanShoot()
+    public virtual void OnCollidePlayer()
     {
-        return CanShootFlag;
+        mIsOnCollidePlayer=true;
     }
     public override void OnUpdate()
     {
         base.OnUpdate();
-        mBulletShooter.OnUpdate();
+        if(mBulletShooter!=null)
+        {
+            mBulletShooter.OnUpdate();
+        }
         Move();
     }
     public override void PlayDestroyAnimation()

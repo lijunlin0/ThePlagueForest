@@ -7,14 +7,16 @@ using DG.Tweening;
 public class DeathBomb : Equipment
 {
     private const int mBombDamagePercent=5;
+    private const int mRangeAdditionPercent=25;
     public DeathBomb():base(EquipmentType.Passive,EquipmentId.DeathBomb)
     {
-        mMaxlayer=1;
+        mMaxlayer=3;
         mStatusEffectId=StatusEffectId.Equipment_DeathBomb;
     }
 
     public override void OnGet(StatusEffect statusEffect, int layer)
     {
+        
         statusEffect.SetFightEventCallback((FightEventData eventData)=>
         {
             if(eventData.GetFightEvent()!=FightEvent.Death)
@@ -28,7 +30,7 @@ public class DeathBomb : Equipment
                 int points=target.GetCurrentPropertySheet().GetMaxHealth()*mBombDamagePercent/100;
                 DamageInfo damageInfo=new DamageInfo(player,target,points,null,statusEffect);
                 FightSystem.Damage(damageInfo);
-            });
+            },1+(layer-1)*mRangeAdditionPercent/100);
             area.SetCollisionEnabledCallback(()=>
             {
                 area.PlayDestroyAnimation(0.25f);

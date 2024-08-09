@@ -38,6 +38,7 @@ public static class CollisionHelper
                 
                 int points=PropertySheet.CollideDamage;
                 DamageInfo damageInfo=new DamageInfo(enemy,player,points,null,null);
+                enemy.OnCollidePlayer();
                 FightSystem.Damage(damageInfo);
                 player.SetCollideProtect();
                 break;

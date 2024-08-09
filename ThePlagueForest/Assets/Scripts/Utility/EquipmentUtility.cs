@@ -23,9 +23,6 @@ public class EquipmentUtility
         sEquipments.Add(EquipmentId.Boomerang,new Boomerang());
         sEquipments.Add(EquipmentId.Dagger,new Dagger());
         sEquipments.Add(EquipmentId.SacredSword,new SacredSword());
-
-
-        return;
         sEquipments.Add(EquipmentId.FrozenCircle,new FrozenCircle());
         sEquipments.Add(EquipmentId.DeathBomb,new DeathBomb());
         sEquipments.Add(EquipmentId.Sword,new Sword());
@@ -40,8 +37,11 @@ public class EquipmentUtility
         sEquipments.Add(EquipmentId.Burn,new Burn());
         sEquipments.Add(EquipmentId.Frozen,new Frozen());
         sEquipments.Add(EquipmentId.LifeEmblem,new LifeEmblem());
-        
         sEquipments.Add(EquipmentId.LuckyStone,new LuckyStone());
+
+
+        return;
+        
 
     }
     public static Equipment GetEquipment(EquipmentId equipmentId)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,7 @@ public class EquipmentSelectWindow : MonoBehaviour
         if(windowCount<=1)
         {
             FightManager.GetCurrent().SetPause(false);
+            DOTween.PlayAll();
         }
         windowCount--;
     }

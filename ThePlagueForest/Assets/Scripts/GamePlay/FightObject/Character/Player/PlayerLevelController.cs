@@ -7,7 +7,7 @@ public class PlayerLevelController
     public const int PlayerBaseExp=100;
     public const int PlayerExpAdd=20;
     public const float LevelExpFactor=1.05f;
-    public const int NormalExp=1000;
+    public const int NormalExp=20;
     public const int EliteExp=60;
     public const int BossExp=500;
 

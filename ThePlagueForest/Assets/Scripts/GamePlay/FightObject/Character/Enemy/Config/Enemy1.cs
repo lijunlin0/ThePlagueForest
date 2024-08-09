@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,7 +22,38 @@ public class Enemy1 : Enemy
     protected void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Enemy1,basePropertySheet);
-        CanShootFlag=false;
-        CanShootFlag=true;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if(mIsOnCollidePlayer)
+        {
+            mIsOnShoot=true;
+            mAnimator.Play("Enemy1Attack");
+        }
+        AnimatorStateInfo stateInfo = mAnimator.GetCurrentAnimatorStateInfo(0);
+        if(stateInfo.IsName("Enemy1Attack")&&stateInfo.normalizedTime>=1)
+        {
+            mIsOnShoot=false;
+            mIsOnCollidePlayer=false;
+            mAnimator.Play("Enemy1Walk");
+        }
+    }
+    public override void PlayDestroyAnimation()
+    {
+        gameObject.SetActive(false);
+        mAnimator.Play("Enemy1Death");
+        ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
+        Destroy(mHealthBar.gameObject);
+        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
+        spriteRenderer.DOFade(0,1).OnComplete(()=>
+        {
+            ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
+        }).OnComplete(()=>
+        {
+            Destroy(gameObject);
+        });
+
     }
 }

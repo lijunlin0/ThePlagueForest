@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : Character
 {    
     public static CrownObject mCrownObject;
-    protected Animator mAnimator;
+
     private static Player sCurrent;
     protected List<Weapon> mWeapons;
     protected float mCollideProtect=0;
@@ -18,7 +18,6 @@ public class Player : Character
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Player,basePropertySheet);
-        mAnimator=mDisplay.GetComponent<Animator>();
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mPlayerLevelController=new PlayerLevelController();

@@ -32,10 +32,17 @@ public class EffectArea:MonoBehaviour
         effectArea.Init(collideCallback);
         return effectArea; 
     }
-    public static EffectArea CircleWithPositonCreate(string prefabName,Vector3 position,Callback<Character> collideCallback)
+    public static EffectArea CircleWithPositonCreate(string prefabName,Vector3 position,Callback<Character> collideCallback,float scaleFactor=1)
     {
         GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/"+prefabName);
         GameObject effectAreaArea=Instantiate(effectAreaPrefab,position,Quaternion.identity);
+        if(scaleFactor!=1)
+        {
+            float xScale=effectAreaArea.transform.localScale.x;
+            float yScale=effectAreaArea.transform.localScale.y;
+            effectAreaArea.transform.localScale=new Vector3(xScale*scaleFactor,yScale*scaleFactor,1);
+
+        }
         EffectArea effectArea=effectAreaArea.AddComponent<EffectArea>();
         effectArea.Init(collideCallback);
         return effectArea; 

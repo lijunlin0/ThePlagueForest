@@ -5,23 +5,39 @@ using UnityEngine;
 public class BulletShooter
 {
     private Callback mShootCallback;
+    private Callback mAnimationCallback;
     private float mShootTime;
-    private float defaultTime=0;
+    private float mDefaultTime=0;
+    private float mAnimationTime=0;
+    private float mDefaultAnimationTime=0;
     
-    public BulletShooter(Callback callback,float shootTime)
+    public BulletShooter(Callback callback,float shootTime,float animationTime=0,Callback animationCallback=null)
     {
         mShootCallback = callback;
         mShootTime = shootTime;
-        defaultTime=shootTime;
+        
+        mAnimationCallback=animationCallback;
+        mAnimationTime=animationTime;
     }
 
     public void OnUpdate()
     {
-        if (defaultTime>=mShootTime)
+        if (mDefaultTime>=mShootTime)
         {
             mShootCallback();
-            defaultTime=0;
+            mDefaultTime=0;
+            mDefaultAnimationTime=0;
         }
-        defaultTime+=Time.deltaTime;
+        mDefaultTime+=Time.deltaTime;
+        if(mAnimationTime==0)
+        {
+            return;
+        }
+        if (mDefaultAnimationTime>=mAnimationTime)
+        {
+            mAnimationCallback();
+            mDefaultAnimationTime=0;
+        }
+        mDefaultAnimationTime+=Time.deltaTime;
     }
 }

@@ -31,6 +31,7 @@ public class SettingsWindow : MonoBehaviour
         continueButton.onClick.AddListener(()=>
         {
             FightManager.GetCurrent().SetPause(false);
+            DOTween.PlayAll();
             GameObject.Destroy(gameObject);
 
         });
