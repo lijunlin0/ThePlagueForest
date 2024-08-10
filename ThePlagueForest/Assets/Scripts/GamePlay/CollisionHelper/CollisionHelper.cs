@@ -32,10 +32,13 @@ public static class CollisionHelper
         MyCollider collider1=player.GetCollider();
         foreach(Enemy enemy in enemies)
         {
+            if(enemy.IsOnCollidePlayer())
+            {
+                continue;
+            }
             MyCollider collider2=enemy.GetCollider();
             if(IsColliding(collider1,collider2))
             {
-                
                 int points=PropertySheet.CollideDamage;
                 DamageInfo damageInfo=new DamageInfo(enemy,player,points,null,null);
                 enemy.OnCollidePlayer();

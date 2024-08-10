@@ -104,4 +104,5 @@ public class Character : FightObject
         }
         mStatusEffectList.OnUpdate();
     }
+    public Animator GetAnimator(){return mAnimator;}
 }

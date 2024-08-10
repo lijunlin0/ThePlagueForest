@@ -16,7 +16,15 @@ public class HealthBar : MonoBehaviour
     {
         GameObject prefab=Resources.Load<GameObject>("UI/HealthBar");
         GameObject healthObject=GameObject.Instantiate(prefab,character.transform.position,Quaternion.identity,GameObject.Find("Canvas").transform);
+        
+        if(character.GetCharacterId()==CharacterId.Player)
+        {   
+            Image image=healthObject.transform.Find("Health/HealthFill").GetComponent<Image>();
+            image.color=new Color(0.1f,0.7f,0,1);
+
+        }
         HealthBar healthBar=healthObject.AddComponent<HealthBar>();
+        
         healthBar.Init(character);
         return healthBar;
     }

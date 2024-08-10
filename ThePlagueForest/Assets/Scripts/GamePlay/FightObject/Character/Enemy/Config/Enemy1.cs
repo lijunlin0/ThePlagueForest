@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 //丧尸
 public class Enemy1 : Enemy
 {
-
     public static Enemy1 Create(Vector3 position)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy1");
@@ -42,7 +41,7 @@ public class Enemy1 : Enemy
     }
     public override void PlayDestroyAnimation()
     {
-        gameObject.SetActive(false);
+        mCollider.GetCollider().enabled=false;
         mAnimator.Play("Enemy1Death");
         ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
         Destroy(mHealthBar.gameObject);
@@ -50,8 +49,6 @@ public class Enemy1 : Enemy
         spriteRenderer.DOFade(0,1).OnComplete(()=>
         {
             ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
-        }).OnComplete(()=>
-        {
             Destroy(gameObject);
         });
 

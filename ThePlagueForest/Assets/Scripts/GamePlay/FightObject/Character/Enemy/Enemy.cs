@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +12,12 @@ public enum EnemyType
     Normal=1,
     Elite=2,
     Boss=3,
+}
+
+public enum EnemyCreateChance
+{
+    Enemy1=90,
+    Enemy2=10,
 }
 
 public class Enemy : Character
@@ -84,5 +91,9 @@ public class Enemy : Character
     public  void HealthChange(int health)
     {
         mHealth+=health;
+    }
+    public bool IsOnCollidePlayer()
+    {
+        return mIsOnCollidePlayer;
     }
 }

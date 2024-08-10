@@ -4,6 +4,7 @@ using UnityEngine;
 //巫师
 public class Enemy2 : Enemy
 {
+    protected float mShootRange=600;
     public static Enemy2 Create(Vector3 position)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy2");
@@ -22,10 +23,11 @@ public class Enemy2 : Enemy
         mBulletShooter = new BulletShooter(()=>
         {
             Shoot();
-        },3,2,()=>{mAnimator.Play("Enemy2Attack");});
+        },3,2,()=>{mAnimator.Play("Enemy2Attack");},this,mShootRange);
     }
     protected override void Shoot()
     {
+        mAnimator.Play("Enemy2Attack");
         //创建子弹
         Enemy2Bullet bullet=Enemy2Bullet.Create(this,10);
         bullet.transform.position=transform.position;
@@ -40,6 +42,12 @@ public class Enemy2 : Enemy
     public override void OnUpdate()
     {
         base.OnUpdate();
+        if(mIsOnCollidePlayer)
+        {
+            DOVirtual.DelayedCall(1,()=>{
+                mIsOnCollidePlayer=false;
+            });
+        }
         if(mIsOnShoot)
         {
             mAnimator.Play("Enemy2Attack");

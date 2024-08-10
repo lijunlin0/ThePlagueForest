@@ -3,6 +3,8 @@ using System;
 
 public static class Utility
 {
+    public  const int WindowWidth=1920;
+    public const int WindowHeight=1080;
     public static void EnumForeach<T>(Callback<T> callback)
     {
         foreach(T value in Enum.GetValues(typeof(T)))

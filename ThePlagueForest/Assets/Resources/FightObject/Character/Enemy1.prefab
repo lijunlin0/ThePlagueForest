@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6472888331281365703}
   - component: {fileID: 4511874202412651760}
+  - component: {fileID: 8506964473514433404}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -42,7 +43,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 104772399100006777}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 010a96ee087231045b34ca1d9ff95502, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -77,13 +78,40 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 6.272747, y: -33.435093}
-      - {x: 23.695429, y: -13.235553}
-      - {x: 13.610853, y: 18.452469}
-      - {x: -2.4735787, y: 20.561}
-      - {x: -22.09003, y: -3.5909219}
-      - {x: -22.334288, y: -32.018288}
+    - - {x: 11.070339, y: -47.82786}
+      - {x: 35.849335, y: -18.672825}
+      - {x: 20.647322, y: 28.687325}
+      - {x: -1.833915, y: 29.836338}
+      - {x: -37.122475, y: -9.667878}
+      - {x: -34.168343, y: -49.609436}
   m_UseDelaunayMesh: 0
+--- !u!50 &8506964473514433404
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104772399100006777}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.5
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &6363867330742729012
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6472888331281365703}

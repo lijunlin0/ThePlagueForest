@@ -14,6 +14,8 @@ public class Player : Character
     protected bool mIsShoot=false;
     protected bool mShootflickerFlag=true;
     protected GameObject mAttackRangeArea=null;
+    protected Enemy mNearEnemy;
+    protected AttackTargetUI mAttackTargetUI;
     protected static PlayerLevelController mPlayerLevelController;
     protected virtual void Init(PropertySheet basePropertySheet)
     {
@@ -26,6 +28,7 @@ public class Player : Character
         Camera.main.transform.SetParent(this.transform,false);
          //创建王冠图片
         mCrownObject=CrownObject.Create();
+        mNearEnemy=new Enemy();
     }
 
     private void IsBorder()
@@ -119,6 +122,30 @@ public class Player : Character
             weapon.OnUpdate();
         }
         AttackRangeAreaFlicker();
+        AttackTargetUICreate();
+        
+    }
+    protected void AttackTargetUICreate()
+    {
+        Enemy nearEnemy=FightUtility.GetNearEnemy(this);
+        //如果攻击范围内没有敌人
+        if(nearEnemy==null&&mNearEnemy!=null)
+        {
+            Destroy(mAttackTargetUI.gameObject);
+            mNearEnemy=null;
+            return;
+        }
+        //如果和上一次相同
+        if(nearEnemy==mNearEnemy)
+        {
+            return;
+        }
+        if(mAttackTargetUI!=null)
+        {
+            Destroy(mAttackTargetUI.gameObject);
+        }
+        mAttackTargetUI=AttackTargetUI.Create(nearEnemy);
+        mNearEnemy=nearEnemy;
         
     }
     public CrownObject GetCrownObject()

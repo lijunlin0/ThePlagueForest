@@ -56,28 +56,35 @@ public class FightModel
         mEquipments=new Dictionary<Equipment,int>();
         //初始武器
         FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
 
     }
     public void EnemyCreate()
     {
-        //随机一个敌人id
         List<CharacterId> idList=new List<CharacterId>();
         for(int i=(int)CharacterId.Enemy1;i<=(int)CharacterId.Enemy2;i++)
         {
             idList.Add((CharacterId)i);
         }
-        int index=RandomHelper.RandomInt(0,idList.Count);
+        //根据概率得到下标
+        int randomNum=RandomHelper.RandomInt(0,100);
+        Debug.Log(randomNum);
+        int index=0;
+        if(randomNum<(int)EnemyCreateChance.Enemy2)
+        {
+            index=idList.Count-1;
+        }
+        else if(randomNum<(int)EnemyCreateChance.Enemy1)
+        {
+            index=idList.Count-2;
+        }
         //随机一个位置
         float distance=0;
         float x=0;
         float y=0;
         while(distance<=EnemyCreateDistanceWithPlayer)
         {
-            x=RandomHelper.RandomInt(-960,960)+mPlayer.transform.position.x;
-            y=RandomHelper.RandomInt(-540,540)+mPlayer.transform.position.y;
+            x=RandomHelper.RandomIntTwoRange(-Utility.WindowWidth,-Utility.WindowWidth/2,Utility.WindowWidth,Utility.WindowWidth/2);
+            y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight,-Utility.WindowHeight/2,Utility.WindowHeight,Utility.WindowHeight/2);
             distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
         }
         //生成敌人

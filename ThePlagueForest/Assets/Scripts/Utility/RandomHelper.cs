@@ -6,6 +6,18 @@ public class RandomHelper
     {
         return Random.Range(min,max);
     }
+    public static int RandomIntTwoRange(int min1,int max1,int min2,int max2)
+    {
+        bool range=Random.Range(0,2)==0;
+        if(range)
+        {
+            return Random.Range(min1,max1);
+        }
+        else
+        {
+            return Random.Range(min2,max2);
+        }
+    }
 
     public static bool RandomResult(float percent)
     {
