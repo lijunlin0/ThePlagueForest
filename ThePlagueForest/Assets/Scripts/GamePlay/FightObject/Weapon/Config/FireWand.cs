@@ -10,8 +10,9 @@ public class FireWand:Weapon
     private float mShootTimeReduce=0.1f;
     public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)
     {
-         mBaseAttack=20;
-        mShootTime=1.2f;
+        mBaseAttack=20;
+        mBaseShootTime=2f;
+        mShootTime=mBaseShootTime;
         mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_FireWand;
     }

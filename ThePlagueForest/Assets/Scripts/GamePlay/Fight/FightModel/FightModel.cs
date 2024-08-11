@@ -1,9 +1,12 @@
 
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class FightModel
 {
+    private float mEnemyLevelUpTime=0;
+    private float mEnemyLevelUpDefaultTime=0;
     private const int EnemyCreateDistanceWithPlayer=400;
     private static FightModel sCurrent;
     //敌人
@@ -54,6 +57,7 @@ public class FightModel
         mEnemyBulletList=new List<Bullet>();
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
+        mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
         //初始武器
         FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
 
@@ -67,7 +71,6 @@ public class FightModel
         }
         //根据概率得到下标
         int randomNum=RandomHelper.RandomInt(0,100);
-        Debug.Log(randomNum);
         int index=0;
         if(randomNum<(int)EnemyCreateChance.Enemy2)
         {
@@ -88,17 +91,19 @@ public class FightModel
             distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
         }
         //生成敌人
-        Enemy enemy = EnemyIdToEnemy(idList[index],new Vector3(x,y,-1));
+        Enemy enemy = EnemyIdToEnemy(idList[index],new Vector3(x,y,-1),Enemy.sLevel);
+        Debug.Log("敌人等级:"+Enemy.sLevel);
+
         mEnemyList.Add(enemy);
 
     }
 
-    private Enemy EnemyIdToEnemy(CharacterId id,Vector3 position)
+    private Enemy EnemyIdToEnemy(CharacterId id,Vector3 position,int level)
     {
         switch(id)
         {
-            case CharacterId.Enemy1:return Enemy1.Create(position);
-            case CharacterId.Enemy2:return Enemy2.Create(position);
+            case CharacterId.Enemy1:return Enemy1.Create(position,level);
+            case CharacterId.Enemy2:return Enemy2.Create(position,level);
             default:return null;
         }
     }
@@ -111,6 +116,11 @@ public class FightModel
         {
             EnemyCreateStartTime=0;
             EnemyCreate();
+        }
+        if(mEnemyLevelUpDefaultTime>=mEnemyLevelUpTime)
+        {
+            mEnemyLevelUpDefaultTime=0;
+            Enemy.sLevel++;
         }
        UpdateObjects();
        CollisionHelper.Collide();

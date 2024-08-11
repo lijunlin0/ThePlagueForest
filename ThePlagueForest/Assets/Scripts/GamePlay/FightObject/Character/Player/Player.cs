@@ -20,6 +20,7 @@ public class Player : Character
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Player,basePropertySheet);
+        mLevel=1;
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mPlayerLevelController=new PlayerLevelController();
@@ -148,6 +149,12 @@ public class Player : Character
         mNearEnemy=nearEnemy;
         
     }
+
+    protected override void OnDamage()
+    {
+        base.OnDamage();
+        mHurtSound.Play();
+    }
     public CrownObject GetCrownObject()
     {
         return mCrownObject;
@@ -215,4 +222,12 @@ public class Player : Character
     public void SetCollideProtect(){mCollideProtect=0.2f;}
     public bool InCollideProtect(){return mCollideProtect>=0;}
     public PlayerLevelController GetPlayerLevelController(){return mPlayerLevelController;}
+    public List<Weapon> GetWeapons()
+    {
+        return mWeapons;
+    }
+    public int GetLevel()
+    {
+        return mLevel;
+    }
 }

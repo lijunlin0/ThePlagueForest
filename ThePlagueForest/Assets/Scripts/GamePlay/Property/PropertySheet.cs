@@ -10,7 +10,8 @@ public enum Property
     DamageAddition,             //攻击力提升
     AttackSpeedAddition,        //攻击速度提升
     BaseHealth,                 //基础生命值
-    HealthAddition,             //生命值提升
+    HealthAdditionPoint,        //生命值提升(值提升)
+    HealthAddition,             //生命值提升(百分比提升)
     HealthRecoveryRate,         //生命值恢复速度
     BaseMoveSpeed,              //基础移动速度
     MoveSpeedAddition,          //移动速度提升
@@ -81,8 +82,9 @@ public class PropertySheet
     public int GetMaxHealth()
     {
         float baseHealth=mProperties[Property.BaseHealth];
+        float healthAdditionPoint=mProperties[Property.HealthAdditionPoint];
         float healthAddition=mProperties[Property.HealthAddition];
-        return (int)(baseHealth*(healthAddition+100)/100);
+        return (int)(baseHealth*(healthAddition+100)/100)+(int)healthAdditionPoint;
     }
 
     // 获取生命恢复速度

@@ -11,7 +11,8 @@ public class Boomerang:Weapon
     public Boomerang():base(EquipmentType.Active,EquipmentId.Boomerang)
     {
         mBaseAttack=20;
-        mShootTime=1.2f;
+        mBaseShootTime=2.5f;
+        mShootTime=mBaseShootTime;
         mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_Boomerang;
     }

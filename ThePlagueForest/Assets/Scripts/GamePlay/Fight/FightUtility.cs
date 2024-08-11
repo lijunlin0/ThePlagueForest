@@ -42,7 +42,7 @@ public static class FightUtility
             };
             updatePosition();
 
-            DOVirtual.Float(0,1,0.3f,(float f)=>
+            DOVirtual.Float(0,1,0.5f,(float f)=>
             {
                 updatePosition();
             }).OnComplete(()=>

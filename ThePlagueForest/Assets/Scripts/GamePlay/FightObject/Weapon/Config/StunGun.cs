@@ -13,7 +13,8 @@ public class StunGun:Weapon
     public StunGun():base(EquipmentType.Active,EquipmentId.StunGun)
     {
         mBaseAttack=20;
-        mShootTime=1.2f;
+        mBaseShootTime=1.4f;
+        mShootTime=mBaseShootTime;
         mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_StunGun;
     }

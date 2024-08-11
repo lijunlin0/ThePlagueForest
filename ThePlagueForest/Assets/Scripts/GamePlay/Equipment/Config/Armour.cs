@@ -12,7 +12,7 @@ public class Armour : Equipment
     public override void OnGet(StatusEffect statusEffect, int layer)
     {
         Dictionary<Property,float> corrections=new Dictionary<Property,float>();
-        corrections.Add(Property.HealthAddition,mMaxHealthAddition*layer);
+        corrections.Add(Property.HealthAdditionPoint,mMaxHealthAddition*layer);
         statusEffect.SetPropertyCorrections(corrections);
     }
 }

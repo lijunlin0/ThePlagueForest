@@ -54,6 +54,7 @@ public class Bullet : FightObject
             {
                 mIgnoreList.Add(target);
                 FightSystem.Damage(damageInfo);
+                target.GetHurtSound().Play();
             }
         }
         else

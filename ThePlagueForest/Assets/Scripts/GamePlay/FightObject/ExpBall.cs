@@ -7,12 +7,13 @@ public class ExpBall : FightObject
     private const int MoveSpeedReductionFrame=30;
     private float mCreateTime=0;
     private int mExp;
+    protected AudioSource mSound;
 
     private float mMoveSpeed;
     
-    public static ExpBall Create(Vector3 position, int exp)
+    public static ExpBall Create(Vector3 position, int exp,string expType)
     {
-        GameObject prefab=Resources.Load<GameObject>("FightObject/Other/ExpBall");
+        GameObject prefab=Resources.Load<GameObject>("FightObject/Other/"+expType);
         GameObject gameObject=GameObject.Instantiate(prefab);
         gameObject.transform.position=position;
         ExpBall expBall=gameObject.AddComponent<ExpBall>();
@@ -22,8 +23,9 @@ public class ExpBall : FightObject
 
     private void Init(int exp)
     {
+        base.Init();
         mExp=exp;
-        mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
+        mSound=GetComponent<AudioSource>();
         mMoveSpeed=500;
     }
 
@@ -34,10 +36,12 @@ public class ExpBall : FightObject
         
         if(CollisionHelper.IsColliding(mCollider,collider2))
         {
-
+            mCollider.GetCollider().enabled=false;
+            mDisplay.SetActive(false);
             Player.GetCurrent().GetPlayerLevelController().AddExp(mExp);
+            mSound.Play();
             //Debug.Log("获取经验:"+mExp);
-            Destroy(gameObject);
+            Destroy(gameObject,mSound.clip.length);
         }
         mCreateTime+=Time.deltaTime;
         if(mCreateTime<=mPauseTime)

@@ -11,7 +11,8 @@ public class Dagger:Weapon
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
     {
         mBaseAttack=20;
-        mShootTime=1.2f;
+        mBaseShootTime=1f;
+        mShootTime=mBaseShootTime;
         mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_Dagger;
     }

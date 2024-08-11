@@ -14,6 +14,7 @@ public enum EnemyType
     Boss=3,
 }
 
+
 public enum EnemyCreateChance
 {
     Enemy1=90,
@@ -22,6 +23,9 @@ public enum EnemyCreateChance
 
 public class Enemy : Character
 {
+    public static int sLevel=1;
+    //敌人升级时间间隔
+    public static float sEnemyLevelUpTime=30;
     protected EnemyType enemyType;
     protected BulletShooter mBulletShooter;
     protected bool mIsOnCollidePlayer;
@@ -30,7 +34,7 @@ public class Enemy : Character
     protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
         base.Init(characterId,basePropertySheet);
-        enemyType=EnemyType.Normal;
+        enemyType=EnemyType.Elite;
         mIsOnShoot=false;
         mHealthBar=HealthBar.Create(this);
     }
@@ -85,7 +89,9 @@ public class Enemy : Character
     public override void PlayDestroyAnimation()
     {
         base.PlayDestroyAnimation();
-        ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
+        int expPoints=PlayerLevelController.EnemyTypeToExp(enemyType);
+        string expBallName=PlayerLevelController.EnemyTypeToExpBallName(enemyType);
+        ExpBall.Create(this.transform.position,expPoints,expBallName);
         Destroy(mHealthBar.gameObject);
     }
     public  void HealthChange(int health)

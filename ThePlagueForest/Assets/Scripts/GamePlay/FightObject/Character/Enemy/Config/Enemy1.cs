@@ -8,13 +8,14 @@ using UnityEngine.UIElements;
 //丧尸
 public class Enemy1 : Enemy
 {
-    public static Enemy1 Create(Vector3 position)
+    public static Enemy1 Create(Vector3 position,int level)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy1");
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=position;
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",1);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",level);
+        
         enemy.Init(propertySheet);
         return enemy;
     }
@@ -43,12 +44,13 @@ public class Enemy1 : Enemy
     {
         mCollider.GetCollider().enabled=false;
         mAnimator.Play("Enemy1Death");
-        ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
         Destroy(mHealthBar.gameObject);
         SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0,1).OnComplete(()=>
         {
-            ExpBall.Create(this.transform.position,PlayerLevelController.EnemyTypeToExp(enemyType));
+            int expPoints=PlayerLevelController.EnemyTypeToExp(enemyType);
+            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(enemyType);
+            ExpBall.Create(this.transform.position,expPoints,expBallName);
             Destroy(gameObject);
         });
 

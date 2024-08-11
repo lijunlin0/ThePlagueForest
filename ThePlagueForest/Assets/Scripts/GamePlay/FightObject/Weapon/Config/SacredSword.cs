@@ -12,7 +12,8 @@ public class SacredSword:Weapon
     public SacredSword():base(EquipmentType.Active,EquipmentId.SacredSword)
     {
         mBaseAttack=20;
-        mShootTime=1.2f;
+        mBaseShootTime=1.2f;
+        mShootTime=mBaseShootTime;
         mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_SacredSword;
     }

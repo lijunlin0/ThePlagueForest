@@ -5,13 +5,13 @@ using UnityEngine;
 public class Enemy2 : Enemy
 {
     protected float mShootRange=600;
-    public static Enemy2 Create(Vector3 position)
+    public static Enemy2 Create(Vector3 position,int level)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy2");
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=position;
         Enemy2 enemy=enemyObject.AddComponent<Enemy2>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",1);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",level);
         enemy.Init(CharacterId.Enemy2,propertySheet);
         return enemy;
     }
@@ -60,5 +60,20 @@ public class Enemy2 : Enemy
         }
     }
     
+    public override void PlayDestroyAnimation()
+    {
+        mCollider.GetCollider().enabled=false;
+        mAnimator.Play("Enemy2Death");
+        Destroy(mHealthBar.gameObject);
+        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
+        spriteRenderer.DOFade(0,1.5f).OnComplete(()=>
+        {
+            int expPoints=PlayerLevelController.EnemyTypeToExp(enemyType);
+            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(enemyType);
+            ExpBall.Create(this.transform.position,expPoints,expBallName);
+            Destroy(gameObject);
+        });
+
+    }
 
 }

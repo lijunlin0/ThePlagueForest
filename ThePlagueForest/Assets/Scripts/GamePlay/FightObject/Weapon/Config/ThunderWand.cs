@@ -11,7 +11,8 @@ public class ThunderWand:Weapon
     public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)
     {
         mBaseAttack=20;
-        mShootTime=2f;
+        mBaseShootTime=2f;
+        mShootTime=mBaseShootTime;
         mAttack=mBaseAttack;
         mStatusEffectId=StatusEffectId.Equipment_ThunderWand;
     }

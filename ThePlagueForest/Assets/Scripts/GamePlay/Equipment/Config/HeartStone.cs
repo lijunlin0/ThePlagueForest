@@ -27,8 +27,9 @@ public class Heartstone : Equipment
             if(mCurrentHealthAddition<mMaxHealthAddition*layer)
             {
                 Player player=Player.GetCurrent();
-                Dictionary<Property,int> corrections=new Dictionary<Property,int>();
-                corrections.Add(Property.HealthAddition,mHealthAddition);
+                Dictionary<Property,float> corrections=new Dictionary<Property,float>();
+                corrections.Add(Property.HealthAdditionPoint,mHealthAddition*layer);
+                effect.SetPropertyCorrections(corrections);
                 effect.SetUserData("HeartStone",(mCurrentHealthAddition+1).ToString());
             }
                     

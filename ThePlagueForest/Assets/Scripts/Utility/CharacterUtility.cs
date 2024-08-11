@@ -28,4 +28,11 @@ public class CharacterUtility
         sheet.SetRawValue(Property.BaseMoveSpeed,moveSpeed);
         return sheet;
     }
+    public static int GetLevelUpMaxHealthAdd(string characterName)
+    {
+        JsonData characterData=Config[characterName];
+        PropertySheet sheet=new PropertySheet();
+
+        return (int)characterData["Health"][1];
+    }
 }

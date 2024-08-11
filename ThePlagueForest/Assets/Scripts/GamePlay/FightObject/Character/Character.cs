@@ -23,11 +23,14 @@ public class Character : FightObject
     protected PropertySheet mCurrentPropertySheet;
     protected HealthBar mHealthBar;
     protected SpriteRenderer mSpriteRenderer;
+    protected AudioSource mHurtSound;
+    protected int mLevel;
     protected virtual void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
 
         base.Init();
         mSpriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
+        mHurtSound=GetComponent<AudioSource>();
         mCharacterId=characterId;
         mBasePropertySheet=basePropertySheet;
         mStatusEffectList=new StatusEffectList(this,OnStatusEffectChanged);
@@ -52,6 +55,20 @@ public class Character : FightObject
         else if(mHealth>currMaxHealth)
         {
             mHealth=currMaxHealth;
+        }
+
+        float attackSpeedFactor=mCurrentPropertySheet.GetAttackSpeedFactor();
+        if(attackSpeedFactor==1)
+        {
+            return;
+        }
+        List<Weapon> weapons=Player.GetCurrent().GetWeapons();
+        foreach(Weapon weapon in weapons)
+        {
+            float time=weapon.GetBaseShootTime();
+            float resTime=time/attackSpeedFactor;
+            weapon.GetBulletShooter().ReduceShootTime(time-resTime);
+            Debug.Log("射击间隔:"+time+","+resTime);
         }
     }
     protected virtual void OnHealthChanged(int theoryChangePoints)
@@ -105,4 +122,8 @@ public class Character : FightObject
         mStatusEffectList.OnUpdate();
     }
     public Animator GetAnimator(){return mAnimator;}
+    public  AudioSource GetHurtSound()
+    {
+        return mHurtSound;
+    }
 }

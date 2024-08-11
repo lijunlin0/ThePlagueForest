@@ -72,4 +72,9 @@ public class BulletShooter
         }
         mDefaultAnimationTime+=Time.deltaTime;
     }
+
+    public void ReduceShootTime(float time)
+    {
+        mShootTime-=time;
+    }
 }
