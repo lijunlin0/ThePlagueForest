@@ -79,12 +79,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 11.070339, y: -47.82786}
-      - {x: 35.849335, y: -18.672825}
-      - {x: 20.647322, y: 28.687325}
-      - {x: -1.833915, y: 29.836338}
-      - {x: -37.122475, y: -9.667878}
-      - {x: -34.168343, y: -49.609436}
+    - - {x: -270.06302, y: -104.474106}
+      - {x: 178.51402, y: -113.083466}
+      - {x: 184.2921, y: 106.31364}
+      - {x: 31.73425, y: 269.00952}
+      - {x: -24.534412, y: -5.471794}
+      - {x: -222.9892, y: -55.903465}
   m_UseDelaunayMesh: 0
 --- !u!50 &7307934103217897985
 Rigidbody2D:
@@ -123,7 +123,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7349099be779ac14cb5929221743431d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1d16befd5d5b6dd439bfa792cce0d4a9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -283,12 +283,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 205932487, guid: d58b4d3cde788204aa6158b466582b1e, type: 3}
+  m_Sprite: {fileID: 793065817, guid: e36e50f912c044c46bf1480b409005ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 32, y: 32}
+  m_Size: {x: 90, y: 90}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
