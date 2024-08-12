@@ -4,7 +4,7 @@ using UnityEngine;
 //巫师
 public class Enemy2 : Enemy
 {
-    protected float mShootRange=600;
+    protected const int ShootRange=600;
     public static Enemy2 Create(Vector3 position,int level)
     {
         GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy2");
@@ -19,19 +19,18 @@ public class Enemy2 : Enemy
     protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
         base.Init(characterId,basePropertySheet);
+        mEnemyType=EnemyType.Elite;
         //添加子弹发射器
-        mBulletShooter = new BulletShooter(()=>
+        mBulletShooter = new BulletShooter(EquipmentId.None,this,()=>
         {
             Shoot();
-        },3,2,()=>{mAnimator.Play("Enemy2Attack");},this,mShootRange);
+        },3,ShootRange,2,()=>{mAnimator.Play("Enemy2Attack");});
     }
     protected override void Shoot()
     {
         mAnimator.Play("Enemy2Attack");
         //创建子弹
         Enemy2Bullet bullet=Enemy2Bullet.Create(this,10);
-        bullet.transform.position=transform.position;
-        //Debug.Log("敌人发射子弹,位置:"+bullet.transform.position);
         //方向朝着玩家
         Vector3 direction=(FightModel.GetCurrent().GetPlayer().transform.position-bullet.transform.position).normalized;
         bullet.transform.localRotation=FightUtility.DirectionToRotation(direction);
@@ -68,8 +67,8 @@ public class Enemy2 : Enemy
         SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0,1.5f).OnComplete(()=>
         {
-            int expPoints=PlayerLevelController.EnemyTypeToExp(enemyType);
-            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(enemyType);
+            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
+            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
             ExpBall.Create(this.transform.position,expPoints,expBallName);
             Destroy(gameObject);
         });

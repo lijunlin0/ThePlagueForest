@@ -1,10 +1,14 @@
 
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class FightModel
 {
+    private float mBossCreateDefaultTime=0;
+    private float mBossCreateTime=0;
     private float mEnemyLevelUpTime=0;
     private float mEnemyLevelUpDefaultTime=0;
     private const int EnemyCreateDistanceWithPlayer=400;
@@ -20,7 +24,7 @@ public class FightModel
     //装备以及层数
     private Dictionary<Equipment,int> mEquipments;
     private float EnemyCreateStartTime=0;
-    private float EnemyCreateEndTime=1;
+    private float EnemyCreateEndTime=2;
     public List<Bullet> GetEnemyBullets()
     {
         return mEnemyBulletList;
@@ -58,8 +62,11 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
+        mBossCreateTime=Boss.sCreateTime;
         //初始武器
         FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
+        Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
+        mEnemyList.Add(boss);
 
     }
     public void EnemyCreate()
@@ -80,7 +87,17 @@ public class FightModel
         {
             index=idList.Count-2;
         }
-        //随机一个位置
+        //生成敌人
+        Enemy enemy = EnemyIdToEnemy(idList[index],GetEnemyValidPosition(),Enemy.sLevel);
+        Debug.Log("敌人等级:"+Enemy.sLevel);
+
+        mEnemyList.Add(enemy);
+
+    }
+
+    private Vector3 GetEnemyValidPosition()
+    {
+         //随机一个位置
         float distance=0;
         float x=0;
         float y=0;
@@ -90,12 +107,7 @@ public class FightModel
             y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight,-Utility.WindowHeight/2,Utility.WindowHeight,Utility.WindowHeight/2);
             distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
         }
-        //生成敌人
-        Enemy enemy = EnemyIdToEnemy(idList[index],new Vector3(x,y,-1),Enemy.sLevel);
-        Debug.Log("敌人等级:"+Enemy.sLevel);
-
-        mEnemyList.Add(enemy);
-
+        return new Vector3(x,y,-1);
     }
 
     private Enemy EnemyIdToEnemy(CharacterId id,Vector3 position,int level)
@@ -104,6 +116,7 @@ public class FightModel
         {
             case CharacterId.Enemy1:return Enemy1.Create(position,level);
             case CharacterId.Enemy2:return Enemy2.Create(position,level);
+            case CharacterId.Boss:return Boss.Create(position,level);
             default:return null;
         }
     }
@@ -111,10 +124,23 @@ public class FightModel
 
     public void OnUpdate()
     {
+        
+       EnemyCreateUpdate();
+       UpdateObjects();
+       CollisionHelper.Collide();
+       RemoveInvalidObjects();
+    }
+
+    private void EnemyCreateUpdate()
+    {
         EnemyCreateStartTime+=Time.deltaTime;
+        mEnemyLevelUpDefaultTime+=Time.deltaTime;
+        mBossCreateDefaultTime+=Time.deltaTime;
         if(EnemyCreateStartTime>=EnemyCreateEndTime)
         {
             EnemyCreateStartTime=0;
+            EnemyCreateEndTime-=0.01f;
+            EnemyCreateEndTime=Mathf.Clamp(EnemyCreateEndTime-0.01f,0.2f,2);
             EnemyCreate();
         }
         if(mEnemyLevelUpDefaultTime>=mEnemyLevelUpTime)
@@ -122,9 +148,15 @@ public class FightModel
             mEnemyLevelUpDefaultTime=0;
             Enemy.sLevel++;
         }
-       UpdateObjects();
-       CollisionHelper.Collide();
-       RemoveInvalidObjects();
+         if(mBossCreateDefaultTime>=mBossCreateTime)
+        {
+            mBossCreateDefaultTime=0;
+            Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
+            mEnemyList.Add(boss);
+            Boss.sBossLevel+=1;
+        }
+
+        
     }
 
     public void AddEquipment(Equipment equipment)
@@ -134,10 +166,6 @@ public class FightModel
             mEquipments.Add(equipment, 0);
         }
         mEquipments[equipment]+=1;
-        if(equipment is Weapon)
-        {
-            mPlayer.AddWeapon(equipment as Weapon);
-        }
     }
 
     public int GetEquipmentLayer(Equipment equipment)

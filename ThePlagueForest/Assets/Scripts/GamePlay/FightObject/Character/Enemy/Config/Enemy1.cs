@@ -48,8 +48,8 @@ public class Enemy1 : Enemy
         SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0,1).OnComplete(()=>
         {
-            int expPoints=PlayerLevelController.EnemyTypeToExp(enemyType);
-            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(enemyType);
+            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
+            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
             ExpBall.Create(this.transform.position,expPoints,expBallName);
             Destroy(gameObject);
         });

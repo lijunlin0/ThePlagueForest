@@ -62,7 +62,7 @@ public class EquipmentUtility
         List<Equipment> res=new List<Equipment>();
         foreach(Equipment equipment in equipments)
         {
-            if(fightModel.GetEquipmentLayer(equipment)>equipment.GetMaxLayer())
+            if(fightModel.GetEquipmentLayer(equipment)>=equipment.GetMaxLayer())
             {
                 continue;
             }       

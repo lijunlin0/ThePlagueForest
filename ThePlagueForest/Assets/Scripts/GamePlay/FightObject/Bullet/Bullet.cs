@@ -61,6 +61,7 @@ public class Bullet : FightObject
         {
             mIsDead=true;
             FightSystem.Damage(damageInfo);
+            target.GetHurtSound().Play();
         }
     }
 

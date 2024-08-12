@@ -52,7 +52,7 @@ public static class FightUtility
         }
     }
 
-    public static Enemy GetNearEnemy(Character character,List<Character> ignoreList=null)
+    public static Enemy GetNearEnemy(Character character,int range,List<Character> ignoreList=null)
     {
         if(character.IsEnemy())
         {
@@ -68,7 +68,7 @@ public static class FightUtility
                 continue;
             }
             float distance=Vector3.Distance(character.transform.position,enemy.transform.position);
-            if(distance<Weapon.mAttackRange&&distance<minDistance)
+            if(distance<range&&distance<minDistance)
             {
                 res=enemy;
                 minDistance=distance;

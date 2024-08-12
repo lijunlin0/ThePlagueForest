@@ -5,46 +5,38 @@ using UnityEngine;
 
 //闪电魔杖
 public class ThunderWand:Weapon
-{
-    private int mAttackAddition=10;
-    private float mShootTimeReduce=0.1f;
+{   
+    private const int Attack=20;
+    private const float  ShootTime=2.5f;
+
+    private const int AttackAddition=10;
     public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)
     {
-        mBaseAttack=20;
-        mBaseShootTime=2f;
-        mShootTime=mBaseShootTime;
-        mAttack=mBaseAttack;
+        
         mStatusEffectId=StatusEffectId.Equipment_ThunderWand;
     }
 
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        if(layer!=1)
-        {
-           mAttack+=mBaseAttack*mAttackAddition/100;
-            mShootTime-=mShootTimeReduce;
-            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
-            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
-        }
-         BulletShooter shooter = new BulletShooter(()=>
+        int attack=Attack+Attack*AttackAddition/100*(layer-1);
+        float shootTime=ShootTime/layer;
+         BulletShooter shooter = new BulletShooter(mEquipmentId,Player.GetCurrent(),()=>
          {
             //随机选择一名敌人
             List<Enemy> enemyList = FightModel.GetCurrent().GetEnemies();
             if(enemyList.Count==0)
             {
-                mIsShoot=false;
                 return;
             }
             int randomIndex=RandomHelper.RandomInt(0,enemyList.Count-1);
             Enemy targetEnemy=enemyList[randomIndex];
             
-            mIsShoot=true;
             //创建子弹
-            BulletThunderWand bulletThunderWand = BulletThunderWand.Create(Player.GetCurrent(),mAttack);
+            BulletThunderWand bulletThunderWand = BulletThunderWand.Create(Player.GetCurrent(),attack);
             bulletThunderWand.transform.position=targetEnemy.transform.position;
             FightModel.GetCurrent().AddPlayerBullet(bulletThunderWand);
-        },mShootTime);
-        mBulletShooter=shooter;
+        },shootTime,DefaultShootRange);
+        Player.GetCurrent().AddBulletShooter(shooter);
     }
   
 

@@ -7,23 +7,26 @@ public class BulletShooter
 {
     private Callback mShootCallback;
     private Callback mAnimationCallback;
-    private Enemy mEnemy;
-    private float mEnemyShootRange = 0;
+    private Character mCharacter;
+    private int mShootRange = 0;
     private float mShootTime;
     private float mDefaultTime=0;
     private float mAnimationTime=0;
     private float mDefaultAnimationTime=0;
     private bool mCanShoot=true;
+    private EquipmentId mEquipmentId;
+
     
-    public BulletShooter(Callback callback,float shootTime,float animationTime=0,Callback animationCallback=null,Enemy enemy=null,float enemyShootRange=0)
+    public BulletShooter(EquipmentId equipmentId,Character character,Callback callback,float shootTime,int shootRange,float animationTime=0,Callback animationCallback=null)
     {
         mShootCallback = callback;
         mShootTime = shootTime;
         
         mAnimationCallback=animationCallback;
         mAnimationTime=animationTime;
-        mEnemyShootRange=enemyShootRange;
-        mEnemy=enemy;
+        mShootRange=shootRange;
+        mCharacter = character;
+        mEquipmentId=equipmentId;
     }
 
     public void OnUpdate()
@@ -34,6 +37,7 @@ public class BulletShooter
             HaveAnimationOnUpdate();
             return;
         }
+        mCanShoot=HasTarget();
         //攻击
         if (mDefaultTime>=mShootTime&&mCanShoot)
         {
@@ -41,40 +45,42 @@ public class BulletShooter
             mDefaultTime=0;
             mDefaultAnimationTime=0;
         }
-        mDefaultTime+=Time.deltaTime;
+        float attackSpeedFactor=mCharacter.GetCurrentPropertySheet().GetAttackSpeedFactor();
+        mDefaultTime+=Time.deltaTime*attackSpeedFactor;
 
+    }
+
+    private bool HasTarget()
+    {
+        Enemy nearEnemy=FightUtility.GetNearEnemy(mCharacter,mShootRange);
+        return nearEnemy!=null;
     }
     public void HaveAnimationOnUpdate()
     {
         //判断能否攻击
-        if(Vector3.Distance(mEnemy.transform.position,Player.GetCurrent().transform.position)>mEnemyShootRange)
+        if(Vector3.Distance(mCharacter.transform.position,Player.GetCurrent().transform.position)>mShootRange)
         {
-            mCanShoot=false;
             mDefaultAnimationTime=0;
             mDefaultTime=0;
             return;
         }
-        else
-        {
-            mCanShoot=true;
-        }
+
         //播放攻击动画
         if (mDefaultAnimationTime>=mAnimationTime)
         {
+            mAnimationCallback();
+            mDefaultAnimationTime=0;
             DOVirtual.DelayedCall(mShootTime-mAnimationTime,()=>
             {
                 mShootCallback();
                 //重置计时
                 mDefaultAnimationTime=0;
             });
-            mAnimationCallback();
-            mDefaultAnimationTime=0;
         }
         mDefaultAnimationTime+=Time.deltaTime;
     }
 
-    public void ReduceShootTime(float time)
-    {
-        mShootTime-=time;
-    }
+
+    public EquipmentId GetEquipmentId(){return mEquipmentId;}
+    public bool CanShoot(){return mCanShoot;}
 }

@@ -10,7 +10,7 @@ public enum CharacterId
     Player,
     Enemy1,
     Enemy2,
-    Boss1,
+    Boss,
 }
 
 public class Character : FightObject
@@ -57,19 +57,7 @@ public class Character : FightObject
             mHealth=currMaxHealth;
         }
 
-        float attackSpeedFactor=mCurrentPropertySheet.GetAttackSpeedFactor();
-        if(attackSpeedFactor==1)
-        {
-            return;
-        }
-        List<Weapon> weapons=Player.GetCurrent().GetWeapons();
-        foreach(Weapon weapon in weapons)
-        {
-            float time=weapon.GetBaseShootTime();
-            float resTime=time/attackSpeedFactor;
-            weapon.GetBulletShooter().ReduceShootTime(time-resTime);
-            Debug.Log("射击间隔:"+time+","+resTime);
-        }
+        
     }
     protected virtual void OnHealthChanged(int theoryChangePoints)
     {
@@ -105,7 +93,7 @@ public class Character : FightObject
     }
     public bool IsBoss()
     {
-        return mCharacterId>=CharacterId.Boss1;
+        return mCharacterId>=CharacterId.Boss;
     }
     public bool IsEnemy()
     {

@@ -9,7 +9,7 @@ public class Player : Character
     public static CrownObject mCrownObject;
 
     private static Player sCurrent;
-    protected List<Weapon> mWeapons;
+    protected List<BulletShooter> mBulletShooters;
     protected float mCollideProtect=0;
     protected bool mIsShoot=false;
     protected bool mShootflickerFlag=true;
@@ -24,7 +24,7 @@ public class Player : Character
         mHealthBar=HealthBar.Create(this);
         sCurrent=this;
         mPlayerLevelController=new PlayerLevelController();
-        mWeapons=new List<Weapon>();
+        mBulletShooters=new List<BulletShooter>();
         AttackRangeAreaCreate();
         Camera.main.transform.SetParent(this.transform,false);
          //创建王冠图片
@@ -110,17 +110,17 @@ public class Player : Character
             mCollideProtect-=Time.deltaTime;
         }
         Move();
-        foreach(Weapon weapon in mWeapons)
+        foreach(BulletShooter shooter in mBulletShooters)
         {
-            if(weapon is Boomerang)
+            if(shooter.GetEquipmentId()==EquipmentId.Boomerang)
             {
                 ChangeAttackRangeAreaSize(1.3f);
             }
-            if(weapon.IsShoot())
+            if(shooter.CanShoot())
             {
                 mIsShoot=true;
             }
-            weapon.OnUpdate();
+            shooter.OnUpdate();
         }
         AttackRangeAreaFlicker();
         AttackTargetUICreate();
@@ -128,7 +128,7 @@ public class Player : Character
     }
     protected void AttackTargetUICreate()
     {
-        Enemy nearEnemy=FightUtility.GetNearEnemy(this);
+        Enemy nearEnemy=FightUtility.GetNearEnemy(this,Boomerang.ShootRange);
         //如果攻击范围内没有敌人
         if(nearEnemy==null&&mNearEnemy!=null)
         {
@@ -200,17 +200,18 @@ public class Player : Character
         mHealthBar.gameObject.SetActive(false);
     }
 
-    public  void AddWeapon(Weapon weapon)
+    public  void AddBulletShooter(BulletShooter shooter)
     {
-        mWeapons.Add(weapon);
+        RemoveBulletShooter(shooter.GetEquipmentId());
+        mBulletShooters.Add(shooter);
     }
-    public void RemoveWeaponWithStatusEffectId(StatusEffectId id)
+    public void RemoveBulletShooter(EquipmentId id)
     {
-        for(int i=0;i<mWeapons.Count;i++)
+        for(int i=0;i<mBulletShooters.Count;i++)
         {
-            if(mWeapons[i].GetStatusEffectsId()==id)
+            if(mBulletShooters[i].GetEquipmentId()==id)
             {
-                mWeapons.RemoveAt(i);
+                mBulletShooters.RemoveAt(i);
                 return;
             }
         }
@@ -222,10 +223,6 @@ public class Player : Character
     public void SetCollideProtect(){mCollideProtect=0.2f;}
     public bool InCollideProtect(){return mCollideProtect>=0;}
     public PlayerLevelController GetPlayerLevelController(){return mPlayerLevelController;}
-    public List<Weapon> GetWeapons()
-    {
-        return mWeapons;
-    }
     public int GetLevel()
     {
         return mLevel;

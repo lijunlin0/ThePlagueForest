@@ -14,5 +14,6 @@ public class Karambit : Equipment
         Dictionary<Property,float> corrections=new Dictionary<Property,float>();
         corrections.Add(Property.AttackSpeedAddition,mAttackSpeedAddition*layer);
         statusEffect.SetPropertyCorrections(corrections);
+       
     }
 }

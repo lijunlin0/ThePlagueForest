@@ -17,8 +17,8 @@ public enum EnemyType
 
 public enum EnemyCreateChance
 {
-    Enemy1=90,
-    Enemy2=10,
+    Enemy1=50,
+    Enemy2=50,
 }
 
 public class Enemy : Character
@@ -26,7 +26,7 @@ public class Enemy : Character
     public static int sLevel=1;
     //敌人升级时间间隔
     public static float sEnemyLevelUpTime=30;
-    protected EnemyType enemyType;
+    protected EnemyType mEnemyType;
     protected BulletShooter mBulletShooter;
     protected bool mIsOnCollidePlayer;
     protected bool mIsOnShoot;
@@ -34,20 +34,15 @@ public class Enemy : Character
     protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
         base.Init(characterId,basePropertySheet);
-        enemyType=EnemyType.Elite;
+        mEnemyType=EnemyType.Normal;
         mIsOnShoot=false;
         mHealthBar=HealthBar.Create(this);
     }
-    public virtual void Move()
+    protected virtual void Move()
     {
         if(mIsOnShoot)
         {
             return;
-        }
-        AnimatorStateInfo stateInfo = mAnimator.GetCurrentAnimatorStateInfo(0);
-        if(!stateInfo.IsName("Walk"))
-        {
-            
         }
         Vector3 playerPosition=Player.GetCurrent().transform.position;
         Vector3 enemyPosition=transform.position;
@@ -57,7 +52,6 @@ public class Enemy : Character
         if(distance>1)
         {   
             Vector3 prePosition=transform.position;
-            //transform.localRotation=Quaternion.LookRotation(Vector3.forward, direction);
             transform.position+=direction.normalized*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime;
             //根据位移方向转向
             if(transform.position.x-prePosition.x>0)
@@ -89,8 +83,8 @@ public class Enemy : Character
     public override void PlayDestroyAnimation()
     {
         base.PlayDestroyAnimation();
-        int expPoints=PlayerLevelController.EnemyTypeToExp(enemyType);
-        string expBallName=PlayerLevelController.EnemyTypeToExpBallName(enemyType);
+        int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
+        string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
         ExpBall.Create(this.transform.position,expPoints,expBallName);
         Destroy(mHealthBar.gameObject);
     }

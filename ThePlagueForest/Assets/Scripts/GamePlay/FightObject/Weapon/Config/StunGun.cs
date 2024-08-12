@@ -7,65 +7,56 @@ using UnityEngine;
 
 public class StunGun:Weapon
 {
-    private int mAttackAddition=10;
-    private float mShootTimeReduce=0.1f;
-    private int BulletCount=5;
+    private const int BulletCount=5;
+    private const int MaxLayerBulletCount=10;
+
+    private const int Attack=20;
+    private const float  ShootTime=2.5f;
+
+    private const int AttackAddition=10;
     public StunGun():base(EquipmentType.Active,EquipmentId.StunGun)
     {
-        mBaseAttack=20;
-        mBaseShootTime=1.4f;
-        mShootTime=mBaseShootTime;
-        mAttack=mBaseAttack;
+        
         mStatusEffectId=StatusEffectId.Equipment_StunGun;
     }
 
     public override void OnGet(StatusEffect statusEffect,int layer)
     {
-        if(layer!=1)
-        {
+        int attack=Attack+Attack*AttackAddition/100*(layer-1);
+        float shootTime=ShootTime/layer;
+
+         BulletShooter shooter = new BulletShooter(mEquipmentId,Player.GetCurrent(),()=>
+         {
+            List<Character> targets=new List<Character>(); 
+            Character character=Player.GetCurrent();
+            int bulletCount=BulletCount;
             if(layer==mMaxlayer)
             {
-                BulletCount+=5;
+                bulletCount=MaxLayerBulletCount;
             }
-            mAttack+=mBaseAttack*mAttackAddition/100;
-            mShootTime-=mShootTimeReduce;
-            Debug.Log("攻击力:"+mAttack+"攻速间隔:"+mShootTime);
-            Player.GetCurrent().RemoveWeaponWithStatusEffectId(mStatusEffectId);
-        }
-
-         BulletShooter shooter = new BulletShooter(()=>
-         {
-            List<Character> mTargets=new List<Character>(); 
-            Character character=Player.GetCurrent();
             //立即造成伤害
-            for(int i=0;i<BulletCount;i++)
+            for(int i=0;i<bulletCount;i++)
             {
-                Enemy nearEnemy=FightUtility.GetNearEnemy(character,mTargets);
+                Enemy nearEnemy=FightUtility.GetNearEnemy(character,DefaultShootRange,targets);
                 if(nearEnemy==null)
                 {
                     break;
                 }
-                mTargets.Add(nearEnemy);
-                BulletStunGun bullet=BulletStunGun.Create(nearEnemy,mAttack);
-                DamageInfo damageInfo=new DamageInfo(Player.GetCurrent(),nearEnemy,mAttack,bullet,null);
+                targets.Add(nearEnemy);
+                BulletStunGun bullet=BulletStunGun.Create(nearEnemy,attack);
+                DamageInfo damageInfo=new DamageInfo(Player.GetCurrent(),nearEnemy,attack,bullet,null);
                 FightSystem.Damage(damageInfo);
                 FightModel.GetCurrent().AddPlayerBullet(bullet);
                 character=nearEnemy;
             }
-            if(mTargets.Count==0)
+            if(targets.Count!=0)
             {
-                mIsShoot=false;
-            }
-            else
-            {
-                mTargets.Insert(0,Player.GetCurrent());
-                mIsShoot=true;
-                FightUtility.ChainEffect(mTargets);
-            }
-           
+                targets.Insert(0,Player.GetCurrent());
+                FightUtility.ChainEffect(targets);
+            }    
 
-        },mShootTime);
-        mBulletShooter=shooter;
+        },shootTime,DefaultShootRange);
+        Player.GetCurrent().AddBulletShooter(shooter);
     }
 
 }
