@@ -1,9 +1,10 @@
+using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
 
 public class ExpBall : FightObject 
 {
-    private const float mPauseTime=1f;
+    private const float mPauseTime=2f;
     private const int MoveSpeedReductionFrame=30;
     private float mCreateTime=0;
     private int mExp;
@@ -24,6 +25,9 @@ public class ExpBall : FightObject
     private void Init(int exp)
     {
         base.Init();
+        SpriteRenderer renderer = mDisplay.GetComponent<SpriteRenderer>();
+        renderer.color=new Color(1,1,1,0);
+        renderer.DOFade(1,0.5f);
         mExp=exp;
         mSound=GetComponent<AudioSource>();
         mMoveSpeed=500;

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2841170249123305067}
   - component: {fileID: 8966797518057464050}
   - component: {fileID: -668335329365877179}
-  - component: {fileID: 4107268033589318822}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -115,7 +114,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -130,37 +129,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -5.872023, y: 3.1788018}
-      - {x: -5.913115, y: -3.5226812}
-      - {x: 6.975536, y: -3.6365125}
-      - {x: 6.968857, y: -0.08054507}
-      - {x: 0.9455612, y: 6.9282126}
+    - - {x: -7.9855733, y: 7.986095}
+      - {x: -8.026666, y: -8.247088}
+      - {x: 8.094478, y: -8.153711}
+      - {x: 8.087795, y: -0.24631247}
+      - {x: 8.032173, y: 7.8399405}
       - {x: -1.8751407, y: 6.969262}
   m_UseDelaunayMesh: 0
---- !u!50 &4107268033589318822
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664671084953375267}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7

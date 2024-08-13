@@ -110,8 +110,8 @@ public class Character : FightObject
         mStatusEffectList.OnUpdate();
     }
     public Animator GetAnimator(){return mAnimator;}
-    public  AudioSource GetHurtSound()
+    public  void PlayHurtSound()
     {
-        return mHurtSound;
+        mHurtSound.Play();
     }
 }

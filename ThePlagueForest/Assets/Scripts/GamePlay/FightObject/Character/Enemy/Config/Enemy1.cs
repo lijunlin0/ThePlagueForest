@@ -15,7 +15,6 @@ public class Enemy1 : Enemy
         enemyObject.transform.position=position;
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
         PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",level);
-        
         enemy.Init(propertySheet);
         return enemy;
     }

@@ -27,9 +27,14 @@ public static class FightUtility
         return Quaternion.Euler(0,0,radian*Mathf.Rad2Deg);
     }
 
-    public static void ChainEffect(List<Character> targets)
+    public static void ChainEffect(List<Character> targets,bool isFinalChain)
     {
-        GameObject prefab=Resources.Load<GameObject>("FightObject/Effect/Bullet/StunChain");
+        //播放一次敌人受伤音效
+        targets[1].PlayHurtSound();
+        //如果是最终层数更换子弹
+        GameObject prefab=isFinalChain?Resources.Load<GameObject>("FightObject/Effect/Bullet/FinalStunChain"):Resources.Load<GameObject>("FightObject/Effect/Bullet/StunChain");
+        float zOffsetRotation=isFinalChain?prefab.transform.localEulerAngles.z:0;
+
         for(int i=1;i<targets.Count;i++)
         {
             Character startEnemy=targets[i-1];
@@ -37,8 +42,8 @@ public static class FightUtility
             GameObject effect=GameObject.Instantiate(prefab);
             Callback updatePosition=()=>
             {
-
-                LineLink(effect,startEnemy.transform.position,endEnemy.transform.position);
+                float xFactor=isFinalChain?0.005f:0.01f;
+                LineLink(effect,startEnemy.transform.position,endEnemy.transform.position,xFactor);
             };
             updatePosition();
 
@@ -72,7 +77,6 @@ public static class FightUtility
             {
                 res=enemy;
                 minDistance=distance;
-                //Debug.Log(minDistance);
             }
         }
         return res;
@@ -82,12 +86,12 @@ public static class FightUtility
     {
         Vector3 direction=endPosition-startPosition;
         fightObject.transform.localPosition=(startPosition+endPosition)/2;
+
         fightObject.transform.localRotation=DirectionToRotation(direction);
         float distance=Mathf.Sqrt(SqrDistance2D(startPosition,endPosition));
         float scaleY=fightObject.transform.localScale.y;
 
         fightObject.transform.localScale=new Vector3(distance*xFactor,scaleY,1);
-
     }
     
     public static float SqrDistance2D(Vector3 position1,Vector3 position2)

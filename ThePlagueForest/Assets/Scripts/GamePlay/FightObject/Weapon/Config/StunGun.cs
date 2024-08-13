@@ -52,7 +52,15 @@ public class StunGun:Weapon
             if(targets.Count!=0)
             {
                 targets.Insert(0,Player.GetCurrent());
-                FightUtility.ChainEffect(targets);
+                if(layer!=mMaxlayer)
+                {
+                    FightUtility.ChainEffect(targets,false);
+                }
+                else
+                {
+                    FightUtility.ChainEffect(targets,true);
+                }
+                
             }    
 
         },shootTime,DefaultShootRange);

@@ -12,7 +12,7 @@
         "MoveSpeed" : 200
     },
     "Enemy2" : {
-        "Health" : [100, 20],
+        "Health" : [150, 20],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : 50
     },

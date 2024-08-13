@@ -10,6 +10,7 @@ public class CrownObject : MonoBehaviour
     {
         GameObject Prefab=Resources.Load<GameObject>("Other/CrownObject");
         GameObject gameObject=Instantiate(Prefab,Player.GetCurrent().transform);
+        gameObject.SetActive(false);
         CrownObject crown=gameObject.AddComponent<CrownObject>();
         return crown;
     }

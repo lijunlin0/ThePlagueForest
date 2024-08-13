@@ -7,6 +7,7 @@ using UnityEngine;
 //地图生成
 public class Map : MonoBehaviour
 {
+    private static Canvas mCanvas;
     public static int ImgSize=160;
     public static int Width=20;//160
     public static int Height=20;//100
@@ -18,6 +19,7 @@ public class Map : MonoBehaviour
 
     public static void Create()
     {
+        mCanvas=GameObject.Find("Canvas").GetComponent<Canvas>();
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/0"));
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/1"));
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/2"));
@@ -40,12 +42,12 @@ public class Map : MonoBehaviour
                 if(i<-Height/2||j<-Width/2||i>=Height/2||j>=Width/2)
                 {
                     prefab=IsOnBorder(true);
-                    GameObject.Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity);
+                    GameObject.Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
                 }
                 else
                 {
                     prefab=IsOnBorder(false);
-                    GameObject.Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity);
+                    GameObject.Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
                 }
             }
         }

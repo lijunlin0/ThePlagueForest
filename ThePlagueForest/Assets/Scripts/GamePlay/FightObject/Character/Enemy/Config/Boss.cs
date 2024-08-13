@@ -35,7 +35,6 @@ public class Boss : Enemy
     }
     protected override void Shoot()
     {
-        mAnimator.Play("BossAttack");
         float startAngle=-mTotalAngle/2;
         float stepAngle=mTotalAngle/(mBulletCount-1);
         float rotation;
@@ -47,8 +46,6 @@ public class Boss : Enemy
             BossBullet bullet=BossBullet.Create(this,30,rotation);
             FightModel.GetCurrent().AddEnemyBullets(bullet);
         }
-
-
         mIsOnShoot=true;
     }
 
@@ -98,16 +95,15 @@ public class Boss : Enemy
             AnimatorStateInfo stateInfo = mAnimator.GetCurrentAnimatorStateInfo(0);
             if(!stateInfo.IsName("BossIdle"))
             {
-                mAnimator.Play("BossIdle");
+                PlayLowAnimation("BossIdle");
             }
-            
         }
     }
 
     protected override void OnDamage()
     {
         base.OnDamage();
-        mAnimator.Play("BossHurt");
+        PlayLowAnimation("BossHurt");
     }
 
     public override void OnUpdate()
@@ -144,7 +140,17 @@ public class Boss : Enemy
             ExpBall.Create(this.transform.position,expPoints,expBallName);
             Destroy(gameObject);
         });
+    }
 
+    //播放低优先级动画
+    private void PlayLowAnimation(string animationName)
+    {
+        AnimatorStateInfo info = mAnimator.GetCurrentAnimatorStateInfo(0);
+        if(!info.IsName("BossAttack"))
+        {
+            mAnimator.Play(animationName);
+            return;
+        }
     }
 
 }

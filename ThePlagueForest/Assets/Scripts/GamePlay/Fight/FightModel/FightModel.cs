@@ -64,7 +64,11 @@ public class FightModel
         mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
         mBossCreateTime=Boss.sCreateTime;
         //初始武器
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.SacredSword));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
         Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
         mEnemyList.Add(boss);
 
@@ -116,7 +120,6 @@ public class FightModel
         {
             case CharacterId.Enemy1:return Enemy1.Create(position,level);
             case CharacterId.Enemy2:return Enemy2.Create(position,level);
-            case CharacterId.Boss:return Boss.Create(position,level);
             default:return null;
         }
     }
@@ -124,7 +127,6 @@ public class FightModel
 
     public void OnUpdate()
     {
-        
        EnemyCreateUpdate();
        UpdateObjects();
        CollisionHelper.Collide();
@@ -155,8 +157,6 @@ public class FightModel
             mEnemyList.Add(boss);
             Boss.sBossLevel+=1;
         }
-
-        
     }
 
     public void AddEquipment(Equipment equipment)

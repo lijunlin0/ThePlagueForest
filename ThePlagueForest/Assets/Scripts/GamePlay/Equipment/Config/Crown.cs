@@ -16,15 +16,15 @@ public class Crown : Equipment
     }
     public override void OnGet(StatusEffect effect,int layer)
     {     
-        SpriteRenderer spriteRenderer=Player.GetCurrent().GetCrownObject().GetComponent<SpriteRenderer>();
+        CrownObject crownObject=Player.GetCurrent().GetCrownObject();
         int tick=mInvincibleTick-TickLayerReduce*(layer-1);
         effect.SetTick(tick,()=>
         {
             Debug.Log("无敌");
-            spriteRenderer.color=new Color(1, 1, 1,1);
+            crownObject.gameObject.SetActive(true);
             DOVirtual.DelayedCall(mInvincibleDuration,()=>
             {
-               spriteRenderer.color=new Color(1, 1, 1,0);
+               crownObject.gameObject.SetActive(false);
             });
 
             StatusEffect statusEffect=new StatusEffect(StatusEffectId.Invincible,Player.GetCurrent(),mInvincibleDuration);
