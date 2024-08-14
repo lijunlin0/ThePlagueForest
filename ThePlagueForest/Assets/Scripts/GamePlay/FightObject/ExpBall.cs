@@ -45,7 +45,7 @@ public class ExpBall : FightObject
             Player.GetCurrent().GetPlayerLevelController().AddExp(mExp);
             mSound.Play();
             //Debug.Log("获取经验:"+mExp);
-            Destroy(gameObject,mSound.clip.length);
+            Destroy(gameObject,mSound.clip.length+1);
         }
         mCreateTime+=Time.deltaTime;
         if(mCreateTime<=mPauseTime)

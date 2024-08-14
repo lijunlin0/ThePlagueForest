@@ -3,8 +3,13 @@ using System;
 
 public static class Utility
 {
-    public  const int WindowWidth=1920;
-    public const int WindowHeight=1080;
+    public  const int PcWidth=1920;
+    public const int PcHeight=1080;
+    public const int PhoneWidth=1080;
+    public const int PhoneHeight=1920;
+    public static int WindowWidth=0;
+    public static int WindowHeight=0;
+    public static bool IsPC=false;
     public static void EnumForeach<T>(Callback<T> callback)
     {
         foreach(T value in Enum.GetValues(typeof(T)))

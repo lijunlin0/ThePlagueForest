@@ -68,6 +68,10 @@ public class Character : FightObject
     //被攻击
     protected virtual void OnDamage()
     {
+        if(mIsDead)
+        {
+            return;
+        }
         Color color=mSpriteRenderer.color;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(mSpriteRenderer.material.DOColor(Color.red,0.1f));

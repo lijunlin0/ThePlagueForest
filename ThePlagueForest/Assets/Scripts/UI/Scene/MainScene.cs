@@ -9,6 +9,7 @@ public class MainScene : MonoBehaviour
 {
   public void Awake()
   {
+    InitScene();
     //获取Canvas
      GameObject CanvasObj=GameObject.Find("Canvas");
      //加载UI预制件
@@ -22,5 +23,17 @@ public class MainScene : MonoBehaviour
   public void StartButtonOnClick()
   {
     SceneManager.LoadScene("Fight");
+  }
+  private void InitScene()
+  {
+    GameObject canvas=GameObject.Find("Canvas");
+    if(!Utility.IsPC)
+    {
+      InputManager inputManager=canvas.AddComponent<InputManager>();
+    }
+    Camera mainCamera = Camera.main;
+    RectTransform transform=canvas.GetComponent<RectTransform>();
+    transform.sizeDelta = new Vector2(Utility.WindowWidth, Utility.WindowHeight); 
+    mainCamera.orthographicSize=Utility.WindowHeight/2;
   }
 }

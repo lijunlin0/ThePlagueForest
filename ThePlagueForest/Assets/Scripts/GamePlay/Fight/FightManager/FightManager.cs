@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FightManager
 {
-    private bool mPause;
+    private static bool mPause;
     private static FightManager sCurrent;
     protected FightModel mFightModel;
     public static FightManager GetCurrent()
@@ -36,4 +36,5 @@ public class FightManager
     {
         mPause=pause;
     }
+    public static bool IsPause(){return mPause;}
 }

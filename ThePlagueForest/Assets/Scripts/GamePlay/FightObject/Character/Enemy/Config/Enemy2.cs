@@ -70,7 +70,8 @@ public class Enemy2 : Enemy
             int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
             string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
             ExpBall.Create(this.transform.position,expPoints,expBallName);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Destroy(gameObject,5);
         });
 
     }

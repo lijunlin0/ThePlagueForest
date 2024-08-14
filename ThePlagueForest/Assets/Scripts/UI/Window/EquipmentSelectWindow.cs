@@ -12,7 +12,7 @@ public class EquipmentSelectWindow : MonoBehaviour
     public static EquipmentSelectWindow Open(List<Equipment> equipments)
     {
         Canvas canvas=GameObject.Find("Main Camera/WindowCanvas").GetComponent<Canvas>();
-        GameObject prefab=Resources.Load<GameObject>("UI/Equipment Select Window");
+        GameObject prefab=Utility.IsPC?Resources.Load<GameObject>("UI/Equipment Select Window"):Resources.Load<GameObject>("UI/Equipment Select Window Phone");
         GameObject gameObject = GameObject.Instantiate(prefab,canvas.transform);
         EquipmentSelectWindow window=gameObject.AddComponent<EquipmentSelectWindow>();
         window.Init(equipments);

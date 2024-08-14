@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine.WSA;
-
 //活力戒指--击杀敌人有 25% 概率恢复 4(+Layer*1)% 最大生命值 的血量
 public class Vitality : Equipment
 {

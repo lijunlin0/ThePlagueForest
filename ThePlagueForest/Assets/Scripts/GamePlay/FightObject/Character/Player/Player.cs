@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class Player : Character
 {    
@@ -54,33 +55,11 @@ public class Player : Character
             transform.position=new Vector3(transform.position.x,heightHalf-offset,transform.position.z);
         }
     }
-    public void Move()
+    public void Move(Vector3 direction)
     {
-        
-        float horizontalDistance=0f;
-        float verticalDistance=0f;
-
-        if(Input.GetKey(KeyCode.W))
-        {
-            verticalDistance+=1;
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            verticalDistance-=1;
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            horizontalDistance+=1;
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            horizontalDistance-=1;
-        }
-        Vector3 prePosition=transform.position;
-        Vector3 direction=new Vector3(horizontalDistance,verticalDistance,0f).normalized;
         transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
         IsBorder();
-        
+        Vector3 prePosition=transform.position;
         if(prePosition==transform.position)
         {
             mAnimator.Play("Idle");
@@ -101,6 +80,36 @@ public class Player : Character
         }
     }
 
+    public void PcMove()
+    {
+        float horizontalDistance=0f;
+        float verticalDistance=0f;
+        if(Input.GetKey(KeyCode.W))
+        {
+            verticalDistance+=1;
+        }
+        if(Input.GetKey(KeyCode.S))
+        {
+            verticalDistance-=1;
+        }
+        if(Input.GetKey(KeyCode.D))
+        {
+            horizontalDistance+=1;
+        }
+        if(Input.GetKey(KeyCode.A))
+        {
+            horizontalDistance-=1;
+        }
+        Vector3 prePosition=transform.position;
+        Vector3 direction=new Vector3(horizontalDistance,verticalDistance,0f).normalized;
+        Move(direction);
+    }
+
+    public void PhoneMove()
+    {
+        EnhancedTouchSupport.Enable();
+    }
+
     public override void OnUpdate()
     {
         mIsShoot=false;
@@ -109,7 +118,6 @@ public class Player : Character
         {
             mCollideProtect-=Time.deltaTime;
         }
-        Move();
         foreach(BulletShooter shooter in mBulletShooters)
         {
             if(shooter.GetEquipmentId()==EquipmentId.Boomerang)

@@ -13,12 +13,22 @@ public class HealthBar : MonoBehaviour
     public static HealthBar Create(Character character)
     {
         GameObject prefab=Resources.Load<GameObject>("UI/HealthBar");
+        //Boss
         if(character.GetCharacterId()==CharacterId.Boss)
         {   
             Canvas canvas=GameObject.Find("WindowCanvas").GetComponent<Canvas>();
-            GameObject gameObject=GameObject.Instantiate(prefab,new Vector3(0,480,-1),Quaternion.identity,canvas.transform);
+            GameObject gameObject=GameObject.Instantiate(prefab,canvas.transform);
+            RectTransform rectTransform=gameObject.GetComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(0, 0);//上下左右对齐模式
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.offsetMin=new Vector2(50,Utility.WindowHeight-120);
+            rectTransform.offsetMax=new Vector2(-50,-50);
             GameObject bossDisplay=gameObject.transform.Find("Display").gameObject;
-            bossDisplay.transform.localScale = new Vector3(10,6,1);
+            RectTransform displayTransform=bossDisplay.GetComponent<RectTransform>();
+            displayTransform.anchorMin = new Vector2(0, 0);
+            displayTransform.anchorMax = new Vector2(1, 1);  
+            displayTransform.offsetMin=new Vector2(0,0);
+            displayTransform.offsetMax=new Vector2(0,0);
             TextMeshProUGUI  text=gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI >();
             text.text="火蠕虫";
             HealthBar bar=gameObject.AddComponent<HealthBar>();

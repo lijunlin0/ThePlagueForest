@@ -38,7 +38,8 @@ public class BossBullet : Bullet
         mAnimator.Play("BulletBossExplosion");
         spriteRenderer.material.DOFade(0,1f).OnComplete(()=>
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Destroy(gameObject,5);
         });
     }
 

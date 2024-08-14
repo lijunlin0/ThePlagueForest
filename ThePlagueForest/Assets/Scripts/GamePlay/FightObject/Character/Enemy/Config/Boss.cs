@@ -131,14 +131,15 @@ public class Boss : Enemy
     {
         mCollider.GetCollider().enabled=false;
         mAnimator.Play("BossDeath");
-        Destroy(mHealthBar.gameObject);
+        Destroy(mHealthBar.gameObject,5);
         SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0,1.5f).OnComplete(()=>
         {
             int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
             string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
             ExpBall.Create(this.transform.position,expPoints,expBallName);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Destroy(gameObject,5);
         });
     }
 
