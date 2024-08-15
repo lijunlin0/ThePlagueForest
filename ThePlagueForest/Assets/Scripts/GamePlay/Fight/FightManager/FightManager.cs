@@ -24,7 +24,10 @@ public class FightManager
         {
             mPause=true;
             EndWindow.SetOpen(mPause);
-            EndWindow.Open();
+            DOVirtual.DelayedCall(2,()=>
+            {
+                EndWindow.Open();
+            });
         }
         if(mPause)
         {

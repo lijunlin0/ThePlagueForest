@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public static class Utility
 {
-    public  const int PcWidth=1920;
-    public const int PcHeight=1080;
-    public const int PhoneWidth=1080;
-    public const int PhoneHeight=1920;
     public static int WindowWidth=0;
     public static int WindowHeight=0;
     public static bool IsPC=false;

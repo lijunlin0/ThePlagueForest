@@ -2,7 +2,7 @@
     "Comment":"角色属性配置",
     
     "Player1" : {
-        "Health" : [3000, 20],
+        "Health" : [100, 20],
         "HealthRecovery" : [1.0, 0.5],
         "MoveSpeed" : 300
     },
@@ -17,7 +17,7 @@
         "MoveSpeed" : 50
     },
     "Boss" : {
-        "Health" : [1000, 1000],
+        "Health" : [1000, 500],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : 150
     }

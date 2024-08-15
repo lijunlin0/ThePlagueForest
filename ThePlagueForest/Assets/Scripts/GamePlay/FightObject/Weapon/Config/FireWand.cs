@@ -7,7 +7,7 @@ using UnityEngine;
 public class FireWand:Weapon
 {
     public const int ShootRange=600;
-    private const int Attack=20;
+    private const int Attack=12;
     private const float  ShootTime=2.5f;
     private const int AttackAddition=10;
     public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)

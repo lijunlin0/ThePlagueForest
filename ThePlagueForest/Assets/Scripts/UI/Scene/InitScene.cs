@@ -20,14 +20,14 @@ public class InitScene : MonoBehaviour
    {
       if(Screen.width<Screen.height)
       {
-         Utility.WindowWidth=Utility.PhoneWidth;
-         Utility.WindowHeight=Utility.PhoneHeight;
+         Utility.WindowWidth=Screen.width;
+         Utility.WindowHeight=Screen.height;
          Utility.IsPC=false;
       }
       else
       {
-         Utility.WindowWidth=Utility.PcWidth;
-         Utility.WindowHeight=Utility.PcHeight;
+         Utility.WindowWidth=Screen.width;
+         Utility.WindowHeight=Screen.height;
          Utility.IsPC=true;
       }
    }

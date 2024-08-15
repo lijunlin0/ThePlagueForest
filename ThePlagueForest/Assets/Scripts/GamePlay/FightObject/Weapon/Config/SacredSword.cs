@@ -7,8 +7,8 @@ using UnityEngine.UIElements;
 //圣剑
 public class SacredSword:Weapon
 {
-    private const int Attack=20;
-    private const float  ShootTime=2.5f;
+    private const int Attack=30;
+    private const float  ShootTime=1.8f;
     private const float MaxLayerBulletScale=1.5f;
 
     private const int AttackAddition=10;

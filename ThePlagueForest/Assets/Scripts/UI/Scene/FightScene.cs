@@ -27,7 +27,7 @@ public class FightScene : MonoBehaviour
           Canvas[] canvases = FindObjectsOfType<Canvas>();
           if(!Utility.IsPC)
           {
-               InputManager inputManager=canvases[0].AddComponent<InputManager>();
+               canvases[0].AddComponent<InputManager>();
           }
           // 遍历所有 Canvas
           foreach (Canvas canvas in canvases)
@@ -35,9 +35,13 @@ public class FightScene : MonoBehaviour
                RectTransform rectTransform = canvas.GetComponent<RectTransform>();
                rectTransform.sizeDelta = new Vector2(Utility.WindowWidth,Utility.WindowHeight);
           }
-          Joystick joystick=Joystick.Create();
-          InputManager.mJoystick=joystick;
-          InputManager.mJoystickCenter=joystick.transform.Find("Center").gameObject;
-          InputManager.mJoystickBasePosition=joystick.transform.position;
+          //生成摇杆
+          if(!Utility.IsPC)
+          {
+               Joystick joystick=Joystick.Create();
+               InputManager.mJoystick=joystick;
+               InputManager.mJoystickCenter=joystick.transform.Find("Center").gameObject;
+               InputManager.mJoystickBasePosition=joystick.transform.position;
+          }
      }
 }

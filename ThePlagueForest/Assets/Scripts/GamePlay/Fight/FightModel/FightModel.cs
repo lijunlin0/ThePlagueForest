@@ -64,14 +64,7 @@ public class FightModel
         mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
         mBossCreateTime=Boss.sCreateTime;
         //初始武器
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.StunGun));
-        Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
-        mEnemyList.Add(boss);
-
+        EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
     }
     public void EnemyCreate()
     {
@@ -93,7 +86,7 @@ public class FightModel
         }
         //生成敌人
         Enemy enemy = EnemyIdToEnemy(idList[index],GetEnemyValidPosition(),Enemy.sLevel);
-        Debug.Log("敌人等级:"+Enemy.sLevel);
+        //Debug.Log("敌人等级:"+Enemy.sLevel);
 
         mEnemyList.Add(enemy);
 

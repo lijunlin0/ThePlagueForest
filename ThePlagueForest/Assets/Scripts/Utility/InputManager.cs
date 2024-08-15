@@ -59,6 +59,7 @@ public class InputManager:MonoBehaviour
         mJoystickCenter.transform.localPosition=Vector3.zero;
         mJoystick.transform.position=mJoystickBasePosition+Player.GetCurrent().transform.position;
         IsSwipe=false;
+        Player.GetCurrent().GetAnimator().Play("Idle");
     }
      private void MovePlayer()
     {

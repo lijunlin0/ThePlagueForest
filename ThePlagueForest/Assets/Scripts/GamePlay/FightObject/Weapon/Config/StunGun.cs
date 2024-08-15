@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class StunGun:Weapon
 {
-    private const int BulletCount=5;
+    private const int BulletCount=10;
     private const int MaxLayerBulletCount=10;
 
     private const int Attack=20;
-    private const float  ShootTime=2.5f;
+    private const float  ShootTime=2f;
 
     private const int AttackAddition=10;
     public StunGun():base(EquipmentType.Active,EquipmentId.StunGun)

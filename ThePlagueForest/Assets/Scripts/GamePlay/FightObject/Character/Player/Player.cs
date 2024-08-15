@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -18,6 +19,7 @@ public class Player : Character
     protected Enemy mNearEnemy;
     protected AttackTargetUI mAttackTargetUI;
     protected static PlayerLevelController mPlayerLevelController;
+    protected bool mIsMove=false;
     protected virtual void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Player,basePropertySheet);
@@ -57,27 +59,28 @@ public class Player : Character
     }
     public void Move(Vector3 direction)
     {
+        Vector3 prePosition=transform.position;
         transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
         IsBorder();
-        Vector3 prePosition=transform.position;
         if(prePosition==transform.position)
         {
             mAnimator.Play("Idle");
+            return;
         }
         else
         {
             mAnimator.Play("Walk");
         }
         //根据位移方向转向
-        if(transform.position.x-prePosition.x>0)
+        if(transform.position.x>prePosition.x)
         {
-            
             mSpriteRenderer.flipX=false;
         }
         else
         {
             mSpriteRenderer.flipX=true;
         }
+        mIsMove=false;
     }
 
     public void PcMove()
@@ -100,20 +103,19 @@ public class Player : Character
         {
             horizontalDistance-=1;
         }
-        Vector3 prePosition=transform.position;
         Vector3 direction=new Vector3(horizontalDistance,verticalDistance,0f).normalized;
         Move(direction);
     }
 
-    public void PhoneMove()
-    {
-        EnhancedTouchSupport.Enable();
-    }
-
     public override void OnUpdate()
     {
-        mIsShoot=false;
         base.OnUpdate();
+        if(Utility.IsPC)
+        {
+            PcMove();
+        }
+        
+        mIsShoot=false;
         if(mCollideProtect>=0)
         {
             mCollideProtect-=Time.deltaTime;
@@ -155,7 +157,6 @@ public class Player : Character
         }
         mAttackTargetUI=AttackTargetUI.Create(nearEnemy);
         mNearEnemy=nearEnemy;
-        
     }
 
     protected override void OnDamage()

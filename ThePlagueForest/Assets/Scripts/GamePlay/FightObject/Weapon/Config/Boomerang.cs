@@ -7,8 +7,8 @@ using UnityEngine;
 public class Boomerang:Weapon
 {
     public const int ShootRange=600;
-    private const int Attack=20;
-    private const float  ShootTime=2.5f;
+    private const int Attack=10;
+    private const float  ShootTime=1.8f;
     private const float MaxLayerBulletScale=50;
     private const int AttackAddition=10;
     public Boomerang():base(EquipmentType.Active,EquipmentId.Boomerang)

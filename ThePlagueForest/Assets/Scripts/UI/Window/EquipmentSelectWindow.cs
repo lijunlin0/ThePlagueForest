@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,19 +10,26 @@ public class EquipmentSelectWindow : MonoBehaviour
     private List<EquipmentSelectCell> mCells;
     private EquipmentSelectCell mSelectCell;
     private List<Equipment> mEquipments;
-    public static EquipmentSelectWindow Open(List<Equipment> equipments)
+    private string mTittleTxt="";
+    public static EquipmentSelectWindow Open(List<Equipment> equipments,string tittleText="")
     {
         Canvas canvas=GameObject.Find("Main Camera/WindowCanvas").GetComponent<Canvas>();
         GameObject prefab=Resources.Load<GameObject>("UI/Equipment Select Window");
         GameObject gameObject = GameObject.Instantiate(prefab,canvas.transform);
         EquipmentSelectWindow window=gameObject.AddComponent<EquipmentSelectWindow>();
-        window.Init(equipments);
+        window.Init(equipments,tittleText);
         return window;
     }
 
-    public void Init(List<Equipment> equipments)
+    public void Init(List<Equipment> equipments,string tittleText)
     {  
         windowCount++;
+        mTittleTxt=tittleText;
+        if(mTittleTxt!="")
+        {
+            TextMeshProUGUI textUI=transform.Find("Window/Tittle/Text").gameObject.GetComponent<TextMeshProUGUI>();
+            textUI.text=mTittleTxt;
+        }  
         FightManager.GetCurrent().SetPause(true);
         mCells=new List<EquipmentSelectCell>();
         mEquipments = equipments;

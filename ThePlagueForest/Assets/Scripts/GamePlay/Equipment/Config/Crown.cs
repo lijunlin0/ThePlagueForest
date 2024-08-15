@@ -20,7 +20,6 @@ public class Crown : Equipment
         int tick=mInvincibleTick-TickLayerReduce*(layer-1);
         effect.SetTick(tick,()=>
         {
-            Debug.Log("无敌");
             crownObject.gameObject.SetActive(true);
             DOVirtual.DelayedCall(mInvincibleDuration,()=>
             {

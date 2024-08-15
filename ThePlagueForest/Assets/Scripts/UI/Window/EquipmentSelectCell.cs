@@ -20,7 +20,7 @@ public class EquipmentSelectCell : MonoBehaviour
     private void Init(Equipment equipment,Callback callback)
     {
         mEquipment=equipment;
-        Tuple<string,string,string,string,string> equipmentText=EquipmentUtility.GetEquipmentText(mEquipment.GetEquipmentId());
+        Tuple<string,string,string,string,string,string> equipmentText=EquipmentUtility.GetEquipmentText(mEquipment.GetEquipmentId());
         //加载图标
         GameObject prefab=Resources.Load<GameObject>("UI/Icon/"+equipmentText.Item3);
         GameObject icon=GameObject.Instantiate(prefab,transform.Find("Icon"));
@@ -32,14 +32,25 @@ public class EquipmentSelectCell : MonoBehaviour
         });
         //加载装备名称和描述
         TMP_Text tittleText=transform.Find("TittleText").GetComponent<TMP_Text>();
-       
-        tittleText.text = equipmentText.Item1;
         TMP_Text contentText=transform.Find("ContentText").GetComponent<TMP_Text>();
-        contentText.text = equipmentText.Item2;
         TMP_Text levelUpText=transform.Find("LevelUpText").GetComponent<TMP_Text>();
-        levelUpText.text="叠加:"+equipmentText.Item4;
         TMP_Text levelText=transform.Find("LevelText").GetComponent<TMP_Text>();
-        levelText.text="层数:"+FightModel.GetCurrent().GetEquipmentLayer(equipment).ToString()+"/"+equipment.GetMaxLayer().ToString();
+        //终极武器
+        if(equipment is Weapon&&FightModel.GetCurrent().GetEquipmentLayer(equipment)==equipment.GetMaxLayer())
+        {
+            tittleText.text=equipmentText.Item4;
+            tittleText.color=new Color(1,0.5f,1,1);
+            contentText.text=equipmentText.Item5;
+        }
+        else
+        {
+            tittleText.text = equipmentText.Item1;
+            contentText.text = equipmentText.Item2;
+            levelUpText.text="叠加:"+equipmentText.Item4;
+            levelText.text="层数:"+FightModel.GetCurrent().GetEquipmentLayer(equipment).ToString()+"/"+equipment.GetMaxLayer().ToString();
+        }
+        
+       
         //Debug.Log(tittleText.text.ToString()+contentText.text.ToString());
     }
     public void SetSelect(bool isSelect)

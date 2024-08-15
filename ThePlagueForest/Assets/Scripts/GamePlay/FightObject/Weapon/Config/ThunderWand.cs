@@ -6,8 +6,9 @@ using UnityEngine;
 //闪电魔杖
 public class ThunderWand:Weapon
 {   
-    private const int Attack=20;
-    private const float  ShootTime=2.5f;
+    private const int Attack=15;
+    private const int ShootRange=10000;
+    private const float  ShootTime=1.2f;
 
     private const int AttackAddition=10;
     public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)
@@ -35,7 +36,7 @@ public class ThunderWand:Weapon
             BulletThunderWand bulletThunderWand = BulletThunderWand.Create(Player.GetCurrent(),attack);
             bulletThunderWand.transform.position=targetEnemy.transform.position;
             FightModel.GetCurrent().AddPlayerBullet(bulletThunderWand);
-        },shootTime,DefaultShootRange);
+        },shootTime,ShootRange);
         Player.GetCurrent().AddBulletShooter(shooter);
     }
   
