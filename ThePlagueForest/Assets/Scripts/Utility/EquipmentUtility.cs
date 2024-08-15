@@ -48,10 +48,10 @@ public class EquipmentUtility
     {
         return sEquipments[equipmentId];
     }
-    public static Tuple<string,string,string> GetEquipmentText(EquipmentId id)
+    public static Tuple<string,string,string,string,string> GetEquipmentText(EquipmentId id)
     {
         JsonData EquipmentData=Config[id.ToString()];
-        var tuple=Tuple.Create(EquipmentData[0].ToString(),EquipmentData[1].ToString(),EquipmentData[2].ToString());
+        var tuple=Tuple.Create(EquipmentData[0].ToString(),EquipmentData[1].ToString(),EquipmentData[2].ToString(),EquipmentData[3].ToString(),EquipmentData[4].ToString());
         return tuple;
     }
 

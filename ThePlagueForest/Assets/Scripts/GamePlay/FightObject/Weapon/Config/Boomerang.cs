@@ -9,7 +9,7 @@ public class Boomerang:Weapon
     public const int ShootRange=600;
     private const int Attack=20;
     private const float  ShootTime=2.5f;
-
+    private const float MaxLayerBulletScale=50;
     private const int AttackAddition=10;
     public Boomerang():base(EquipmentType.Active,EquipmentId.Boomerang)
     {
@@ -31,7 +31,10 @@ public class Boomerang:Weapon
             //创建子弹
             BulletBoomerang bulletBoomerang = BulletBoomerang.Create(Player.GetCurrent(),attack);
             bulletBoomerang.transform.position=Player.GetCurrent().transform.position;
-           
+            if(layer==mMaxlayer)
+            {
+                bulletBoomerang.transform.localScale=new Vector3(MaxLayerBulletScale,MaxLayerBulletScale,1);
+            }
             Vector3 direction=(nearEnemy.transform.position-bulletBoomerang.transform.position).normalized;
             bulletBoomerang.transform.rotation=FightUtility.DirectionToRotation(direction);
             FightModel.GetCurrent().AddPlayerBullet(bulletBoomerang);

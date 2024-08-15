@@ -1,21 +1,26 @@
 using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 //火焰魔杖子弹
 public class BulletFireWand: Bullet
-{ 
-    public static BulletFireWand Create(Character character,int points)
+{   
+    private float mCircleDuration=0.5f;
+    private float mFinalCircleDuration=2f;
+    private bool mIsFinal=false;
+    public static BulletFireWand Create(Character character,int points,bool isFinal)
     {
         GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletFireWand");
         GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
         BulletFireWand bullet=bulletObject.AddComponent<BulletFireWand>();
-        bullet.Init(character,points);
+        bullet.Init(character,points,isFinal);
         return bullet;
     }
-    protected override void Init(Character character,int points)
+    protected void Init(Character character,int points,bool isFinal)
     {
+        mIsFinal=isFinal;
         base.Init(character,points);
         mMoveSpeed=600;
     }
@@ -43,7 +48,7 @@ public class BulletFireWand: Bullet
             });
             area.SetCollisionEnabledCallback(()=>
             {
-                area.PlayDestroyAnimation(0.5f);
+                area.PlayDestroyAnimation(mIsFinal?mFinalCircleDuration:mCircleDuration);
                 area.Collide();
             });
     }

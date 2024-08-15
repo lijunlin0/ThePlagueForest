@@ -16,6 +16,7 @@ public class Bullet : FightObject
     protected List<Character> mIgnoreList;
     //子弹能否穿透
     protected bool mIsPenetrate=false;
+    protected int mPenetrateCount=0;
     protected virtual void Init(Character source,int points)
     {
         base.Init();
@@ -28,6 +29,7 @@ public class Bullet : FightObject
         mPoints = points;
         mLiveTime=0;
         mMaxLifeTime=5;
+        mPenetrateCount=99999;
         mIgnoreList=new List<Character>();
     }
     public override void OnUpdate()
@@ -44,7 +46,7 @@ public class Bullet : FightObject
     public virtual void OnCollideCharacter(Character target)
     {
         DamageInfo damageInfo=new DamageInfo(mSource,target,mPoints,this,null);
-        if(mIsPenetrate)
+        if(mIsPenetrate&&mPenetrateCount!=0)
         {
             if(mIgnoreList.Contains(target))
             {
@@ -55,6 +57,7 @@ public class Bullet : FightObject
                 mIgnoreList.Add(target);
                 FightSystem.Damage(damageInfo);
                 target.PlayHurtSound();
+                mPenetrateCount--;
             }
         }
         else

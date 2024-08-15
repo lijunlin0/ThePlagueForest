@@ -104,6 +104,7 @@ public class PlayerLevelController
         {
             case EnemyType.Normal:return "ExpBallNormal";
             case EnemyType.Elite:return "ExpBallElite";
+            case EnemyType.Boss:return "ExpBallBoss";
             default:return ""; 
         }
     }

@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 public static class Utility
@@ -28,5 +30,11 @@ public static class Utility
         float value;
         bool valid = float.TryParse(str, out value);
         return valid ? value : defaultValue;
+    }
+    public static void ForceRebuildLayout(Transform transform)
+    {
+        RectTransform rectTransform = transform.GetComponent<RectTransform>();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
 }

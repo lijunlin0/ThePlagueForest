@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-//死亡炸弹--敌人阵亡时爆炸，对周围敌人造成 5% 最大生命值的伤害
+//死亡炸弹--敌人阵亡时爆炸，对周围敌人造成 2% 最大生命值的伤害,boss造成 0.5%
 
 
 public class DeathBomb : Equipment
@@ -28,6 +28,10 @@ public class DeathBomb : Equipment
             EffectArea area= EffectArea.CircleWithPositonCreate("BombCircle",enemy.gameObject.transform.position,(Character target)=>
             {
                 int points=target.GetCurrentPropertySheet().GetMaxHealth()*mBombDamagePercent/100;
+                if(target.IsBoss())
+                {
+                    points/=4;
+                }
                 DamageInfo damageInfo=new DamageInfo(player,target,points,null,statusEffect);
                 FightSystem.Damage(damageInfo);
             },1+(layer-1)*mRangeAdditionPercent/100);

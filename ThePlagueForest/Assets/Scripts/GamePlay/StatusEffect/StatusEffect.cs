@@ -29,7 +29,7 @@ public class StatusEffect
 
     //燃烧每次伤害最大生命值比例
     public const float BurnTickDamageWithMaxHealth=4;
-    public const float BurnTickDamageWithMaxHealthBoss=1;
+    public const float BurnTickDamageWithMaxHealthBoss=0.5f;
 
     //冰冻减速比例
     public const float FrozenMoveSpeedAddition=-40;

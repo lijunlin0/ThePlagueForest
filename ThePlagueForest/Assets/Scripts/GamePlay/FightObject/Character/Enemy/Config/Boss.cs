@@ -26,7 +26,7 @@ public class Boss : Enemy
     protected void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Boss,basePropertySheet);
-        mEnemyType=EnemyType.Elite;
+        mEnemyType=EnemyType.Boss;
         //添加子弹发射器
         mBulletShooter = new BulletShooter(EquipmentId.None,this,()=>
         {

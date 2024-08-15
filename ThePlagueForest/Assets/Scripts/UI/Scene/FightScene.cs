@@ -35,5 +35,9 @@ public class FightScene : MonoBehaviour
                RectTransform rectTransform = canvas.GetComponent<RectTransform>();
                rectTransform.sizeDelta = new Vector2(Utility.WindowWidth,Utility.WindowHeight);
           }
+          Joystick joystick=Joystick.Create();
+          InputManager.mJoystick=joystick;
+          InputManager.mJoystickCenter=joystick.transform.Find("Center").gameObject;
+          InputManager.mJoystickBasePosition=joystick.transform.position;
      }
 }

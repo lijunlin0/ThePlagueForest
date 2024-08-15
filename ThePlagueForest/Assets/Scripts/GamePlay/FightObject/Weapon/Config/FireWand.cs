@@ -9,7 +9,6 @@ public class FireWand:Weapon
     public const int ShootRange=600;
     private const int Attack=20;
     private const float  ShootTime=2.5f;
-
     private const int AttackAddition=10;
     public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)
     {
@@ -28,7 +27,7 @@ public class FireWand:Weapon
                 return;
             }
             //创建子弹
-            BulletFireWand bulletFireWand = BulletFireWand.Create(Player.GetCurrent(),attack);
+            BulletFireWand bulletFireWand = BulletFireWand.Create(Player.GetCurrent(),attack,layer==mMaxlayer);
             bulletFireWand.transform.position=Player.GetCurrent().transform.position;
 
             //方向朝着最近的敌人

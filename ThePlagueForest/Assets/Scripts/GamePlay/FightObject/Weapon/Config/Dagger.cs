@@ -8,7 +8,7 @@ public class Dagger:Weapon
 {
     private const int Attack=20;
     private const float  ShootTime=2.5f;
-
+    private const int FinalPenetrateCount=3;
     private const int AttackAddition=10;
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
     {
@@ -26,8 +26,9 @@ public class Dagger:Weapon
             {
                 return;
             }
+            int penetrateCount=layer==mMaxlayer?FinalPenetrateCount:0;
             //创建子弹
-            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),attack);
+            BulletDagger bulletDagger = BulletDagger.Create(Player.GetCurrent(),attack,penetrateCount);
             bulletDagger.transform.position=Player.GetCurrent().transform.position;
            
             Vector3 direction=(nearEnemy.transform.position-bulletDagger.transform.position).normalized;
