@@ -17,8 +17,8 @@ public enum EnemyType
 
 public enum EnemyCreateChance
 {
-    Enemy1=50,
-    Enemy2=50,
+    Enemy1=90,
+    Enemy2=10,
 }
 
 public class Enemy : Character
@@ -30,6 +30,9 @@ public class Enemy : Character
     protected BulletShooter mBulletShooter;
     protected bool mIsOnCollidePlayer;
     protected bool mIsOnShoot;
+    protected String mName="";
+    protected float mdeathAnimationTime;
+
 
     protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
@@ -82,11 +85,29 @@ public class Enemy : Character
     }
     public override void PlayDestroyAnimation()
     {
-        base.PlayDestroyAnimation();
-        int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
-        string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
-        ExpBall.Create(this.transform.position,expPoints,expBallName);
-        Destroy(mHealthBar.gameObject);
+        mCollider.GetCollider().enabled=false;
+        mAnimator.Play(mName+"Death");
+        mSpriteRenderer.DOFade(0,mdeathAnimationTime).OnComplete(()=>
+        {
+            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
+            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
+            ExpBall.Create(this.transform.position,expPoints,expBallName);
+            DOTween.Kill(gameObject);
+            if(mIsPoolObject)
+            {
+                // 重置
+                Color color = mSpriteRenderer.color;
+                color.a = 1;
+                mSpriteRenderer.color = color;
+                mCollider.GetCollider().enabled=true;
+                FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject,3);
+            }
+            
+        });
     }
     public  void HealthChange(int health)
     {
@@ -96,4 +117,5 @@ public class Enemy : Character
     {
         return mIsOnCollidePlayer;
     }
+    
 }

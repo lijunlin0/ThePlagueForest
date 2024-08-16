@@ -8,14 +8,15 @@ public class ExpBall : FightObject
     private const int MoveSpeedReductionFrame=30;
     private float mCreateTime=0;
     private int mExp;
+    private SpriteRenderer mSpriteRenderer;
     protected AudioSource mSound;
 
     private float mMoveSpeed;
     
     public static ExpBall Create(Vector3 position, int exp,string expType)
     {
-        GameObject prefab=Resources.Load<GameObject>("FightObject/Other/"+expType);
-        GameObject gameObject=GameObject.Instantiate(prefab);
+        GameObject gameObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Other/"+expType);
+        gameObject.SetActive(true);
         gameObject.transform.position=position;
         ExpBall expBall=gameObject.AddComponent<ExpBall>();
         expBall.Init(exp);
@@ -25,9 +26,10 @@ public class ExpBall : FightObject
     private void Init(int exp)
     {
         base.Init();
-        SpriteRenderer renderer = mDisplay.GetComponent<SpriteRenderer>();
-        renderer.color=new Color(1,1,1,0);
-        renderer.DOFade(1,0.5f);
+        mIsPoolObject=true;
+        mSpriteRenderer = mDisplay.GetComponent<SpriteRenderer>();
+        mSpriteRenderer.color=new Color(1,1,1,0);
+        mSpriteRenderer.DOFade(1,0.5f);
         mExp=exp;
         mSound=GetComponent<AudioSource>();
         mMoveSpeed=500;
@@ -45,7 +47,8 @@ public class ExpBall : FightObject
             Player.GetCurrent().GetPlayerLevelController().AddExp(mExp);
             mSound.Play();
             //Debug.Log("获取经验:"+mExp);
-            Destroy(gameObject,mSound.clip.length+1);
+            DOTween.Kill(mSpriteRenderer);
+            FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
         }
         mCreateTime+=Time.deltaTime;
         if(mCreateTime<=mPauseTime)

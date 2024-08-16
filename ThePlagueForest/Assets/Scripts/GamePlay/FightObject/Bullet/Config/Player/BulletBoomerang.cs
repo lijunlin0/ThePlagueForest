@@ -10,7 +10,7 @@ public class BulletBoomerang: Bullet
 { 
     private const float MoveSpeedReduction=100;
     private const float MinMoveSpeed=300;
-    private const float MoveSpeedReductionFrame=3.5f;
+    private const float MoveSpeedReductionFrame=50000;
     private float mMoveSpeedReduction;
     private bool mOutFlag=true;
     private Tween mRotateTween;
@@ -28,11 +28,13 @@ public class BulletBoomerang: Bullet
         base.Init(source,points);
         mIsPenetrate=true;
         mMoveSpeed=3000;
-        mMoveSpeedReduction=100;
+        mMoveSpeedReduction=1000;
         mRotateTween = mDisplay.transform.DOLocalRotate(new Vector3(0, 0, 2160), 3f,RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
     }
    public override void OnUpdate()
     {
+        float deltaTime=Time.deltaTime;
+        Debug.Log(deltaTime);
         base.OnUpdate();
         if(mIsDead)
         {
@@ -43,8 +45,11 @@ public class BulletBoomerang: Bullet
         //飞回来后销毁子弹
         if(!mOutFlag&&distance<=100)
         {
+            if(mRotateTween!=null)
+            {
+                mRotateTween.Kill();
+            }
             mIsDead=true;
-            mRotateTween.Kill();
         }
         if(mOutFlag&&mMoveSpeed<MinMoveSpeed+1)
         {
@@ -53,15 +58,15 @@ public class BulletBoomerang: Bullet
         //飞出去
         if(mOutFlag)
         {
-            mMoveSpeed=Mathf.Max(MinMoveSpeed,mMoveSpeed-mMoveSpeedReduction);
+            mMoveSpeed=Mathf.Max(MinMoveSpeed,mMoveSpeed-mMoveSpeedReduction*deltaTime);
             FightUtility.Move(gameObject,mMoveSpeed);
-            mMoveSpeedReduction+=MoveSpeedReductionFrame;
+            mMoveSpeedReduction+=MoveSpeedReductionFrame*deltaTime;
         }
         //飞回来
         else
         {
-            mMoveSpeedReduction+=MoveSpeedReductionFrame;
-            mMoveSpeed=Mathf.Max(MinMoveSpeed,mMoveSpeed+mMoveSpeedReduction);
+            mMoveSpeedReduction+=MoveSpeedReductionFrame*deltaTime;
+            mMoveSpeed=Mathf.Max(MinMoveSpeed,mMoveSpeed+mMoveSpeedReduction*deltaTime);
             gameObject.transform.rotation=FightUtility.DirectionToRotation(player.transform.position-gameObject.transform.position).normalized;
             FightUtility.Move(gameObject,mMoveSpeed);
         }

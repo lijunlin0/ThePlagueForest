@@ -7,8 +7,8 @@ public class Boss : Enemy
 {
     public static int sBossLevel=1;
     public static float sCreateTime=60;
-    protected static float mTotalAngle=120;
-    protected static int mBulletCount=7;
+    protected static float mTotalAngle=140;
+    protected static int mBulletCount=8;
     protected bool mIsdestination=false;
     protected const int ShootRange=1000;
     protected bool mLookDirection=true;
@@ -18,7 +18,7 @@ public class Boss : Enemy
         GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
         enemyObject.transform.position=position;
         Boss enemy=enemyObject.AddComponent<Boss>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Boss",level);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Boss",level,true);
         enemy.Init(propertySheet);
         return enemy;
     }
@@ -26,6 +26,8 @@ public class Boss : Enemy
     protected void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Boss,basePropertySheet);
+        mName="Boss";
+        mdeathAnimationTime=1.5f;
         mEnemyType=EnemyType.Boss;
         //添加子弹发射器
         mBulletShooter = new BulletShooter(EquipmentId.None,this,()=>
@@ -43,7 +45,7 @@ public class Boss : Enemy
         {
             rotation=startAngle+i*stepAngle;
             rotation=mLookDirection?rotation:rotation+180;
-            BossBullet bullet=BossBullet.Create(this,30,rotation);
+            BossBullet bullet=BossBullet.Create(this,mCurrentPropertySheet.GetAttack(),rotation);
             FightModel.GetCurrent().AddEnemyBullets(bullet);
         }
         mIsOnShoot=true;
@@ -127,21 +129,7 @@ public class Boss : Enemy
         }
     }
     
-    public override void PlayDestroyAnimation()
-    {
-        mCollider.GetCollider().enabled=false;
-        mAnimator.Play("BossDeath");
-        Destroy(mHealthBar.gameObject,5);
-        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
-        spriteRenderer.DOFade(0,1.5f).OnComplete(()=>
-        {
-            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
-            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
-            ExpBall.Create(this.transform.position,expPoints,expBallName);
-            gameObject.SetActive(false);
-            Destroy(gameObject,5);
-        });
-    }
+    
 
     //播放低优先级动画
     private void PlayLowAnimation(string animationName)

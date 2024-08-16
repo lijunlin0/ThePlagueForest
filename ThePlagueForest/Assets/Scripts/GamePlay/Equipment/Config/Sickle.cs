@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-//镰刀--子弹命中敌人时 30% 概率恢复 2+((layer-1)*1) 生命值
+//镰刀--子弹命中敌人时 20% 概率恢复 1+((layer-1)*1) 生命值
 public class Sickle : Equipment
 {
-    private const float mTriggerChance=30; 
-    private const int mRecoveryPoints=2;
+    private const float mTriggerChance=20; 
+    private const int mRecoveryPoints=1;
     private const int mRecoveryPointsLayerAddition=1;
     public Sickle():base(EquipmentType.Passive,EquipmentId.Sickle)
     {

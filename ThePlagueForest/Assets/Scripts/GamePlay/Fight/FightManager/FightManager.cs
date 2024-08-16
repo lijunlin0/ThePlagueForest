@@ -6,6 +6,7 @@ public class FightManager
 {
     private static bool mPause;
     private static FightManager sCurrent;
+    private PoolManager mPoolManager;
     protected FightModel mFightModel;
     public static FightManager GetCurrent()
     {
@@ -17,12 +18,15 @@ public class FightManager
         mPause=false;
         sCurrent=this;
         mFightModel=new FightModel();
+        mPoolManager=new PoolManager();
     }
     public void OnUpdate()
     {
         if(Player.GetCurrent().IsDead()&&!EndWindow.IsOpen())
         {
+            EnemyLevelRestart();
             mPause=true;
+            Enemy.sLevel=1;
             EndWindow.SetOpen(mPause);
             DOVirtual.DelayedCall(2,()=>
             {
@@ -40,4 +44,11 @@ public class FightManager
         mPause=pause;
     }
     public static bool IsPause(){return mPause;}
+    public void EnemyLevelRestart()
+    {
+        Enemy.sLevel=1;
+        Boss.sBossLevel=1;
+    }
+    public PoolManager GetPoolManager(){return mPoolManager;}
+
 }

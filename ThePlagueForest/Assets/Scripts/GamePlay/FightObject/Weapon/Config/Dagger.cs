@@ -6,10 +6,10 @@ using UnityEngine;
 //匕首
 public class Dagger:Weapon
 {
-    private const int Attack=30;
-    private const float  ShootTime=0.5f;
-    private const int FinalPenetrateCount=5;
-    private const int AttackAddition=10;
+    private const int Attack=50;
+    private const float  ShootTime=0.3f;
+    private const int FinalPenetrateCount=3;
+    private const int AttackAddition=40;
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
     {
         mStatusEffectId=StatusEffectId.Equipment_Dagger;

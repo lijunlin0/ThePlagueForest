@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -6,16 +7,18 @@ public class PlayerLevelController
 {
     public const int PlayerBaseExp=100;
     public const int PlayerExpAdd=20;
-    public const float LevelExpFactor=1.05f;
-    public const int NormalExp=20;
-    public const int EliteExp=60;
-    public const int BossExp=500;
+    public const float LevelExpFactor=1.06f;
+    public const int NormalExp=10;
+    public const int EliteExp=40;
+    public const int BossExp=300;
 
     private Player mPlayer;
     private int mLevel;
     private float mExp;
     private Dictionary<EnemyType,int>mEnemyExp;
     private int mMaxHealthAdditionPoint;
+    //连续升级时挨个处理
+    private List<int> mLevelUpList=new List<int>();
     Callback mExpChangedCallback;
 
     public PlayerLevelController()
@@ -49,6 +52,12 @@ public class PlayerLevelController
 
     public void OnLevelUp()
     {
+        if(mPlayer.IsDead())
+        {
+            return;
+        }
+        //推入
+        mLevelUpList.Add(mLevel);
         HealthChangeText.TextCreate("Level Up!!!",Player.GetCurrent());
         DOVirtual.DelayedCall(0.5f,()=>
         {
@@ -60,8 +69,21 @@ public class PlayerLevelController
 
     public void GetEquipment()
     {
+        if(EquipmentSelectWindow.IsOpen())
+        {
+            return;
+        }
         EquipmentUtility.GetAvailableEquipments();
-        EquipmentSelectWindow window = EquipmentSelectWindow.Open(EquipmentUtility.GetAvailableEquipments());
+        Callback windowCloseCallback=mLevelUpList.Count>1?()=>
+        {
+            GetEquipment();
+            mLevelUpList.RemoveAt(0);
+            Debug.Log("剩余窗口:"+mLevelUpList.Count);
+        }:()=>
+        {
+            mLevelUpList.Clear();
+        };
+        EquipmentSelectWindow window = EquipmentSelectWindow.Open(EquipmentUtility.GetAvailableEquipments(),"升级!",windowCloseCallback);
         window.gameObject.SetActive(false);
         DOVirtual.DelayedCall(1,()=>
         {

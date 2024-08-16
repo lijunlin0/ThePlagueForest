@@ -29,5 +29,6 @@ public class BulletSacredSword:Bullet
     {
         base.Init(source,points);
         mMoveSpeed=500;
+        mMaxLifeTime=2.5f;
     }
 }

@@ -25,21 +25,26 @@ public class DeathBomb : Equipment
             }
             Player player = Player.GetCurrent();
             Character enemy=eventData.GetTarget();
-            EffectArea area= EffectArea.CircleWithPositonCreate("BombCircle",enemy.gameObject.transform.position,(Character target)=>
+            float delayTime=RandomHelper.Randomfloat(0.01f,0.5f);
+            DOVirtual.DelayedCall(delayTime,()=>
             {
-                int points=target.GetCurrentPropertySheet().GetMaxHealth()*mBombDamagePercent/100;
-                if(target.IsBoss())
+                EffectArea area= EffectArea.CircleWithPositonCreate("BombCircle",enemy.gameObject.transform.position,(Character target)=>
                 {
-                    points/=4;
-                }
-                DamageInfo damageInfo=new DamageInfo(player,target,points,null,statusEffect);
-                FightSystem.Damage(damageInfo);
-            },1+(layer-1)*mRangeAdditionPercent/100);
-            area.SetCollisionEnabledCallback(()=>
-            {
-                area.PlayDestroyAnimation(0.25f);
-                area.Collide();
+                    int points=target.GetCurrentPropertySheet().GetMaxHealth()*mBombDamagePercent/100;
+                    if(target.IsBoss())
+                    {
+                        points/=4;
+                    }
+                    DamageInfo damageInfo=new DamageInfo(player,target,points,null,statusEffect);
+                    FightSystem.Damage(damageInfo);
+                },1+(layer-1)*mRangeAdditionPercent/100);
+                area.SetCollisionEnabledCallback(()=>
+                {
+                    area.PlayDestroyAnimation(0.25f);
+                    area.Collide();
+                });
             });
+
         });
         
     }

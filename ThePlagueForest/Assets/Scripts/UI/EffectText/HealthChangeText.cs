@@ -76,14 +76,19 @@ public class HealthChangeText : MonoBehaviour
         }
         Vector3 targetPosition=startPosition+new Vector3(0,80+RandomHelper.RandomInt(-20,20),0);
         transform.position=startPosition;
-        transform.DOMove(targetPosition,1f).SetEase(Ease.OutQuart);
-        DOVirtual.DelayedCall(0.5f,()=>
+        transform.DOMove(targetPosition,1f).SetEase(Ease.OutQuart).OnComplete(()=>
         {
-            mText.DOFade(0,0.3f).OnComplete(()=>
+            DOVirtual.DelayedCall(0.5f,()=>
             {
-                Destroy(gameObject,1);
-            });
+                mText.DOFade(0,0.3f).OnComplete(()=>
+                {
+                    DOTween.Kill(transform);
+                    FightModel.mHealthChangeTextCount--;
+                    Destroy(gameObject,2);
+                });
             
+            });
         });
+        
     }
 }

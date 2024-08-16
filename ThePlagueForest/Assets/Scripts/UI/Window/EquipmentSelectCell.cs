@@ -36,11 +36,11 @@ public class EquipmentSelectCell : MonoBehaviour
         TMP_Text levelUpText=transform.Find("LevelUpText").GetComponent<TMP_Text>();
         TMP_Text levelText=transform.Find("LevelText").GetComponent<TMP_Text>();
         //终极武器
-        if(equipment is Weapon&&FightModel.GetCurrent().GetEquipmentLayer(equipment)==equipment.GetMaxLayer())
+        if(equipment is Weapon&&FightModel.GetCurrent().GetEquipmentLayer(equipment)==equipment.GetMaxLayer()-1)
         {
-            tittleText.text=equipmentText.Item4;
-            tittleText.color=new Color(1,0.5f,1,1);
-            contentText.text=equipmentText.Item5;
+            tittleText.text=equipmentText.Item5;
+            tittleText.color=new Color(1,0.3f,1,1);
+            contentText.text=equipmentText.Item6;
         }
         else
         {

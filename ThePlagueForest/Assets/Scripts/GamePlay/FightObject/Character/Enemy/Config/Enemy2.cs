@@ -7,11 +7,11 @@ public class Enemy2 : Enemy
     protected const int ShootRange=600;
     public static Enemy2 Create(Vector3 position,int level)
     {
-        GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy2");
-        GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
+        GameObject enemyObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Character/Enemy2");
+        enemyObject.SetActive(true);
         enemyObject.transform.position=position;
         Enemy2 enemy=enemyObject.AddComponent<Enemy2>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",level);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy2",level,true);
         enemy.Init(CharacterId.Enemy2,propertySheet);
         return enemy;
     }
@@ -19,6 +19,9 @@ public class Enemy2 : Enemy
     protected override void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
         base.Init(characterId,basePropertySheet);
+        mName="Enemy2";
+        mIsPoolObject=true;
+        mdeathAnimationTime=1.5f;
         mEnemyType=EnemyType.Elite;
         //添加子弹发射器
         mBulletShooter = new BulletShooter(EquipmentId.None,this,()=>
@@ -30,7 +33,7 @@ public class Enemy2 : Enemy
     {
         mAnimator.Play("Enemy2Attack");
         //创建子弹
-        Enemy2Bullet bullet=Enemy2Bullet.Create(this,10);
+        Enemy2Bullet bullet=Enemy2Bullet.Create(this,mCurrentPropertySheet.GetAttack());
         //方向朝着玩家
         Vector3 direction=(FightModel.GetCurrent().GetPlayer().transform.position-bullet.transform.position).normalized;
         bullet.transform.localRotation=FightUtility.DirectionToRotation(direction);
@@ -58,22 +61,4 @@ public class Enemy2 : Enemy
             mAnimator.Play("Enemy2Walk");
         }
     }
-    
-    public override void PlayDestroyAnimation()
-    {
-        mCollider.GetCollider().enabled=false;
-        mAnimator.Play("Enemy2Death");
-        Destroy(mHealthBar.gameObject);
-        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
-        spriteRenderer.DOFade(0,1.5f).OnComplete(()=>
-        {
-            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
-            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
-            ExpBall.Create(this.transform.position,expPoints,expBallName);
-            gameObject.SetActive(false);
-            Destroy(gameObject,5);
-        });
-
-    }
-
 }

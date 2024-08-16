@@ -12,11 +12,11 @@ public enum Property
     MoveSpeedAddition,          //移动速度提升
     AoeRange,                   //范围攻击的范围
     Lucky,                      //幸运值 
+    Attack,                     //敌人攻击力
 }
 
 public class PropertySheet
 {
-    public const int CollideDamage=10;
     private Character mCharacter;
     private Dictionary<Property,float> mProperties=new Dictionary<Property,float>();
     public PropertySheet(Character character,PropertySheet mBaseProperty,StatusEffectList statusEffectList)
@@ -97,5 +97,9 @@ public class PropertySheet
     {
         float lucky=mProperties[Property.Lucky];
         return (100+lucky)/100;
+    }
+    public int GetAttack()
+    {
+        return  (int)mProperties[Property.Attack];
     }
 }

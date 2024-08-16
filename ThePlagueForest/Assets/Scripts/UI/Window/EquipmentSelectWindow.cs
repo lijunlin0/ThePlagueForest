@@ -1,30 +1,34 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EquipmentSelectWindow : MonoBehaviour 
 {
-    public static int windowCount=0;
     private List<EquipmentSelectCell> mCells;
     private EquipmentSelectCell mSelectCell;
     private List<Equipment> mEquipments;
+    private Callback mCloseCallback;
     private string mTittleTxt="";
-    public static EquipmentSelectWindow Open(List<Equipment> equipments,string tittleText="")
+    private static bool mIsOpen = false;
+    public static EquipmentSelectWindow Open(List<Equipment> equipments,string tittleText="",Callback callback=null)
     {
         Canvas canvas=GameObject.Find("Main Camera/WindowCanvas").GetComponent<Canvas>();
         GameObject prefab=Resources.Load<GameObject>("UI/Equipment Select Window");
         GameObject gameObject = GameObject.Instantiate(prefab,canvas.transform);
         EquipmentSelectWindow window=gameObject.AddComponent<EquipmentSelectWindow>();
-        window.Init(equipments,tittleText);
+        window.Init(equipments,tittleText,callback);
         return window;
     }
 
-    public void Init(List<Equipment> equipments,string tittleText)
+    public void Init(List<Equipment> equipments,string tittleText,Callback callback)
     {  
-        windowCount++;
+        mCloseCallback=callback;
         mTittleTxt=tittleText;
+        mIsOpen=true;
         if(mTittleTxt!="")
         {
             TextMeshProUGUI textUI=transform.Find("Window/Tittle/Text").gameObject.GetComponent<TextMeshProUGUI>();
@@ -59,14 +63,14 @@ public class EquipmentSelectWindow : MonoBehaviour
         }
         //增加装备
         FightSystem.GetEquipment(mSelectCell.GetEquipment());
-        Destroy(gameObject);
-        //判断是否有多个装备选择窗口
-        if(windowCount<=1)
+        FightManager.GetCurrent().SetPause(false);
+        mIsOpen=false;
+        DOTween.PlayAll();
+        if(mCloseCallback!=null)
         {
-            FightManager.GetCurrent().SetPause(false);
-            DOTween.PlayAll();
+            mCloseCallback();
         }
-        windowCount--;
+        Destroy(gameObject);
     }
 
     private void UpdateContent()
@@ -76,4 +80,5 @@ public class EquipmentSelectWindow : MonoBehaviour
             cell.SetSelect(cell==mSelectCell);
         }
     }
+    public static bool IsOpen(){return mIsOpen;}
 }

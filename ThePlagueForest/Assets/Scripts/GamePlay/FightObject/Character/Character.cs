@@ -61,9 +61,17 @@ public class Character : FightObject
     }
     protected virtual void OnHealthChanged(int theoryChangePoints)
     {
-        OnDamage();
+        if(theoryChangePoints<0)
+        {
+            OnDamage();
+        }
         mHealthBar.UpdateContent();
+        if(FightModel.mHealthChangeTextCount>100)
+        {
+            return;
+        }
         HealthChangeText healthChangeText=HealthChangeText.Create(theoryChangePoints,this);
+        FightModel.mHealthChangeTextCount++;
     }
     //被攻击
     protected virtual void OnDamage()

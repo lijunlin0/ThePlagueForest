@@ -1,8 +1,8 @@
-//活力戒指--击杀敌人有 25% 概率恢复 4+(Layer*1)% 最大生命值 的血量
+//活力戒指--击杀敌人有 25% 概率恢复 1+(Layer*1)% 最大生命值 的血量
 public class Vitality : Equipment
 {
     private const float mTriggerChance=25;
-    private const int HealthPercent=4;
+    private const int HealthPercent=1;
     private const int HealthPercentLayerAddition=1;
     public Vitality():base(EquipmentType.Passive,EquipmentId.Vitality)
     {

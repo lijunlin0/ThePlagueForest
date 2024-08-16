@@ -8,11 +8,18 @@ public class Enemy2Bullet : Bullet
 {
     public static Enemy2Bullet Create(Enemy enemy,int points)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/MagicBall");
-        GameObject bulletObject=Instantiate(bulletPrefab,enemy.transform.position,Quaternion.identity);
+        GameObject bulletObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Bullet/MagicBall");
+        bulletObject.SetActive(true);
+        bulletObject.transform.position=enemy.transform.position;
         Enemy2Bullet bullet=bulletObject.AddComponent<Enemy2Bullet>();
         bullet.Init(enemy,points);
         return bullet;
+    }
+    protected override void Init(Character character,int points)
+    {
+        base.Init(character,points);
+        mIsPoolObject=true;
+        mMoveSpeed=450;
     }
     public override void OnUpdate()
     {

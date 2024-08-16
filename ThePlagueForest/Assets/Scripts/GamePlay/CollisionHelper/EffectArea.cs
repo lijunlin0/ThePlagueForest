@@ -12,7 +12,7 @@ public class EffectArea:MonoBehaviour
     private MyCollider mCollider;
     private Callback<Character> mCollideCallback;
     private Callback mCollisionEnabledCallback;
-    private static bool mIsCarry=false;
+    private bool mIsCarry=false;
     private Vector2[] mPoints;
     private Vector2[] points;
     private Vector2[] vertex;
@@ -25,11 +25,10 @@ public class EffectArea:MonoBehaviour
     
     public static EffectArea Create(string prefabName,Callback<Character> collideCallback,bool isCarry=true)
     {
-        mIsCarry=isCarry;
         GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/"+prefabName);
         GameObject effectAreaArea=Instantiate(effectAreaPrefab,Player.GetCurrent().transform);
         EffectArea effectArea=effectAreaArea.AddComponent<EffectArea>();
-        effectArea.Init(collideCallback);
+        effectArea.Init(collideCallback,isCarry);
         return effectArea; 
     }
     public static EffectArea CircleWithPositonCreate(string prefabName,Vector3 position,Callback<Character> collideCallback,float scaleFactor=1)
@@ -49,8 +48,9 @@ public class EffectArea:MonoBehaviour
     }
 
 
-    private void Init(Callback<Character> collideCallback)
+    private void Init(Callback<Character> collideCallback,bool isCarry=false)
     {
+        mIsCarry=isCarry;
         mAnimator=new Animator();
         mCollideCallback=collideCallback;
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
@@ -78,6 +78,10 @@ public class EffectArea:MonoBehaviour
 
     public void OnAdd()
     {
+        if(mCollider.GetCollider()==null)
+        {
+            Debug.Log("碰撞空");
+        }
         mIsAddEndOver=false;
         if(mIsAddOver)
         {
@@ -120,7 +124,8 @@ public class EffectArea:MonoBehaviour
         spriteRenderer.DOFade(0,fadeOutDuration).OnComplete(()=>
         {
             gameObject.SetActive(false);
-            Destroy(gameObject,3);
+            DOTween.Kill(transform);
+            Destroy(gameObject);
         });
         
     }

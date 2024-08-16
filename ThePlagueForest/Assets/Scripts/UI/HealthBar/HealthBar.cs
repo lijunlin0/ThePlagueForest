@@ -95,7 +95,8 @@ public class HealthBar : MonoBehaviour
         if(mCharacter.IsDead())
         {
             mHealthSlider.value=0;
-            Destroy(this);
+            mTween.Kill();
+            Destroy(gameObject);
         }
         if(mCharacter.GetCharacterId()!=CharacterId.Boss)
         {

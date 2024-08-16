@@ -4,21 +4,24 @@
     "Player1" : {
         "Health" : [100, 20],
         "HealthRecovery" : [1.0, 0.5],
-        "MoveSpeed" : 300
+        "MoveSpeed" : [300]
     },
     "Enemy1" : {
-        "Health" : [100, 20],
+        "Health" : [50, 20,1.0],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : 200
+        "MoveSpeed" : [150,0.15],
+        "Attack" : [20,1.0]
     },
     "Enemy2" : {
-        "Health" : [150, 20],
+        "Health" : [75, 30, 1.0],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : 50
+        "MoveSpeed" : [50,0.1],
+        "Attack" : [20,2.0]
     },
     "Boss" : {
-        "Health" : [1000, 500],
+        "Health" : [1500, 600, 1.0],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : 150
+        "MoveSpeed" : [150,0.1],
+        "Attack" : [50,1.0]
     }
 }

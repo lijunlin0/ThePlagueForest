@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.IO.Enumeration;
 using System.Net.NetworkInformation;
 using DG.Tweening;
 using Unity.Mathematics;
@@ -9,9 +10,14 @@ public class FightModel
 {
     private float mBossCreateDefaultTime=0;
     private float mBossCreateTime=0;
-    private float mEnemyLevelUpTime=0;
+    
     private float mEnemyLevelUpDefaultTime=0;
+    private float mEnemyLevelUpTime=0;
+
+    private float mEnemyCreateDefaultTime=0;
+    private float mEnemyCreateTime=2f;
     private const int EnemyCreateDistanceWithPlayer=400;
+    public static int mHealthChangeTextCount=0;
     private static FightModel sCurrent;
     //敌人
     private List<Enemy> mEnemyList;
@@ -23,8 +29,6 @@ public class FightModel
     private List<Bullet> mPlayerBulletList;
     //装备以及层数
     private Dictionary<Equipment,int> mEquipments;
-    private float EnemyCreateStartTime=0;
-    private float EnemyCreateEndTime=2;
     public List<Bullet> GetEnemyBullets()
     {
         return mEnemyBulletList;
@@ -63,6 +67,7 @@ public class FightModel
         mEquipments=new Dictionary<Equipment,int>();
         mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
         mBossCreateTime=Boss.sCreateTime;
+        
         //初始武器
         EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
     }
@@ -100,8 +105,8 @@ public class FightModel
         float y=0;
         while(distance<=EnemyCreateDistanceWithPlayer)
         {
-            x=RandomHelper.RandomIntTwoRange(-Utility.WindowWidth,-Utility.WindowWidth/2,Utility.WindowWidth,Utility.WindowWidth/2);
-            y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight,-Utility.WindowHeight/2,Utility.WindowHeight,Utility.WindowHeight/2);
+            x=RandomHelper.RandomIntTwoRange(-Utility.WindowWidth,-Utility.WindowWidth/2,Utility.WindowWidth,Utility.WindowWidth/2)+mPlayer.transform.position.x;
+            y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight,-Utility.WindowHeight/2,Utility.WindowHeight,Utility.WindowHeight/2)+mPlayer.transform.position.y;
             distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
         }
         return new Vector3(x,y,-1);
@@ -128,19 +133,28 @@ public class FightModel
 
     private void EnemyCreateUpdate()
     {
-        EnemyCreateStartTime+=Time.deltaTime;
+        mEnemyCreateDefaultTime+=Time.deltaTime;
         mEnemyLevelUpDefaultTime+=Time.deltaTime;
         mBossCreateDefaultTime+=Time.deltaTime;
-        if(EnemyCreateStartTime>=EnemyCreateEndTime)
+        
+        if(mEnemyCreateDefaultTime>=mEnemyCreateTime)
         {
-            EnemyCreateStartTime=0;
-            EnemyCreateEndTime-=0.01f;
-            EnemyCreateEndTime=Mathf.Clamp(EnemyCreateEndTime-0.01f,0.2f,2);
-            EnemyCreate();
+            mEnemyCreateDefaultTime=0;
+            Debug.Log("endTime"+mEnemyCreateTime);
+            if(Enemy.sLevel%3==0)
+            {
+                CreateEnemyCircle();
+            }
+            else
+            {
+                EnemyCreate();
+            }
+            
         }
         if(mEnemyLevelUpDefaultTime>=mEnemyLevelUpTime)
         {
             mEnemyLevelUpDefaultTime=0;
+            mEnemyCreateTime=Mathf.Clamp(mEnemyCreateTime-0.2f,0.01f,2);
             Enemy.sLevel++;
         }
          if(mBossCreateDefaultTime>=mBossCreateTime)
@@ -152,6 +166,28 @@ public class FightModel
         }
     }
 
+    private void CreateEnemyCircle()
+    {
+        float number=10;
+        float angleStep = 360/number;
+         for (int i = 0; i < number; i++)
+        {
+            // 计算当前敌人的角度
+            float angle = i * angleStep;
+            // 计算敌人的位置
+            Vector3 enemyPosition = CalculatePosition(angle);
+            EnemyCreate();
+        }
+    }
+    private Vector3 CalculatePosition(float angle)
+    {
+        int r=2000;
+        float radian=angle*Mathf.Rad2Deg;
+        float x = mPlayer.transform.position.x + r * Mathf.Cos(radian);
+        float y = mPlayer.transform.position.y + r * Mathf.Sin(radian);
+        return new Vector3(x, y,mPlayer.transform.position.z);
+    }
+
     public void AddEquipment(Equipment equipment)
     {
         if(!mEquipments.ContainsKey(equipment))
@@ -160,6 +196,7 @@ public class FightModel
         }
         mEquipments[equipment]+=1;
     }
+
 
     public int GetEquipmentLayer(Equipment equipment)
     {

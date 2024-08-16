@@ -9,8 +9,8 @@ public class Map : MonoBehaviour
 {
     private static Canvas mCanvas;
     public static int ImgSize=160;
-    public static int Width=20;//160
-    public static int Height=20;//100
+    public static int Width=80;//160
+    public static int Height=60;//100
     private static int BorderSize=6;
     private static List<GameObject> mBorderPrefabs=new List<GameObject>();
     private static List<GameObject> mGrassPrefabs=new List<GameObject>();

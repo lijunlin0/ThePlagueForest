@@ -10,17 +10,20 @@ public class Enemy1 : Enemy
 {
     public static Enemy1 Create(Vector3 position,int level)
     {
-        GameObject enemyPrefab=Resources.Load<GameObject>("FightObject/Character/Enemy1");
-        GameObject enemyObject=GameObject.Instantiate(enemyPrefab);
+        GameObject enemyObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Character/Enemy1");
+        enemyObject.SetActive(true);
         enemyObject.transform.position=position;
         Enemy1 enemy=enemyObject.AddComponent<Enemy1>();
-        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",level);
+        PropertySheet propertySheet=CharacterUtility.GetBasePropertySheet("Enemy1",level,true);
         enemy.Init(propertySheet);
         return enemy;
     }
     protected void Init(PropertySheet basePropertySheet)
     {
         base.Init(CharacterId.Enemy1,basePropertySheet);
+        mName="Enemy1";
+        mIsPoolObject=true;
+        mdeathAnimationTime=1;
     }
 
     public override void OnUpdate()
@@ -39,20 +42,5 @@ public class Enemy1 : Enemy
             mAnimator.Play("Enemy1Walk");
         }
     }
-    public override void PlayDestroyAnimation()
-    {
-        mCollider.GetCollider().enabled=false;
-        mAnimator.Play("Enemy1Death");
-        Destroy(mHealthBar.gameObject);
-        SpriteRenderer spriteRenderer=mDisplay.GetComponent<SpriteRenderer>();
-        spriteRenderer.DOFade(0,1).OnComplete(()=>
-        {
-            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
-            string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
-            ExpBall.Create(this.transform.position,expPoints,expBallName);
-            gameObject.SetActive(false);
-            Destroy(gameObject,5);
-        });
-
-    }
+    
 }

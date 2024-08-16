@@ -39,7 +39,7 @@ public class BossBullet : Bullet
         spriteRenderer.material.DOFade(0,1f).OnComplete(()=>
         {
             gameObject.SetActive(false);
-            Destroy(gameObject,5);
+            Destroy(gameObject);
         });
     }
 

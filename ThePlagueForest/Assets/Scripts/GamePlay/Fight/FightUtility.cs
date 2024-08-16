@@ -52,7 +52,7 @@ public static class FightUtility
                 updatePosition();
             }).OnComplete(()=>
             {
-                GameObject.Destroy(effect);
+                GameObject.Destroy(effect.gameObject);
             });
         }
     }

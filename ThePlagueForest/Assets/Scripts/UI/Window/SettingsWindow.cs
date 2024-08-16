@@ -22,7 +22,6 @@ public class SettingsWindow : MonoBehaviour
         Button mainMenuButton=transform.Find("Window/MainMenuButton").GetComponent<Button>();
         mainMenuButton.onClick.AddListener(()=>
         {
-            DOTween.KillAll();
             SceneManager.LoadScene("Main");
             GameObject.Destroy(gameObject);
         });
