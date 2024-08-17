@@ -8,8 +8,8 @@ public class BulletDagger: Bullet
 { 
     public static BulletDagger Create(Character character,int points,int penetrateCount)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletDagger");
-        GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
+        GameObject bulletObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Bullet/BulletDagger");
+        bulletObject.SetActive(true);
         BulletDagger bullet=bulletObject.AddComponent<BulletDagger>();
         bullet.Init(character,points,penetrateCount);
         return bullet;
@@ -17,6 +17,7 @@ public class BulletDagger: Bullet
     protected void Init(Character character,int points,int penetrateCount)
     {
         base.Init(character,points);
+        mMaxLifeTime=3;
         mIsPenetrate=true;
         mPenetrateCount=penetrateCount;
     }

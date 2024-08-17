@@ -26,6 +26,7 @@ public class Enemy : Character
     public static int sLevel=1;
     //敌人升级时间间隔
     public static float sEnemyLevelUpTime=30;
+    public static float sEnemyCreateTime=3;
     protected EnemyType mEnemyType;
     protected BulletShooter mBulletShooter;
     protected bool mIsOnCollidePlayer;
@@ -101,6 +102,7 @@ public class Enemy : Character
                 mSpriteRenderer.color = color;
                 mCollider.GetCollider().enabled=true;
                 FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
+                Destroy(this);
             }
             else
             {

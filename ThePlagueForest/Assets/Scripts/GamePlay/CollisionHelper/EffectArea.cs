@@ -18,9 +18,9 @@ public class EffectArea:MonoBehaviour
     private Vector2[] vertex;
     private Tween mAddTween;
     private Tween mAddEndTween;
-    private float mAnimationDuration=0;
     private bool mIsAddOver=false;
     private bool mIsAddEndOver=false;
+    private bool mIsPenetrate=false;
 
     
     public static EffectArea Create(string prefabName,Callback<Character> collideCallback,bool isCarry=true)
@@ -33,8 +33,7 @@ public class EffectArea:MonoBehaviour
     }
     public static EffectArea CircleWithPositonCreate(string prefabName,Vector3 position,Callback<Character> collideCallback,float scaleFactor=1)
     {
-        GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/"+prefabName);
-        GameObject effectAreaArea=Instantiate(effectAreaPrefab,position,Quaternion.identity);
+        GameObject effectAreaArea=FightManager.GetCurrent().GetPoolManager().GetGameObject("Area/"+prefabName);
         if(scaleFactor!=1)
         {
             float xScale=effectAreaArea.transform.localScale.x;
@@ -51,6 +50,7 @@ public class EffectArea:MonoBehaviour
     private void Init(Callback<Character> collideCallback,bool isCarry=false)
     {
         mIsCarry=isCarry;
+        mIsPenetrate=isCarry;
         mAnimator=new Animator();
         mCollideCallback=collideCallback;
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
@@ -123,9 +123,18 @@ public class EffectArea:MonoBehaviour
         SpriteRenderer spriteRenderer=GetComponent<SpriteRenderer>();
         spriteRenderer.DOFade(0,fadeOutDuration).OnComplete(()=>
         {
-            gameObject.SetActive(false);
             DOTween.Kill(transform);
-            Destroy(gameObject);
+            if(mIsPenetrate)
+            {
+                FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
+                Destroy(this);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+
+            }
         });
         
     }

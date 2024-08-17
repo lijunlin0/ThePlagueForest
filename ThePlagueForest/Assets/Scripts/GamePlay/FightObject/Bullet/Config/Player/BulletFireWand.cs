@@ -12,8 +12,8 @@ public class BulletFireWand: Bullet
     private bool mIsFinal=false;
     public static BulletFireWand Create(Character character,int points,bool isFinal)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletFireWand");
-        GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
+        GameObject bulletObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Bullet/BulletFireWand");
+        bulletObject.SetActive(true);
         BulletFireWand bullet=bulletObject.AddComponent<BulletFireWand>();
         bullet.Init(character,points,isFinal);
         return bullet;

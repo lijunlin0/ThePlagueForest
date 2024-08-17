@@ -7,21 +7,21 @@
         "MoveSpeed" : [300]
     },
     "Enemy1" : {
-        "Health" : [50, 20,1.0],
+        "Health" : [50, 20,0.5],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : [150,0.15],
-        "Attack" : [20,1.0]
+        "Attack" : [20,0.5]
     },
     "Enemy2" : {
-        "Health" : [75, 30, 1.0],
+        "Health" : [75, 30, 0.5],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : [50,0.1],
-        "Attack" : [20,2.0]
+        "Attack" : [20,0.5]
     },
     "Boss" : {
-        "Health" : [1500, 600, 1.0],
+        "Health" : [1000, 600, 0.5],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : [150,0.1],
-        "Attack" : [50,1.0]
+        "Attack" : [50,0.5]
     }
 }

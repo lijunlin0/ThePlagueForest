@@ -9,8 +9,8 @@ public class BulletThunderWand: Bullet
 { 
     public static BulletThunderWand Create(Character character,int points)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletThunderWand");
-        GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
+        GameObject bulletObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Bullet/BulletThunderWand");
+        bulletObject.SetActive(true);
         BulletThunderWand bullet=bulletObject.AddComponent<BulletThunderWand>();
         bullet.Init(character,points);
         return bullet;

@@ -26,7 +26,6 @@ public class FightManager
         {
             EnemyLevelRestart();
             mPause=true;
-            Enemy.sLevel=1;
             EndWindow.SetOpen(mPause);
             DOVirtual.DelayedCall(2,()=>
             {
@@ -48,6 +47,7 @@ public class FightManager
     {
         Enemy.sLevel=1;
         Boss.sBossLevel=1;
+        Enemy.sEnemyCreateTime=3;
     }
     public PoolManager GetPoolManager(){return mPoolManager;}
 

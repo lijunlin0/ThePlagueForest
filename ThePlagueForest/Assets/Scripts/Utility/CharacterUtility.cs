@@ -28,7 +28,7 @@ public class CharacterUtility
             int attack=(int)characterData["Attack"][0];
             float attackAddition=(float)(double)characterData["Attack"][1];
             sheet.SetRawValue(Property.BaseHealth,health+healthAdd*(level-1)+health*healthAddition*(level-1));
-            float totalMoveSpeed=Mathf.Clamp(moveSpeed+moveSpeedAddition*(level-1)*moveSpeed,moveSpeed,3*moveSpeed);
+            float totalMoveSpeed=Mathf.Clamp(moveSpeed+moveSpeedAddition*(level-1)*moveSpeed,moveSpeed,(float)1.5*moveSpeed);
             sheet.SetRawValue(Property.BaseMoveSpeed,totalMoveSpeed);
             sheet.SetRawValue(Property.Attack,attack);
             sheet.SetRawValue(Property.DamageAddition,attackAddition*attack*(level-1));

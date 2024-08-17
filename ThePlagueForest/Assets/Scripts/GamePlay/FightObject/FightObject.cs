@@ -31,8 +31,8 @@ public class FightObject : MonoBehaviour
             if (mIsPoolObject)
             {
                 DOTween.Kill(gameObject);
-                Destroy(this);
                 FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
+                Destroy(this);
             }
             else
             {

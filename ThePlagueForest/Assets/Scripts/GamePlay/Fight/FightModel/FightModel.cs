@@ -15,7 +15,7 @@ public class FightModel
     private float mEnemyLevelUpTime=0;
 
     private float mEnemyCreateDefaultTime=0;
-    private float mEnemyCreateTime=2f;
+    private float mEnemyCreateTime=0;
     private const int EnemyCreateDistanceWithPlayer=400;
     public static int mHealthChangeTextCount=0;
     private static FightModel sCurrent;
@@ -66,12 +66,13 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
+        mEnemyCreateTime=Enemy.sEnemyCreateTime;
         mBossCreateTime=Boss.sCreateTime;
         
         //初始武器
         EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
     }
-    public void EnemyCreate()
+    public void EnemyCreate(Vector3 position)
     {
         List<CharacterId> idList=new List<CharacterId>();
         for(int i=(int)CharacterId.Enemy1;i<=(int)CharacterId.Enemy2;i++)
@@ -90,7 +91,7 @@ public class FightModel
             index=idList.Count-2;
         }
         //生成敌人
-        Enemy enemy = EnemyIdToEnemy(idList[index],GetEnemyValidPosition(),Enemy.sLevel);
+        Enemy enemy = EnemyIdToEnemy(idList[index],position,Enemy.sLevel);
         //Debug.Log("敌人等级:"+Enemy.sLevel);
 
         mEnemyList.Add(enemy);
@@ -141,13 +142,14 @@ public class FightModel
         {
             mEnemyCreateDefaultTime=0;
             Debug.Log("endTime"+mEnemyCreateTime);
-            if(Enemy.sLevel%3==0)
+            if(true)
             {
+                //Enemy.sLevel%4==0;
                 CreateEnemyCircle();
             }
             else
             {
-                EnemyCreate();
+                EnemyCreate(GetEnemyValidPosition());
             }
             
         }
@@ -176,7 +178,7 @@ public class FightModel
             float angle = i * angleStep;
             // 计算敌人的位置
             Vector3 enemyPosition = CalculatePosition(angle);
-            EnemyCreate();
+            EnemyCreate(enemyPosition);
         }
     }
     private Vector3 CalculatePosition(float angle)

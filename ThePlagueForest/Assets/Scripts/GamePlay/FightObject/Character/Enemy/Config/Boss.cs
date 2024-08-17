@@ -6,7 +6,7 @@ using UnityEngine;
 public class Boss : Enemy
 {
     public static int sBossLevel=1;
-    public static float sCreateTime=60;
+    public static float sCreateTime=80;
     protected static float mTotalAngle=140;
     protected static int mBulletCount=8;
     protected bool mIsdestination=false;

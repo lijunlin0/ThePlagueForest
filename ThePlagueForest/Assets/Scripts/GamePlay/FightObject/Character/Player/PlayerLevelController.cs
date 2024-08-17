@@ -8,8 +8,8 @@ public class PlayerLevelController
     public const int PlayerBaseExp=100;
     public const int PlayerExpAdd=20;
     public const float LevelExpFactor=1.06f;
-    public const int NormalExp=10;
-    public const int EliteExp=40;
+    public const int NormalExp=6;
+    public const int EliteExp=20;
     public const int BossExp=300;
 
     private Player mPlayer;
@@ -19,8 +19,6 @@ public class PlayerLevelController
     private int mMaxHealthAdditionPoint;
     //连续升级时挨个处理
     private List<int> mLevelUpList=new List<int>();
-    Callback mExpChangedCallback;
-
     public PlayerLevelController()
     {
         Init();

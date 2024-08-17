@@ -16,8 +16,8 @@ public class BulletBoomerang: Bullet
     private Tween mRotateTween;
     public static BulletBoomerang Create(Character character,int points)
     {
-        GameObject bulletPrefab=Resources.Load<GameObject>("FightObject/Bullet/BulletBoomerang");
-        GameObject bulletObject=GameObject.Instantiate(bulletPrefab);
+        GameObject bulletObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Bullet/BulletBoomerang");
+        bulletObject.SetActive(true);
         BulletBoomerang bullet=bulletObject.AddComponent<BulletBoomerang>();
         bullet.Init(character,points);
         return bullet;
@@ -48,6 +48,7 @@ public class BulletBoomerang: Bullet
             if(mRotateTween!=null)
             {
                 mRotateTween.Kill();
+                mRotateTween=null;
             }
             mIsDead=true;
         }
@@ -80,5 +81,9 @@ public class BulletBoomerang: Bullet
         mMoveSpeedReduction=MoveSpeedReduction;
         mMoveSpeed=MinMoveSpeed;
 
+    }
+    private void OnDestroy()
+    {
+        mRotateTween.Kill();
     }
 }
