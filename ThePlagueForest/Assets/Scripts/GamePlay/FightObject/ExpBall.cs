@@ -10,6 +10,7 @@ public class ExpBall : FightObject
     private int mExp;
     private SpriteRenderer mSpriteRenderer;
     protected AudioSource mSound;
+    private bool mIsWaitingForSound;
 
     private float mMoveSpeed;
     
@@ -18,7 +19,7 @@ public class ExpBall : FightObject
         GameObject gameObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Other/"+expType);
         gameObject.SetActive(true);
         gameObject.transform.position=position;
-        ExpBall expBall=gameObject.AddComponent<ExpBall>();
+        ExpBall expBall = gameObject.AddComponent<ExpBall>();
         expBall.Init(exp);
         return expBall;
     }
@@ -26,8 +27,10 @@ public class ExpBall : FightObject
     private void Init(int exp)
     {
         base.Init();
+        mIsWaitingForSound=false;
         mIsPoolObject=true;
         mSpriteRenderer = mDisplay.GetComponent<SpriteRenderer>();
+        mSpriteRenderer.enabled=true;
         mSpriteRenderer.color=new Color(1,1,1,0);
         mSpriteRenderer.DOFade(1,0.5f);
         mExp=exp;
@@ -37,19 +40,29 @@ public class ExpBall : FightObject
 
     public void Update()
     {
+        if(mIsWaitingForSound)
+        {
+            return;
+        }
         mCollider.OnUpdate();
         MyCollider collider2=Player.GetCurrent().GetCollider();
         
         if(CollisionHelper.IsColliding(mCollider,collider2))
         {
+            mSpriteRenderer.enabled=false;
             mCollider.GetCollider().enabled=false;
-            mDisplay.SetActive(false);
             Player.GetCurrent().GetPlayerLevelController().AddExp(mExp);
             mSound.Play();
-            //Debug.Log("获取经验:"+mExp);
-            DOTween.Kill(mSpriteRenderer);
-            FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
+            mIsWaitingForSound=true;
+            DOVirtual.DelayedCall(1,()=>
+            {
+                FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
+                mCollider.GetCollider().enabled=true;
+                Destroy(this);
+            });
+            return;
         }
+
         mCreateTime+=Time.deltaTime;
         if(mCreateTime<=mPauseTime)
         {

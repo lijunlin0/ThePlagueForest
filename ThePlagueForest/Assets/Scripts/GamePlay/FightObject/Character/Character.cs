@@ -10,7 +10,9 @@ public enum CharacterId
     Player,
     Enemy1,
     Enemy2,
+    Enemy3,
     Boss,
+    Boss2,
 }
 
 public class Character : FightObject

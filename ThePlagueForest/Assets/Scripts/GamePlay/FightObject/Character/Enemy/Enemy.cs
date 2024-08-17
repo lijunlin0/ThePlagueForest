@@ -17,7 +17,8 @@ public enum EnemyType
 
 public enum EnemyCreateChance
 {
-    Enemy1=90,
+    Enemy1=40,
+    Enemy3=30,
     Enemy2=10,
 }
 

@@ -34,7 +34,6 @@ public class BulletBoomerang: Bullet
    public override void OnUpdate()
     {
         float deltaTime=Time.deltaTime;
-        Debug.Log(deltaTime);
         base.OnUpdate();
         if(mIsDead)
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoolManager
 {
     private const int INIT_OBJ_COUNT = 100;
+    private const int MAX_OBJ_COUNT = 1000;
     private Dictionary<string, List<GameObject>> mGameobjects;
     
     public PoolManager()
@@ -20,7 +21,8 @@ public class PoolManager
         baseGameObject.name=prefabName;
         baseGameObject.SetActive(false);
         list.Add(baseGameObject);
-         for (int i = 1; i < INIT_OBJ_COUNT; ++i)
+        int count=prefabName=="Character/Enemy1"||prefabName=="Other/ExpBallNormal"?MAX_OBJ_COUNT:INIT_OBJ_COUNT;
+         for (int i = 1; i < count; ++i)
         {
             GameObject gameObject=GameObject.Instantiate(baseGameObject);
             gameObject.name=prefabName;

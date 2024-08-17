@@ -68,14 +68,18 @@ public class FightModel
         mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
         mEnemyCreateTime=Enemy.sEnemyCreateTime;
         mBossCreateTime=Boss.sCreateTime;
+
+        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
         
         //初始武器
         EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
+        //Boss2 boss=Boss2.Create(GetEnemyValidPosition(),Boss.sBossLevel);
+        //mEnemyList.Add(boss);
     }
     public void EnemyCreate(Vector3 position)
     {
         List<CharacterId> idList=new List<CharacterId>();
-        for(int i=(int)CharacterId.Enemy1;i<=(int)CharacterId.Enemy2;i++)
+        for(int i=(int)CharacterId.Enemy1;i<(int)CharacterId.Boss;i++)
         {
             idList.Add((CharacterId)i);
         }
@@ -84,11 +88,15 @@ public class FightModel
         int index=0;
         if(randomNum<(int)EnemyCreateChance.Enemy2)
         {
+            index=idList.Count-2;
+        }
+        else if(randomNum<(int)EnemyCreateChance.Enemy3)
+        {
             index=idList.Count-1;
         }
         else if(randomNum<(int)EnemyCreateChance.Enemy1)
         {
-            index=idList.Count-2;
+            index=idList.Count-3;
         }
         //生成敌人
         Enemy enemy = EnemyIdToEnemy(idList[index],position,Enemy.sLevel);
@@ -106,8 +114,8 @@ public class FightModel
         float y=0;
         while(distance<=EnemyCreateDistanceWithPlayer)
         {
-            x=RandomHelper.RandomIntTwoRange(-Utility.WindowWidth,-Utility.WindowWidth/2,Utility.WindowWidth,Utility.WindowWidth/2)+mPlayer.transform.position.x;
-            y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight,-Utility.WindowHeight/2,Utility.WindowHeight,Utility.WindowHeight/2)+mPlayer.transform.position.y;
+            x=RandomHelper.RandomIntTwoRange(-Utility.WindowWidth/2,-Utility.WindowWidth/2,Utility.WindowWidth/2,Utility.WindowWidth/2)+mPlayer.transform.position.x;
+            y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight/2,-Utility.WindowHeight/2,Utility.WindowHeight/2,Utility.WindowHeight/2)+mPlayer.transform.position.y;
             distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
         }
         return new Vector3(x,y,-1);
@@ -119,6 +127,7 @@ public class FightModel
         {
             case CharacterId.Enemy1:return Enemy1.Create(position,level);
             case CharacterId.Enemy2:return Enemy2.Create(position,level);
+            case CharacterId.Enemy3:return Enemy3.Create(position,level);
             default:return null;
         }
     }
@@ -156,15 +165,25 @@ public class FightModel
         if(mEnemyLevelUpDefaultTime>=mEnemyLevelUpTime)
         {
             mEnemyLevelUpDefaultTime=0;
-            mEnemyCreateTime=Mathf.Clamp(mEnemyCreateTime-0.2f,0.01f,2);
+            mEnemyCreateTime=Mathf.Clamp(mEnemyCreateTime-0.1f,0.3f,2);
             Enemy.sLevel++;
         }
          if(mBossCreateDefaultTime>=mBossCreateTime)
         {
             mBossCreateDefaultTime=0;
-            Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
-            mEnemyList.Add(boss);
-            Boss.sBossLevel+=1;
+            int randomInt=RandomHelper.RandomInt(0,2);
+            if(randomInt==0)
+            {
+                Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
+                mEnemyList.Add(boss);
+                Boss.sBossLevel+=1;
+            }
+            else
+            {
+                Boss2 boss=Boss2.Create(GetEnemyValidPosition(),Boss.sBossLevel);
+                mEnemyList.Add(boss);
+                Boss.sBossLevel+=1;
+            }
         }
     }
 
@@ -172,12 +191,13 @@ public class FightModel
     {
         float number=10;
         float angleStep = 360/number;
+        int offsetAngle=RandomHelper.RandomInt(-30,30);
          for (int i = 0; i < number; i++)
         {
             // 计算当前敌人的角度
             float angle = i * angleStep;
             // 计算敌人的位置
-            Vector3 enemyPosition = CalculatePosition(angle);
+            Vector3 enemyPosition = CalculatePosition(angle+offsetAngle);
             EnemyCreate(enemyPosition);
         }
     }

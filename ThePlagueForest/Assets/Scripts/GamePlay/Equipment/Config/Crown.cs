@@ -6,7 +6,7 @@ using DG.Tweening;
 //王冠--每 N 秒无敌 Y 秒
 public class Crown : Equipment
 {
-    private const int mInvincibleTick=8;
+    private const int mInvincibleTick=10;
     private const int mInvincibleDuration=2;
     private const int TickLayerReduce=1;
     public Crown():base(EquipmentType.Passive,EquipmentId.Crown)

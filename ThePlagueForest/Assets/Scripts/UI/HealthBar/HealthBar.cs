@@ -12,30 +12,25 @@ public class HealthBar : MonoBehaviour
     private Tween mTween;
     public static HealthBar Create(Character character)
     {
-        GameObject prefab=Resources.Load<GameObject>("UI/HealthBar");
+        
         //Boss
-        if(character.GetCharacterId()==CharacterId.Boss)
+        if(character.GetCharacterId()==CharacterId.Boss||character.GetCharacterId()==CharacterId.Boss2)
         {   
             Canvas canvas=GameObject.Find("WindowCanvas").GetComponent<Canvas>();
-            GameObject gameObject=GameObject.Instantiate(prefab,canvas.transform);
+            GameObject healthBarPrefab=Resources.Load<GameObject>("UI/BossHealthBar");
+            GameObject gameObject=Instantiate(healthBarPrefab,canvas.transform);
             RectTransform rectTransform=gameObject.GetComponent<RectTransform>();
             rectTransform.anchorMin = new Vector2(0, 0);//上下左右对齐模式
             rectTransform.anchorMax = new Vector2(1, 1);
-            rectTransform.offsetMin=new Vector2(50,Utility.WindowHeight-120);
-            rectTransform.offsetMax=new Vector2(-50,-50);
-            GameObject bossDisplay=gameObject.transform.Find("Display").gameObject;
-            RectTransform displayTransform=bossDisplay.GetComponent<RectTransform>();
-            displayTransform.anchorMin = new Vector2(0, 0);
-            displayTransform.anchorMax = new Vector2(1, 1);  
-            displayTransform.offsetMin=new Vector2(0,0);
-            displayTransform.offsetMax=new Vector2(0,0);
+            rectTransform.offsetMin=new Vector2(50,Utility.WindowHeight-240);
+            rectTransform.offsetMax=new Vector2(-50,-150);
             TextMeshProUGUI  text=gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI >();
-            text.text="火蠕虫";
+            text.text=character.GetCharacterId()==CharacterId.Boss?"火蠕虫":"死神";
             HealthBar bar=gameObject.AddComponent<HealthBar>();
             bar.Init(character);
             return bar;
         }
-
+        GameObject prefab=Resources.Load<GameObject>("UI/HealthBar");
         GameObject healthObject=GameObject.Instantiate(prefab,character.transform.position,Quaternion.identity,GameObject.Find("Canvas").transform);
         GameObject display=healthObject.transform.Find("Display").gameObject;
 
@@ -98,7 +93,7 @@ public class HealthBar : MonoBehaviour
             mTween.Kill();
             Destroy(gameObject);
         }
-        if(mCharacter.GetCharacterId()!=CharacterId.Boss)
+        if(mCharacter.GetCharacterId()!=CharacterId.Boss&&mCharacter.GetCharacterId()!=CharacterId.Boss2)
         {
             transform.position = mCharacter.transform.position + new Vector3(0, YOffset, 0);
         }
