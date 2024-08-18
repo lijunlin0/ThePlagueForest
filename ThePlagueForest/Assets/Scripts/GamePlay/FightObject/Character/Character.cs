@@ -11,6 +11,9 @@ public enum CharacterId
     Enemy1,
     Enemy2,
     Enemy3,
+    Enemy4,
+    Enemy5,
+    Enemy6,
     Boss,
     Boss2,
 }
@@ -26,6 +29,7 @@ public class Character : FightObject
     protected HealthBar mHealthBar;
     protected SpriteRenderer mSpriteRenderer;
     protected AudioSource mHurtSound;
+    protected Vector3 mPrePosition;
     protected int mLevel;
     protected virtual void Init(CharacterId characterId,PropertySheet basePropertySheet)
     {
@@ -128,4 +132,6 @@ public class Character : FightObject
     {
         mHurtSound.Play();
     }
+
+    public Vector3 GetPrePosition(){return mPrePosition;}
 }

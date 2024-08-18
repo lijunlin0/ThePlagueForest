@@ -41,13 +41,21 @@ public class HealthBar : MonoBehaviour
             image.color=new Color(0,0.5f,0,1);
 
         }
-        else if(character.GetCharacterId()==CharacterId.Enemy1)
+        else if(character.GetCharacterId()==CharacterId.Enemy2)
         {   
-            display.transform.localScale=new Vector3(0.8f,0.4f,1);
+            display.transform.localScale=new Vector3(1.2f,0.4f,1);
+        }
+        else if(character.GetCharacterId()==CharacterId.Enemy6)
+        {
+            display.transform.localScale=new Vector3(1.6f,0.4f,1);
+        }
+        else if(character.GetCharacterId()==CharacterId.Enemy5)
+        {
+            display.transform.localScale=new Vector3(1.4f,0.4f,1);
         }
         else
         {
-            display.transform.localScale=new Vector3(1.2f,0.4f,1);
+            display.transform.localScale=new Vector3(0.8f,0.4f,1);
         }
         HealthBar healthBar=healthObject.AddComponent<HealthBar>();
         

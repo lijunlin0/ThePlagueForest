@@ -43,7 +43,9 @@ public class Boss2 : Enemy
         for(int i=0; i<mBulletCount; i++)
         {
             rotation=startAngle+i*stepAngle;
-            Boss2Bullet bullet=Boss2Bullet.Create(this,mCurrentPropertySheet.GetAttack(),baseAngle+rotation);
+            //Boss造成百分比伤害
+            int points=(int)(mCurrentPropertySheet.GetAttack()*Player.GetCurrent().GetCurrentPropertySheet().GetMaxHealth());
+            Boss2Bullet bullet=Boss2Bullet.Create(this,points,baseAngle+rotation);
             FightModel.GetCurrent().AddEnemyBullets(bullet);
         }
         mIsOnShoot=true;

@@ -16,41 +16,52 @@ public class PlayerLevelController
     private int mLevel;
     private float mExp;
     private Dictionary<EnemyType,int>mEnemyExp;
+    private ExpBar mExpBar;
     private int mMaxHealthAdditionPoint;
     //连续升级时挨个处理
     private List<int> mLevelUpList=new List<int>();
     public PlayerLevelController()
     {
         Init();
-        mPlayer = Player.GetCurrent();
-        mLevel=1;
-        mExp=0;
     }
 
     public void Init()
     {
+        mPlayer = Player.GetCurrent();
+        mLevel=1;
+        mExp=0;
         mEnemyExp=new Dictionary<EnemyType, int>();
         mEnemyExp.Add(EnemyType.Normal,NormalExp);
         mEnemyExp.Add(EnemyType.Elite,EliteExp);
         mEnemyExp.Add(EnemyType.Boss,BossExp);
         mMaxHealthAdditionPoint=CharacterUtility.GetLevelUpMaxHealthAdd("Player1");
+        mExpBar=ExpBar.Create(GetlevelUPExp());
     }
 
     public void AddExp(int exp)
     {
         mExp+=exp;
         float levelUpExp=(PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
+        mExpBar.OnExpChanged(mExp);
         if(mExp>=levelUpExp)
         {
             mLevel+=1;
             mExp-=levelUpExp;
             OnLevelUp();
+            mExpBar.OnLevelUp(GetlevelUPExp());
+            mExpBar.OnExpChanged(mExp);
         }
+    }
+
+    public float GetlevelUPExp()
+    {
+        float levelUpExp=(PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
+        return levelUpExp;
     }
 
     public void OnLevelUp()
     {
-        if(mPlayer.IsDead())
+        if(EndWindow.IsOpen())
         {
             return;
         }
@@ -76,7 +87,6 @@ public class PlayerLevelController
         {
             GetEquipment();
             mLevelUpList.RemoveAt(0);
-            Debug.Log("剩余窗口:"+mLevelUpList.Count);
         }:()=>
         {
             mLevelUpList.Clear();

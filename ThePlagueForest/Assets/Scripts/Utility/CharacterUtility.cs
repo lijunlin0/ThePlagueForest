@@ -25,13 +25,17 @@ public class CharacterUtility
         {
             float healthAddition=(float)(double)characterData["Health"][2];
             float moveSpeedAddition=(float)(double)characterData["MoveSpeed"][1];
-            int attack=(int)characterData["Attack"][0];
-            float attackAddition=(float)(double)characterData["Attack"][1];
+            float attack=(float)(double)characterData["Attack"][0];
             sheet.SetRawValue(Property.BaseHealth,health+healthAdd*(level-1)+health*healthAddition*(level-1));
             float totalMoveSpeed=Mathf.Clamp(moveSpeed+moveSpeedAddition*(level-1)*moveSpeed,moveSpeed,(float)1.5*moveSpeed);
             sheet.SetRawValue(Property.BaseMoveSpeed,totalMoveSpeed);
             sheet.SetRawValue(Property.Attack,attack);
-            sheet.SetRawValue(Property.DamageAddition,attackAddition*attack*(level-1));
+            if(characterName!="Boss"&&characterName!="Boss2")
+            {
+                float attackAddition=(float)(double)characterData["Attack"][1];
+                sheet.SetRawValue(Property.DamageAddition,attackAddition*attack*(level-1));
+            }
+            
         }
         else
         {

@@ -2,8 +2,8 @@
 public class Vitality : Equipment
 {
     private const float mTriggerChance=25;
-    private const int HealthPercent=1;
-    private const int HealthPercentLayerAddition=1;
+    private const float HealthPercent=0.5f;
+    private const float HealthPercentLayerAddition=0.25f;
     public Vitality():base(EquipmentType.Passive,EquipmentId.Vitality)
     {
         mMaxlayer=3;
@@ -29,7 +29,7 @@ public class Vitality : Equipment
             {
                 return;
             }
-            int points=player.GetCurrentPropertySheet().GetMaxHealth()*(HealthPercent+HealthPercentLayerAddition*(layer-1))/100;
+            int points=(int)(player.GetCurrentPropertySheet().GetMaxHealth()*(HealthPercent+HealthPercentLayerAddition*(layer-1))/100);
             RecoveryInfo recoveryInfo=new RecoveryInfo(player,player,points);
             FightSystem.Recovery(recoveryInfo);
         });

@@ -17,7 +17,7 @@ public class BulletDagger: Bullet
     protected void Init(Character character,int points,int penetrateCount)
     {
         base.Init(character,points);
-        mMaxLifeTime=2;
+        mMaxLifeTime=1.8f;
         mIsPenetrate=true;
         mPenetrateCount=penetrateCount;
     }

@@ -8,15 +8,7 @@ using UnityEngine;
 
 public class FightModel
 {
-    private float mBossCreateDefaultTime=0;
-    private float mBossCreateTime=0;
     
-    private float mEnemyLevelUpDefaultTime=0;
-    private float mEnemyLevelUpTime=0;
-
-    private float mEnemyCreateDefaultTime=0;
-    private float mEnemyCreateTime=0;
-    private const int EnemyCreateDistanceWithPlayer=400;
     public static int mHealthChangeTextCount=0;
     private static FightModel sCurrent;
     //敌人
@@ -29,6 +21,7 @@ public class FightModel
     private List<Bullet> mPlayerBulletList;
     //装备以及层数
     private Dictionary<Equipment,int> mEquipments;
+    private EnemyCreateManager mEnemyCreateManager;
     public List<Bullet> GetEnemyBullets()
     {
         return mEnemyBulletList;
@@ -65,150 +58,26 @@ public class FightModel
         mEnemyBulletList=new List<Bullet>();
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
-        mEnemyLevelUpTime=Enemy.sEnemyLevelUpTime;
-        mEnemyCreateTime=Enemy.sEnemyCreateTime;
-        mBossCreateTime=Boss.sCreateTime;
-
-        FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
+        mEnemyCreateManager=new EnemyCreateManager();
+        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
         
         //初始武器
         EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
         //Boss2 boss=Boss2.Create(GetEnemyValidPosition(),Boss.sBossLevel);
         //mEnemyList.Add(boss);
     }
-    public void EnemyCreate(Vector3 position)
-    {
-        List<CharacterId> idList=new List<CharacterId>();
-        for(int i=(int)CharacterId.Enemy1;i<(int)CharacterId.Boss;i++)
-        {
-            idList.Add((CharacterId)i);
-        }
-        //根据概率得到下标
-        int randomNum=RandomHelper.RandomInt(0,100);
-        int index=0;
-        if(randomNum<(int)EnemyCreateChance.Enemy2)
-        {
-            index=idList.Count-2;
-        }
-        else if(randomNum<(int)EnemyCreateChance.Enemy3)
-        {
-            index=idList.Count-1;
-        }
-        else if(randomNum<(int)EnemyCreateChance.Enemy1)
-        {
-            index=idList.Count-3;
-        }
-        //生成敌人
-        Enemy enemy = EnemyIdToEnemy(idList[index],position,Enemy.sLevel);
-        //Debug.Log("敌人等级:"+Enemy.sLevel);
-
-        mEnemyList.Add(enemy);
-
-    }
-
-    private Vector3 GetEnemyValidPosition()
-    {
-         //随机一个位置
-        float distance=0;
-        float x=0;
-        float y=0;
-        while(distance<=EnemyCreateDistanceWithPlayer)
-        {
-            x=RandomHelper.RandomIntTwoRange(-Utility.WindowWidth/2,-Utility.WindowWidth/2,Utility.WindowWidth/2,Utility.WindowWidth/2)+mPlayer.transform.position.x;
-            y=RandomHelper.RandomIntTwoRange(-Utility.WindowHeight/2,-Utility.WindowHeight/2,Utility.WindowHeight/2,Utility.WindowHeight/2)+mPlayer.transform.position.y;
-            distance=Vector3.Distance(new Vector3(x,y,-1),mPlayer.transform.position);
-        }
-        return new Vector3(x,y,-1);
-    }
-
-    private Enemy EnemyIdToEnemy(CharacterId id,Vector3 position,int level)
-    {
-        switch(id)
-        {
-            case CharacterId.Enemy1:return Enemy1.Create(position,level);
-            case CharacterId.Enemy2:return Enemy2.Create(position,level);
-            case CharacterId.Enemy3:return Enemy3.Create(position,level);
-            default:return null;
-        }
-    }
+    
 
 
     public void OnUpdate()
     {
-       EnemyCreateUpdate();
+       mEnemyCreateManager.OnUpdate();
+        CollisionHelper.Collide();
        UpdateObjects();
-       CollisionHelper.Collide();
+
        RemoveInvalidObjects();
     }
 
-    private void EnemyCreateUpdate()
-    {
-        mEnemyCreateDefaultTime+=Time.deltaTime;
-        mEnemyLevelUpDefaultTime+=Time.deltaTime;
-        mBossCreateDefaultTime+=Time.deltaTime;
-        
-        if(mEnemyCreateDefaultTime>=mEnemyCreateTime)
-        {
-            mEnemyCreateDefaultTime=0;
-            Debug.Log("endTime"+mEnemyCreateTime);
-            if(true)
-            {
-                //Enemy.sLevel%4==0;
-                CreateEnemyCircle();
-            }
-            else
-            {
-                EnemyCreate(GetEnemyValidPosition());
-            }
-            
-        }
-        if(mEnemyLevelUpDefaultTime>=mEnemyLevelUpTime)
-        {
-            mEnemyLevelUpDefaultTime=0;
-            mEnemyCreateTime=Mathf.Clamp(mEnemyCreateTime-0.1f,0.3f,2);
-            Enemy.sLevel++;
-        }
-         if(mBossCreateDefaultTime>=mBossCreateTime)
-        {
-            mBossCreateDefaultTime=0;
-            int randomInt=RandomHelper.RandomInt(0,2);
-            if(randomInt==0)
-            {
-                Boss boss=Boss.Create(GetEnemyValidPosition(),Boss.sBossLevel);
-                mEnemyList.Add(boss);
-                Boss.sBossLevel+=1;
-            }
-            else
-            {
-                Boss2 boss=Boss2.Create(GetEnemyValidPosition(),Boss.sBossLevel);
-                mEnemyList.Add(boss);
-                Boss.sBossLevel+=1;
-            }
-        }
-    }
-
-    private void CreateEnemyCircle()
-    {
-        float number=10;
-        float angleStep = 360/number;
-        int offsetAngle=RandomHelper.RandomInt(-30,30);
-         for (int i = 0; i < number; i++)
-        {
-            // 计算当前敌人的角度
-            float angle = i * angleStep;
-            // 计算敌人的位置
-            Vector3 enemyPosition = CalculatePosition(angle+offsetAngle);
-            EnemyCreate(enemyPosition);
-        }
-    }
-    private Vector3 CalculatePosition(float angle)
-    {
-        int r=2000;
-        float radian=angle*Mathf.Rad2Deg;
-        float x = mPlayer.transform.position.x + r * Mathf.Cos(radian);
-        float y = mPlayer.transform.position.y + r * Mathf.Sin(radian);
-        return new Vector3(x, y,mPlayer.transform.position.z);
-    }
 
     public void AddEquipment(Equipment equipment)
     {
@@ -228,6 +97,7 @@ public class FightModel
         }
         return mEquipments[equipment];
     }
+
 
     private void UpdateObjects()
     {

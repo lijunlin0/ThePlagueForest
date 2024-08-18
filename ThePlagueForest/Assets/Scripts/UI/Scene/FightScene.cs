@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FightScene : MonoBehaviour
 {
      FightManager mFightManager;
+     public TextMeshProUGUI timerText;
+
+    private LiveTime mLiveTime;
      public void Awake()
      {
           InitScene();
           mFightManager=new FightManager();
           Map.Create();
           SettingsButton.Create();
+          mLiveTime=LiveTime.Create();
      }
      public void Update()
      {

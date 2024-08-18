@@ -59,6 +59,7 @@ public class Player : Character
     }
     public void Move(Vector3 direction)
     {
+        mPrePosition=transform.position;
         Vector3 prePosition=transform.position;
         transform.Translate(direction*mCurrentPropertySheet.GetMoveSpeed()*Time.deltaTime);
         IsBorder();

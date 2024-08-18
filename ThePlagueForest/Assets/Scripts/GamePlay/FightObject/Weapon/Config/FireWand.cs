@@ -8,7 +8,7 @@ public class FireWand:Weapon
 {
     public const int ShootRange=600;
     private const int Attack=100;
-    private const float  ShootTime=1.8f;
+    private const float  ShootTime=1.3f;
     private const int AttackAddition=60;
     public FireWand():base(EquipmentType.Active,EquipmentId.FireWand)
     {

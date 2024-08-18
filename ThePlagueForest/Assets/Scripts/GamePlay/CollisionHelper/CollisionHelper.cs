@@ -39,7 +39,7 @@ public static class CollisionHelper
             MyCollider collider2=enemy.GetCollider();
             if(IsColliding(collider1,collider2))
             {
-                int points=enemy.GetCurrentPropertySheet().GetAttack()/2;
+                int points=(int)(enemy.GetCurrentPropertySheet().GetAttack()/2);
                 DamageInfo damageInfo=new DamageInfo(enemy,player,points,null,null);
                 enemy.OnCollidePlayer();
                 FightSystem.Damage(damageInfo);

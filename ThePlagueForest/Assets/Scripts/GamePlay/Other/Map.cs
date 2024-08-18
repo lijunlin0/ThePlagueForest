@@ -9,8 +9,8 @@ public class Map : MonoBehaviour
 {
     private static Canvas mCanvas;
     public static int ImgSize=160;
-    public static int Width=80;//160
-    public static int Height=60;//100
+    public static int Width=100;//160
+    public static int Height=70;//100
     private static int BorderSize=6;
     private static List<GameObject> mBorderPrefabs=new List<GameObject>();
     private static List<GameObject> mGrassPrefabs=new List<GameObject>();
@@ -27,6 +27,8 @@ public class Map : MonoBehaviour
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/4"));
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/5"));
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/6"));
+        mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/7"));
+        mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/8"));
         mBorderPrefabs.Add(Resources.Load<GameObject>("Other/Map/Border0"));
         mBorderPrefabs.Add(Resources.Load<GameObject>("Other/Map/Border1"));
         mBorderPrefabs.Add(Resources.Load<GameObject>("Other/Map/Border2"));
@@ -41,20 +43,21 @@ public class Map : MonoBehaviour
                 GameObject prefab;
                 if(i<-Height/2||j<-Width/2||i>=Height/2||j>=Width/2)
                 {
-                    prefab=IsOnBorder(true);
-                    GameObject.Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
+                    prefab=CreateBlock(true);
+                    Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
                 }
                 else
                 {
-                    prefab=IsOnBorder(false);
-                    GameObject.Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
+                    prefab=CreateBlock(false);
+                    Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
+                    
                 }
             }
         }
         return;
     }
 
-    private static GameObject IsOnBorder(bool isBorder)
+    private static GameObject CreateBlock(bool isBorder)
     {
         List<GameObject> prefabs = new List<GameObject>();
         List<int> chance=new List<int>();
@@ -64,10 +67,11 @@ public class Map : MonoBehaviour
         for(int i=0;i<chance.Count;i++)
         {
             if(randomInt<chance[i])
-            {
+            {   
                 return prefabs[i];
             }
         }
         return null;
     }
+
 }

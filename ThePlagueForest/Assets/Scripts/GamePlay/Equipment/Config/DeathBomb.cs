@@ -6,8 +6,8 @@ using DG.Tweening;
 
 public class DeathBomb : Equipment
 {
-    private const int mBombDamagePercent=2;
-    private const int mRangeAdditionPercent=10;
+    private const int mBombDamagePercent=1;
+    private const int mRangeAdditionPercent=5;
     public DeathBomb():base(EquipmentType.Passive,EquipmentId.DeathBomb)
     {
         mMaxlayer=3;

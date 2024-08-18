@@ -33,7 +33,7 @@ public class Enemy2 : Enemy
     {
         mAnimator.Play("Enemy2Attack");
         //创建子弹
-        Enemy2Bullet bullet=Enemy2Bullet.Create(this,mCurrentPropertySheet.GetAttack());
+        Enemy2Bullet bullet=Enemy2Bullet.Create(this,(int)mCurrentPropertySheet.GetAttack());
         //方向朝着玩家
         Vector3 direction=(FightModel.GetCurrent().GetPlayer().transform.position-bullet.transform.position).normalized;
         bullet.transform.localRotation=FightUtility.DirectionToRotation(direction);

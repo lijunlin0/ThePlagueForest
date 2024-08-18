@@ -29,6 +29,6 @@ public class BulletSacredSword:Bullet
         base.Init(source,points);
         mIsPenetrate=true;
         mMoveSpeed=500;
-        mMaxLifeTime=2.5f;
+        mMaxLifeTime=2f;
     }
 }

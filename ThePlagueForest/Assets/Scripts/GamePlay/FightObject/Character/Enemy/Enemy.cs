@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,19 +16,8 @@ public enum EnemyType
 }
 
 
-public enum EnemyCreateChance
-{
-    Enemy1=40,
-    Enemy3=30,
-    Enemy2=10,
-}
-
 public class Enemy : Character
 {
-    public static int sLevel=1;
-    //敌人升级时间间隔
-    public static float sEnemyLevelUpTime=30;
-    public static float sEnemyCreateTime=3;
     protected EnemyType mEnemyType;
     protected BulletShooter mBulletShooter;
     protected bool mIsOnCollidePlayer;
@@ -49,6 +39,7 @@ public class Enemy : Character
         {
             return;
         }
+        mPrePosition=transform.position;
         Vector3 playerPosition=Player.GetCurrent().transform.position;
         Vector3 enemyPosition=transform.position;
         Vector3 direction=playerPosition-enemyPosition;

@@ -24,7 +24,6 @@ public class FightManager
     {
         if(Player.GetCurrent().IsDead()&&!EndWindow.IsOpen())
         {
-            EnemyLevelRestart();
             mPause=true;
             EndWindow.SetOpen(mPause);
             DOVirtual.DelayedCall(2,()=>
@@ -43,12 +42,7 @@ public class FightManager
         mPause=pause;
     }
     public static bool IsPause(){return mPause;}
-    public void EnemyLevelRestart()
-    {
-        Enemy.sLevel=1;
-        Boss.sBossLevel=1;
-        Enemy.sEnemyCreateTime=3;
-    }
+
     public PoolManager GetPoolManager(){return mPoolManager;}
 
 }

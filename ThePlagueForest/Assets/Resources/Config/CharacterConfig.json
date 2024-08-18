@@ -2,38 +2,62 @@
     "Comment":"角色属性配置",
     
     "Player1" : {
-        "Health" : [100, 20],
+        "Health" : [10000, 20],
         "HealthRecovery" : [1.0, 0.5],
         "MoveSpeed" : [300]
     },
     "Enemy1" : {
-        "Health" : [80, 20,0.7],
+        "Health" : [80, 40,0.8],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : [120,0.15],
-        "Attack" : [20,0.5]
+        "MoveSpeed" : [120,0.13],
+        "Attack" : [20.0,1.0],
+        "Name"   : "丧尸"
     },
     "Enemy2" : {
-        "Health" : [150, 30, 0.6],
+        "Health" : [250, 30,0.7],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : [100,0.1],
-        "Attack" : [20,0.7]
+        "MoveSpeed" : [120,0.1],
+        "Attack" : [40.0,1.2],
+        "Name"   : "巫师"
     },
     "Enemy3" : {
-        "Health" : [90, 20,0.7],
+        "Health" : [120, 50,0.8],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : [160,0.15],
-        "Attack" : [15,0.5]
+        "MoveSpeed" : [160,0.13],
+        "Attack" : [15.0,1.0],
+        "Name"   : "狼"
+    },
+    "Enemy4" : {
+        "Health" : [170, 30,1.0],
+        "HealthRecovery" : [0.0, 0.0],
+        "MoveSpeed" : [150,0.1],
+        "Attack" : [25.0,1.2],
+        "Name"   : "哥布林"
+    },
+    "Enemy5" : {
+        "Health" : [300, 30,1.0],
+        "HealthRecovery" : [0.0, 0.0],
+        "MoveSpeed" : [100,0.1],
+        "Attack" : [40.0,1.2],
+        "Name"   : "蘑菇怪"
+    },
+    "Enemy6" : {
+        "Health" : [400, 30,1.0],
+        "HealthRecovery" : [0.0, 0.0],
+        "MoveSpeed" : [150,0.1],
+        "Attack" : [50.0,1.2],
+        "Name"   : "骷髅兵"
     },
     "Boss" : {
-        "Health" : [3600, 600, 2],
+        "Health" : [3600, 1000, 4.0],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : [150,0.1],
-        "Attack" : [50,0.7]
+        "Attack" : [0.2]
     },
     "Boss2" : {
-        "Health" : [4800, 600, 2],
+        "Health" : [4800, 1000, 4.0],
         "HealthRecovery" : [0.0, 0.0],
-        "MoveSpeed" : [150,0.1],
-        "Attack" : [40,0.7]
+        "MoveSpeed" : [130,0.1],
+        "Attack" : [0.2]
     }
 }

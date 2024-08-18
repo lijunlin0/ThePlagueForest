@@ -38,7 +38,6 @@ public class EffectArea:MonoBehaviour
         GameObject gameObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Area/"+prefabName);
         gameObject.SetActive(true);
         gameObject.transform.position=position;
-        Debug.Log("创建");
         EffectArea effectArea=gameObject.AddComponent<EffectArea>();
         effectArea.CircleWithPositonInit(collideCallback,prefabName,scaleFactor);
         return effectArea; 

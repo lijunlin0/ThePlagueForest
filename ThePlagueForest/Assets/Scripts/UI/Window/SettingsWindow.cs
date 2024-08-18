@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsWindow : MonoBehaviour
 {
+    private static bool mIsOpen=false;
     private static bool mMusicIsOn=true;
     public  static SettingsWindow Open()
     {
@@ -17,6 +18,7 @@ public class SettingsWindow : MonoBehaviour
     }
     private void Init()
     {
+        mIsOpen=true;
         FightManager.GetCurrent().SetPause(true);
         //按钮点击事件
         Button mainMenuButton=transform.Find("Window/MainMenuButton").GetComponent<Button>();
@@ -31,7 +33,7 @@ public class SettingsWindow : MonoBehaviour
             FightManager.GetCurrent().SetPause(false);
             DOTween.PlayAll();
             GameObject.Destroy(gameObject);
-
+            mIsOpen=false;
         });
         Button MusicButton=transform.Find("Window/MusicButton").GetComponent<Button>();
         Image onImgae=transform.Find("Window/MusicButton/MusicOnImage").GetComponent<Image>();
@@ -45,8 +47,12 @@ public class SettingsWindow : MonoBehaviour
             onImgae.transform.gameObject.SetActive(!mMusicIsOn);
             mMusicIsOn=!mMusicIsOn;
             AudioListener.volume=mMusicIsOn ? 1 : 0;
-            Debug.Log(AudioListener.volume);
         });
     }
+
+    public static bool IsOpen()
+    {
+        return mIsOpen;
+    }    
 
 }

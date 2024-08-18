@@ -5,8 +5,6 @@ using UnityEngine;
 //火蠕虫
 public class Boss : Enemy
 {
-    public static int sBossLevel=1;
-    public static float sCreateTime=70;
     protected static float mTotalAngle=140;
     protected static int mBulletCount=8;
     protected bool mIsdestination=false;
@@ -45,7 +43,10 @@ public class Boss : Enemy
         {
             rotation=startAngle+i*stepAngle;
             rotation=mLookDirection?rotation:rotation+180;
-            BossBullet bullet=BossBullet.Create(this,mCurrentPropertySheet.GetAttack(),rotation);
+            //Boss造成百分比伤害
+            int points=(int)(mCurrentPropertySheet.GetAttack()*Player.GetCurrent().GetCurrentPropertySheet().GetMaxHealth());
+            Debug.Log("boss子弹伤害:"+points);
+            BossBullet bullet=BossBullet.Create(this,points,rotation);
             FightModel.GetCurrent().AddEnemyBullets(bullet);
         }
         mIsOnShoot=true;
@@ -57,6 +58,7 @@ public class Boss : Enemy
         {
             return;
         }
+        mPrePosition=transform.position;
         Player player=Player.GetCurrent();
         Vector3 playerPosition=Player.GetCurrent().transform.position;
         Vector3 enemyPosition=transform.position;

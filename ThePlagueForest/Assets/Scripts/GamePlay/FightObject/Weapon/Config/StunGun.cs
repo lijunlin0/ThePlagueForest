@@ -10,7 +10,7 @@ public class StunGun:Weapon
     private const int BulletCount=5;
     private const int MaxLayerBulletCount=10;
 
-    private const int Attack=30;
+    private const int Attack=40;
     private const float  ShootTime=1f;
 
     private const int AttackAddition=30;

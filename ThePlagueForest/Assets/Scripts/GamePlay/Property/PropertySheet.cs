@@ -98,8 +98,8 @@ public class PropertySheet
         float lucky=mProperties[Property.Lucky];
         return (100+lucky)/100;
     }
-    public int GetAttack()
+    public float GetAttack()
     {
-        return  (int)mProperties[Property.Attack];
+        return  mProperties[Property.Attack];
     }
 }

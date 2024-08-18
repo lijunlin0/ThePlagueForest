@@ -6,7 +6,7 @@ using UnityEngine;
 //匕首
 public class Dagger:Weapon
 {
-    private const int Attack=50;
+    private const int Attack=55;
     private const float  ShootTime=0.3f;
     private const int FinalPenetrateCount=8;
     private const int penetrateCountAddition=1;
