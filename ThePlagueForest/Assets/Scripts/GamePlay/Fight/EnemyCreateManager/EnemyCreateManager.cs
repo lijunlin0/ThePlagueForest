@@ -23,6 +23,7 @@ public class EnemyCreateManager
     private const int EnemyCreateDistanceWithPlayer=400;
     private Player mPlayer;
     private List<Enemy> mEnemies;
+    private List<Enemy> mLiveBossList;
     //敌人生成概率表
     private Dictionary<CharacterId,int> mEnemyChance;
     public EnemyCreateManager()
@@ -38,6 +39,7 @@ public class EnemyCreateManager
             {CharacterId.Enemy3,20},//狼
             {CharacterId.Enemy1,35},//丧尸
         };
+        mLiveBossList=new List<Enemy>();
     }
 
     private Vector3 GetEnemyValidPosition()
@@ -110,12 +112,24 @@ public class EnemyCreateManager
             if(randomInt==0)
             {
                 Boss boss=Boss.Create(GetEnemyValidPosition(),mBossLevel);
+                //避免boss血条重叠
+                if(mLiveBossList.Count!=0)
+                {
+                    boss.GetHealthBar().gameObject.SetActive(false);
+                }
+                mLiveBossList.Add(boss);
                 mEnemies.Add(boss);
                 mBossLevel++;
             }
             else
             {
                 Boss2 boss=Boss2.Create(GetEnemyValidPosition(),mBossLevel);
+                //避免boss血条重叠
+                if(mLiveBossList.Count!=0)
+                {
+                    boss.GetHealthBar().gameObject.SetActive(false);
+                }
+                mLiveBossList.Add(boss);
                 mEnemies.Add(boss);
                 mBossLevel++;
             }
@@ -144,4 +158,5 @@ public class EnemyCreateManager
         float y = mPlayer.transform.position.y + r * Mathf.Sin(radian);
         return new Vector3(x, y,mPlayer.transform.position.z);
     }
+    public List<Enemy> GetBossList(){return mLiveBossList;}
 }

@@ -10,7 +10,7 @@ public class Dagger:Weapon
     private const float  ShootTime=0.3f;
     private const int FinalPenetrateCount=8;
     private const int penetrateCountAddition=1;
-    private const int AttackAddition=20;
+    private const int AttackAddition=10;
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
     {
         mStatusEffectId=StatusEffectId.Equipment_Dagger;
@@ -27,7 +27,7 @@ public class Dagger:Weapon
             {
                 return;
             }
-            int penetrateCount=(layer-1)*penetrateCountAddition;
+            int penetrateCount=layer*penetrateCountAddition;
             if(layer==mMaxlayer)
             {
                 penetrateCount=FinalPenetrateCount;

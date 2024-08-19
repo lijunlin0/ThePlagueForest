@@ -16,6 +16,12 @@ public class Boss2Bullet : Bullet
         return bullet;
     }
 
+    protected override void Init(Character source,int points)
+    {
+        base.Init(source,points);
+        mMoveSpeed=500;
+    }
+
     public override void OnUpdate()
     {
         base.OnUpdate();

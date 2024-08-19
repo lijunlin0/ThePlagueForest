@@ -59,8 +59,8 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         mEnemyCreateManager=new EnemyCreateManager();
-        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
-        
+        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.BurnCircle));
+        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.FrozenCircle));
         //初始武器
         EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
         //Boss2 boss=Boss2.Create(GetEnemyValidPosition(),Boss.sBossLevel);
@@ -97,6 +97,8 @@ public class FightModel
         }
         return mEquipments[equipment];
     }
+
+    public EnemyCreateManager GetEnemyCreateManager(){return mEnemyCreateManager;}
 
 
     private void UpdateObjects()

@@ -8,7 +8,7 @@ public class ThunderWand:Weapon
 {   
     private const int Attack=100;
     private const int ShootRange=1500;
-    private const float  ShootTime=1.2f;
+    private const float  ShootTime=1.8f;
 
     private const int AttackAddition=20;
     public ThunderWand():base(EquipmentType.Active,EquipmentId.ThunderWand)

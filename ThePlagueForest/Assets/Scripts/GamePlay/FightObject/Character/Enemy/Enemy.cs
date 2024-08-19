@@ -78,6 +78,15 @@ public class Enemy : Character
     }
     public override void PlayDestroyAnimation()
     {
+        if(mEnemyType==EnemyType.Boss)
+        {
+            List<Enemy> bossList=FightModel.GetCurrent().GetEnemyCreateManager().GetBossList();
+            bossList.RemoveAt(0);
+            if(bossList.Count>0)
+            {
+                bossList[0].GetHealthBar().gameObject.SetActive(true);
+            }
+        }
         mCollider.GetCollider().enabled=false;
         mAnimator.Play(mName+"Death");
         mSpriteRenderer.DOFade(0,mdeathAnimationTime).OnComplete(()=>
@@ -111,5 +120,7 @@ public class Enemy : Character
     {
         return mIsOnCollidePlayer;
     }
+
+    public HealthBar GetHealthBar(){return mHealthBar;}
     
 }
