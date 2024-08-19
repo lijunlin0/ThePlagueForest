@@ -45,7 +45,6 @@ public class Boss : Enemy
             rotation=mLookDirection?rotation:rotation+180;
             //Boss造成百分比伤害
             int points=(int)(mCurrentPropertySheet.GetAttack()*Player.GetCurrent().GetCurrentPropertySheet().GetMaxHealth());
-            Debug.Log("boss子弹伤害:"+points);
             BossBullet bullet=BossBullet.Create(this,points,rotation);
             FightModel.GetCurrent().AddEnemyBullets(bullet);
         }

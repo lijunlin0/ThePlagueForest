@@ -22,10 +22,6 @@ public class Bullet : FightObject
         base.Init();
         mCollider=new MyCollider(GetComponent<PolygonCollider2D>());
         mSource = source;
-        if(mSource==null)
-        {
-            //Debug.Log("null");
-        }
         mPoints = points;
         mLiveTime=0;
         mMaxLifeTime=5;

@@ -33,7 +33,7 @@ public class ThunderWand:Weapon
             Enemy targetEnemy=enemyList[randomIndex];
             
             //创建子弹
-            BulletThunderWand bulletThunderWand = BulletThunderWand.Create(Player.GetCurrent(),attack);
+            BulletThunderWand bulletThunderWand = BulletThunderWand.Create(Player.GetCurrent(),attack,layer==mMaxlayer);
             bulletThunderWand.transform.position=targetEnemy.transform.position;
             FightModel.GetCurrent().AddPlayerBullet(bulletThunderWand);
         },shootTime,ShootRange);

@@ -15,7 +15,6 @@ public static class FightSystem
         Bullet bullet=damageInfo.GetBullet();
         if(target.GetStatusEffectList().IsInvincible())
         {
-            //Debug.Log("无敌状态抵挡伤害");
             return false;
         }
         int points=damageInfo.GetPoints();
@@ -73,7 +72,6 @@ public static class FightSystem
         Player player=Player.GetCurrent();
         StatusEffectList statusEffectList=player.GetStatusEffectList();
         List<StatusEffect> statusEffects=statusEffectList.GetStatusEffectsWithId(statusEffectId);
-        //Debug.Log("层数:"+(statusEffects.Count+1));
         //给玩家待修改的状态效果
         StatusEffect effect=null;
         if(statusEffects.Count>0)
@@ -101,13 +99,13 @@ public static class FightSystem
         StatusEffect statusEffect=changeInfo.GetStatusEffect();
         if(statusEffect.GetId()==StatusEffectId.None)
         {
-            Debug.LogError("Invalid Id");
             return false;
         }
         StatusEffectList statusEffectList=statusEffect.GetTarget().GetStatusEffectList();
         List<StatusEffect> statusEffects=statusEffectList.GetStatusEffectsWithId(statusEffect.GetId());
-        if(statusEffects.Count>=statusEffect.GetMaxLayer())
-        {
+        
+        if(statusEffects.Count>=statusEffect.GetMaxLayer()||(statusEffect.GetId()==StatusEffectId.Equipment_Crown&&statusEffects.Count>0))
+        {                                                                                       //王冠只持有一个
             statusEffect.SetElapsedTickDuration(statusEffects[0].GetElapsedTickDuration());
             statusEffectList.RemoveStatusEffect(statusEffects[0]);
         }

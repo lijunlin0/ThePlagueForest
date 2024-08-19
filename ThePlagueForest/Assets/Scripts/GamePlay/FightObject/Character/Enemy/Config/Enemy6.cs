@@ -33,7 +33,6 @@ public class Enemy6 : Enemy
         if(mIsOnCollidePlayer)
         {
             mIsOnShoot=true;
-            Debug.Log("播放");
             mAnimator.Play("Enemy6Attack");
         }
         AnimatorStateInfo stateInfo = mAnimator.GetCurrentAnimatorStateInfo(0);

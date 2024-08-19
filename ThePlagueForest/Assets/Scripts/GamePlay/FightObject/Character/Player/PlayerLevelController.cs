@@ -114,7 +114,6 @@ public class PlayerLevelController
         statusEffect.SetPropertyCorrections(corrections);
         StatusEffectChangeInfo info= new StatusEffectChangeInfo(statusEffect,StatusEffectChangeReason.System,mPlayer);
         FightSystem.AddStatusEffect(info);
-        //Debug.Log("玩家最大生命值:"+mPlayer.GetCurrentPropertySheet().GetMaxHealth());
     }
 
     public static int EnemyTypeToExp(EnemyType enemyType)

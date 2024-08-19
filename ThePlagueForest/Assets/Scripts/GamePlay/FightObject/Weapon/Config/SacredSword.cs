@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 //圣剑
 public class SacredSword:Weapon
 {
-    private const int Attack=50;
+    private const int Attack=60;
     private const float  ShootTime=1.8f;
     private const float MaxLayerBulletScale=1.5f;
 
@@ -32,13 +32,8 @@ public class SacredSword:Weapon
                 return;
             }
             //创建子弹
-            BulletSacredSword bulletSacredSword = BulletSacredSword.Create(Player.GetCurrent(),attack);
+            BulletSacredSword bulletSacredSword = BulletSacredSword.Create(Player.GetCurrent(),attack,layer==mMaxlayer,MaxLayerBulletScale);
             bulletSacredSword.transform.position=Player.GetCurrent().transform.position;
-            if(layer==mMaxlayer)
-            {
-                bulletSacredSword.transform.localScale=new Vector3(MaxLayerBulletScale,MaxLayerBulletScale,1);
-            }
-           
             Vector3 direction=(nearEnemy.transform.position-bulletSacredSword.transform.position).normalized;
             bulletSacredSword.transform.rotation=FightUtility.DirectionToRotation(direction);
             FightModel.GetCurrent().AddPlayerBullet(bulletSacredSword);

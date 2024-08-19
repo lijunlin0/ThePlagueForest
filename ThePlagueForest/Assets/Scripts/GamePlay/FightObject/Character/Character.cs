@@ -100,10 +100,8 @@ public class Character : FightObject
     }
     public void SetHealth(int health,int theoryChangePoints)
     {
-        //Debug.Log("设置的血量: "+health);
         mHealth=Mathf.Clamp(health,0,mCurrentPropertySheet.GetMaxHealth());
         OnHealthChanged(theoryChangePoints);
-        //Debug.Log(gameObject.name+":"+health);
     }
     public bool IsPlayer()
     {

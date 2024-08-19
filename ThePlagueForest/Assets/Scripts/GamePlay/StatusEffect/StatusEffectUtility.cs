@@ -17,7 +17,6 @@ public class StatusEffectUtility
         statusEffect.SetTick(StatusEffect.BurnTick,()=>
         {
             int points=(int)(target.GetCurrentPropertySheet().GetMaxHealth()*percent/100);
-            //Debug.Log("燃烧伤害:"+points);
             DamageInfo damageInfo=new DamageInfo(target,target,points,null,statusEffect);
             FightSystem.Damage(damageInfo);
         });

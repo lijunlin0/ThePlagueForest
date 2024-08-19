@@ -49,8 +49,6 @@ public class EquipmentSelectCell : MonoBehaviour
             levelUpText.text="叠加:"+equipmentText.Item4;
             levelText.text="层数:"+FightModel.GetCurrent().GetEquipmentLayer(equipment).ToString()+"/"+equipment.GetMaxLayer().ToString();
         }
-        
-       
         //Debug.Log(tittleText.text.ToString()+contentText.text.ToString());
     }
     public void SetSelect(bool isSelect)
