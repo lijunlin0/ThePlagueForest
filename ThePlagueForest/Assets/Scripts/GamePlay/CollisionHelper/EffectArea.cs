@@ -28,8 +28,8 @@ public class EffectArea:MonoBehaviour
     public static EffectArea Create(string prefabName,Callback<Character> collideCallback,bool isCarry=true)
     {
         GameObject effectAreaPrefab=Resources.Load<GameObject>("FightObject/Area/"+prefabName);
-        GameObject effectAreaArea=Instantiate(effectAreaPrefab,Player.GetCurrent().transform);
-        EffectArea effectArea=effectAreaArea.AddComponent<EffectArea>();
+        GameObject effectAreaObject=Instantiate(effectAreaPrefab,Player.GetCurrent().transform);
+        EffectArea effectArea=effectAreaObject.AddComponent<EffectArea>();
         effectArea.Init(collideCallback);
         return effectArea; 
     }

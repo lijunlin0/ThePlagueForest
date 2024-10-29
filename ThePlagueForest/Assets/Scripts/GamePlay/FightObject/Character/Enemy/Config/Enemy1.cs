@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 //丧尸
 public class Enemy1 : Enemy

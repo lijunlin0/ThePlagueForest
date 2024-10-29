@@ -57,6 +57,18 @@ public static class FightUtility
         }
     }
 
+    public static void LineLink(GameObject fightObject,Vector3 startPosition,Vector3 endPosition,float xFactor=0.01f)
+    {
+        Vector3 direction=endPosition-startPosition;
+        fightObject.transform.localPosition=(startPosition+endPosition)/2;
+
+        fightObject.transform.localRotation=DirectionToRotation(direction);
+        float distance=Mathf.Sqrt(SqrDistance2D(startPosition,endPosition));
+        float scaleY=fightObject.transform.localScale.y;
+
+        fightObject.transform.localScale=new Vector3(distance*xFactor,scaleY,1);
+    }
+
     public static Enemy GetNearEnemy(Character character,int range,List<Character> ignoreList=null)
     {
         if(character.IsEnemy())
@@ -82,17 +94,7 @@ public static class FightUtility
         return res;
     }
 
-    public static void LineLink(GameObject fightObject,Vector3 startPosition,Vector3 endPosition,float xFactor=0.01f)
-    {
-        Vector3 direction=endPosition-startPosition;
-        fightObject.transform.localPosition=(startPosition+endPosition)/2;
-
-        fightObject.transform.localRotation=DirectionToRotation(direction);
-        float distance=Mathf.Sqrt(SqrDistance2D(startPosition,endPosition));
-        float scaleY=fightObject.transform.localScale.y;
-
-        fightObject.transform.localScale=new Vector3(distance*xFactor,scaleY,1);
-    }
+    
     
     public static float SqrDistance2D(Vector3 position1,Vector3 position2)
     {

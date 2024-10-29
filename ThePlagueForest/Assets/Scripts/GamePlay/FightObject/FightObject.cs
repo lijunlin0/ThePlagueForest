@@ -28,15 +28,14 @@ public class FightObject : MonoBehaviour
         gameObject.SetActive(false);
         DOVirtual.DelayedCall(3,()=>
         {
+            DOTween.Kill(gameObject);
             if (mIsPoolObject)
             {
-                DOTween.Kill(gameObject);
                 FightManager.GetCurrent().GetPoolManager().PutGameObject(gameObject);
                 Destroy(this);
             }
             else
             {
-                DOTween.Kill(gameObject);
                 Destroy(gameObject);
             }
         });

@@ -5,7 +5,7 @@ using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 
-//匕首子弹
+//回旋镖子弹
 public class BulletBoomerang: Bullet
 { 
     private const float MoveSpeedReduction=100;

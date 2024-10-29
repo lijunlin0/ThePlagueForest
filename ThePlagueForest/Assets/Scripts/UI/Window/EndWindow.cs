@@ -22,12 +22,16 @@ public class EndWindow : MonoBehaviour
         Button button=GameObject.Find("Window/Button").GetComponent<Button>();
         button.onClick.AddListener(()=>
         {
-            DOTween.KillAll();
+            mIsOpen=false;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
             SceneManager.LoadScene("Main");
             Destroy(gameObject);
         });
     }
-
+    public void OnSceneUnloaded(Scene scene)
+    {
+        DOTween.KillAll();
+    }
     public static bool IsOpen()
     {
         return mIsOpen;

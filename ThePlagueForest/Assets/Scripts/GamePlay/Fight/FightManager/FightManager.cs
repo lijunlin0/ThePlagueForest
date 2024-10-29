@@ -14,7 +14,6 @@ public class FightManager
     }
     public FightManager()
     {
-        DOTween.Init();
         mPause=false;
         sCurrent=this;
         mFightModel=new FightModel();

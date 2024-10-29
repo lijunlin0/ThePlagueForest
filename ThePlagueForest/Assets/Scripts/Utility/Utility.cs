@@ -7,6 +7,8 @@ public static class Utility
 {
     public static int WindowWidth=0;
     public static int WindowHeight=0;
+    public  const int PCWindowHeight=1080;
+    public  const int PhoneWindowHeight=1920;
     public static bool IsPC=false;
     public static void EnumForeach<T>(Callback<T> callback)
     {
