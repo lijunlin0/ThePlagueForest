@@ -26,7 +26,6 @@ public class StatusEffect
     //燃烧,冰冻默认持续时间
     public const float BurnDuration = 4f;
     public const float FrozenDuration = 4f;
-
     //燃烧每次伤害最大生命值比例
     public const float BurnTickDamageWithMaxHealth=4;
     public const float BurnTickDamageWithMaxHealthBoss=0.5f;

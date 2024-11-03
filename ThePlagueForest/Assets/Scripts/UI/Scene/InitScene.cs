@@ -12,23 +12,9 @@ public class InitScene : MonoBehaviour
    }
    public void Start()
    {
-      InitScreen();
+      Utility.InitScreen();
       
       SceneManager.LoadScene("Main");
    }
-   public void InitScreen()
-   {
-      if(Screen.width<Screen.height)
-      {
-         Utility.WindowWidth=Screen.width;
-         Utility.WindowHeight=Utility.PhoneWindowHeight;
-         Utility.IsPC=false;
-      }
-      else
-      {
-         Utility.WindowWidth=Screen.width;
-         Utility.WindowHeight=Utility.PCWindowHeight;
-         Utility.IsPC=true;
-      }
-   }
+
 }

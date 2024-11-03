@@ -8,7 +8,7 @@ public class Dagger:Weapon
 {
     private const int Attack=55;
     private const float  ShootTime=0.3f;
-    private const int FinalPenetrateCount=8;
+    private const int FinalPenetrateCount=7;
     private const int penetrateCountAddition=1;
     private const int AttackAddition=10;
     public Dagger():base(EquipmentType.Active,EquipmentId.Dagger)
@@ -27,7 +27,7 @@ public class Dagger:Weapon
             {
                 return;
             }
-            int penetrateCount=layer*penetrateCountAddition;
+            int penetrateCount=(layer-1)*penetrateCountAddition;
             if(layer==mMaxlayer)
             {
                 penetrateCount=FinalPenetrateCount;

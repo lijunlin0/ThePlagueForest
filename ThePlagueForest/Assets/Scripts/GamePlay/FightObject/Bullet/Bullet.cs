@@ -56,6 +56,10 @@ public class Bullet : FightObject
         }
         else
         {
+            if(mIgnoreList.Contains(target))
+            {
+                return;
+            }
             mIsDead=true;
             FightSystem.Damage(damageInfo);
             target.PlayHurtSound();
