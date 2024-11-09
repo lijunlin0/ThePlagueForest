@@ -17,7 +17,7 @@
         "Health" : [250, 30,0.7],
         "HealthRecovery" : [0.0, 0.0],
         "MoveSpeed" : [120,0.1],
-        "Attack" : [35.0,1.0],
+        "Attack" : [20.0,0.8],
         "Name"   : "巫师"
     },
     "Enemy3" : {

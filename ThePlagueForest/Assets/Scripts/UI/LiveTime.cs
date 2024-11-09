@@ -33,6 +33,7 @@ public class LiveTime : MonoBehaviour
         mElapsedTime+=Time.deltaTime;
         int minutes = Mathf.FloorToInt(mElapsedTime/60);
         int seconds = Mathf.FloorToInt(mElapsedTime%60);
+        Debug.Log("时间："+mElapsedTime);
         // 格式化时间字符串
         mText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }

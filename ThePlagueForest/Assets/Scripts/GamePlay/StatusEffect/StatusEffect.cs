@@ -29,11 +29,8 @@ public class StatusEffect
     //燃烧每次伤害最大生命值比例
     public const float BurnTickDamageWithMaxHealth=4;
     public const float BurnTickDamageWithMaxHealthBoss=0.5f;
-
     //冰冻减速比例
     public const float FrozenMoveSpeedAddition=-40;
-
-
     public const float BurnTick = 0.5f;
 
     //持续时间计时
@@ -50,7 +47,6 @@ public class StatusEffect
         mId = id;
         mTarget = target;
         mPropertyCorrections=new Dictionary<Property,float>();
-
         mTotalDuration=totalDuration;
         mElapsedTickDuration=0;
         mTotalTickDuration=999999;
@@ -81,16 +77,13 @@ public class StatusEffect
                 mElapsedTickDuration-=mTotalTickDuration;
                 mTickCallback();
             }
-
         }
-
         //状态效果持续时间是否结束
         mElapseDuration+=Time.deltaTime;
         if(mElapseDuration>mTotalDuration)
         {
             mIsDead=true;
         }
-
     }
 
     public float GetElapsedTickDuration(){return mElapsedTickDuration;}

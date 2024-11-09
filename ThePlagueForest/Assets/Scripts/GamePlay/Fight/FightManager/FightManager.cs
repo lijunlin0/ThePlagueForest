@@ -24,7 +24,7 @@ public class FightManager
         if(Player.GetCurrent().IsDead()&&!EndWindow.IsOpen())
         {
             mPause=true;
-            EndWindow.SetOpen(mPause);
+            EndWindow.SetOpen(true);
             DOVirtual.DelayedCall(2,()=>
             {
                 EndWindow.Open();

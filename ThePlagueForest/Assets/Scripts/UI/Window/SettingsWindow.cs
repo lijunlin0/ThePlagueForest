@@ -25,6 +25,8 @@ public class SettingsWindow : MonoBehaviour
         mainMenuButton.onClick.AddListener(()=>
         {
             SceneManager.LoadScene("Main");
+            mIsOpen=false;
+            FightManager.GetCurrent().SetPause(false);
             GameObject.Destroy(gameObject);
         });
         Button continueButton=transform.Find("Window/ContinueButton").GetComponent<Button>();

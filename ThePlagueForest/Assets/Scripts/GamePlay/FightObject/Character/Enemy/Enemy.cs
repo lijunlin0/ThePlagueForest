@@ -91,9 +91,8 @@ public class Enemy : Character
         mAnimator.Play(mName+"Death");
         mSpriteRenderer.DOFade(0,mdeathAnimationTime).OnComplete(()=>
         {
-            int expPoints=PlayerLevelController.EnemyTypeToExp(mEnemyType);
             string expBallName=PlayerLevelController.EnemyTypeToExpBallName(mEnemyType);
-            ExpBall.Create(this.transform.position,expPoints,expBallName);
+            ExpBall.Create(this.transform.position,mEnemyType,expBallName);
             DOTween.Kill(gameObject);
             if(mIsPoolObject)
             {

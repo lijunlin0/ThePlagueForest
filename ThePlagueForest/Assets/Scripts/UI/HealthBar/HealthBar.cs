@@ -19,6 +19,7 @@ public class HealthBar : MonoBehaviour
             Canvas canvas=GameObject.Find("WindowCanvas").GetComponent<Canvas>();
             GameObject healthBarPrefab=Resources.Load<GameObject>("UI/BossHealthBar");
             GameObject gameObject=Instantiate(healthBarPrefab,canvas.transform);
+            //摆放位置
             RectTransform rectTransform=gameObject.GetComponent<RectTransform>();
             rectTransform.anchorMin = new Vector2(0, 0);//上下左右对齐模式
             rectTransform.anchorMax = new Vector2(1, 1);
@@ -76,10 +77,12 @@ public class HealthBar : MonoBehaviour
         float currentHealth=mCharacter.GetHealth();
         float targetValue=currentHealth/maxHealth;
         mHealthSlider.value=targetValue;
+        //加血时，伤害条直接补齐
         if(mDamageSlider.value<targetValue)
         {
             mDamageSlider.value=targetValue;
         }
+        //掉血时，动画
         else
         {
             if(mTween!=null)

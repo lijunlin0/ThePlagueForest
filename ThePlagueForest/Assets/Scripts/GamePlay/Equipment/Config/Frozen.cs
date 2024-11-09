@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-//炽焰弹--10% *(layer) 子弹附带燃烧效果
+//极寒弹--10% *(layer) 子弹附带减速效果
 public class Frozen : Equipment
 {
     private const int FrozenBulletChance=10;

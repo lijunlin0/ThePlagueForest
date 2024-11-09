@@ -8,14 +8,10 @@ public class PlayerLevelController
     public const int PlayerBaseExp=100;
     public const int PlayerExpAdd=20;
     public const float LevelExpFactor=1.06f;
-    public const int NormalExp=6;
-    public const int EliteExp=20;
-    public const int BossExp=300;
 
     private Player mPlayer;
     private int mLevel;
     private float mExp;
-    private Dictionary<EnemyType,int>mEnemyExp;
     private ExpBar mExpBar;
     private int mMaxHealthAdditionPoint;
     //连续升级时挨个处理
@@ -30,10 +26,6 @@ public class PlayerLevelController
         mPlayer = Player.GetCurrent();
         mLevel=1;
         mExp=0;
-        mEnemyExp=new Dictionary<EnemyType, int>();
-        mEnemyExp.Add(EnemyType.Normal,NormalExp);
-        mEnemyExp.Add(EnemyType.Elite,EliteExp);
-        mEnemyExp.Add(EnemyType.Boss,BossExp);
         mMaxHealthAdditionPoint=CharacterUtility.GetLevelUpMaxHealthAdd("Player1");
         mExpBar=ExpBar.Create(GetlevelUPExp());
     }
@@ -41,7 +33,7 @@ public class PlayerLevelController
     public void AddExp(int exp)
     {
         mExp+=exp;
-        float levelUpExp=(PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
+        float levelUpExp=GetlevelUPExp();
         mExpBar.OnExpChanged(mExp);
         if(mExp>=levelUpExp)
         {
@@ -53,15 +45,15 @@ public class PlayerLevelController
         }
     }
 
-    public float GetlevelUPExp()
+    public int GetlevelUPExp()
     {
-        float levelUpExp=(PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1);
+        int levelUpExp=(int)((PlayerBaseExp+(mLevel-1)*PlayerExpAdd)*Mathf.Pow(LevelExpFactor,mLevel-1));
         return levelUpExp;
     }
 
     public void OnLevelUp()
     {
-        if(EndWindow.IsOpen())
+        if(EndWindow.IsOpen()||Player.GetCurrent().IsDead())
         {
             return;
         }
@@ -114,17 +106,6 @@ public class PlayerLevelController
         statusEffect.SetPropertyCorrections(corrections);
         StatusEffectChangeInfo info= new StatusEffectChangeInfo(statusEffect,StatusEffectChangeReason.System,mPlayer);
         FightSystem.AddStatusEffect(info);
-    }
-
-    public static int EnemyTypeToExp(EnemyType enemyType)
-    {
-        switch(enemyType)
-        {
-            case EnemyType.Normal:return NormalExp;
-            case EnemyType.Elite:return EliteExp;
-            case EnemyType.Boss:return BossExp;
-            default:return NormalExp;
-        }
     }
 
     public static string EnemyTypeToExpBallName(EnemyType enemyType)

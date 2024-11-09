@@ -26,6 +26,7 @@ public class DeathBomb : Equipment
             Player player = Player.GetCurrent();
             Character enemy=eventData.GetTarget();
             float delayTime=RandomHelper.Randomfloat(0.01f,0.5f);
+            
             DOVirtual.DelayedCall(delayTime,()=>
             {
                 EffectArea area= EffectArea.CircleWithPositonCreate("BombCircle",enemy.gameObject.transform.position,(Character target)=>

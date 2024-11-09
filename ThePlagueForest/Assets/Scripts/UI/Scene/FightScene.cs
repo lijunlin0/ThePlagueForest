@@ -9,14 +9,13 @@ public class FightScene : MonoBehaviour
      FightManager mFightManager;
      public TextMeshProUGUI timerText;
 
-    private LiveTime mLiveTime;
      public void Awake()
      {
           InitScene();
           mFightManager=new FightManager();
           Map.Create();
           SettingsButton.Create();
-          mLiveTime=LiveTime.Create();
+          LiveTime.Create();
      }
      public void Update()
      {

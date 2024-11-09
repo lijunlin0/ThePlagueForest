@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class FightModel
 {
-    
     public static int mHealthChangeTextCount=0;
     private static FightModel sCurrent;
     //敌人
@@ -59,17 +58,8 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         mEnemyCreateManager=new EnemyCreateManager();
-        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
-        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
-        //FightSystem.GetEquipment(EquipmentUtility.GetEquipment(EquipmentId.Crown));
-        //初始武器
         EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
-        //Boss2 boss=Boss2.Create(GetEnemyValidPosition(),Boss.sBossLevel);
-        //mEnemyList.Add(boss);
     }
-    
-
-
     public void OnUpdate()
     {
        mEnemyCreateManager.OnUpdate();
@@ -78,8 +68,6 @@ public class FightModel
 
        RemoveInvalidObjects();
     }
-
-
     public void AddEquipment(Equipment equipment)
     {
         if(!mEquipments.ContainsKey(equipment))
@@ -88,7 +76,6 @@ public class FightModel
         }
         mEquipments[equipment]+=1;
     }
-
 
     public int GetEquipmentLayer(Equipment equipment)
     {

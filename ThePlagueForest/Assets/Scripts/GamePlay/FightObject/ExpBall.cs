@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ExpBall : FightObject 
 {
+    public const int NormalExp=6;
+    public const int EliteExp=20;
+    public int BossExp=0;
     private const float mPauseTime=2f;
     private const int MoveSpeedReductionFrame=30;
     private float mCreateTime=0;
@@ -14,17 +17,17 @@ public class ExpBall : FightObject
 
     private float mMoveSpeed;
     
-    public static ExpBall Create(Vector3 position, int exp,string expType)
+    public static ExpBall Create(Vector3 position, EnemyType enemyType,string expType)
     {
         GameObject gameObject=FightManager.GetCurrent().GetPoolManager().GetGameObject("Other/"+expType);
         gameObject.SetActive(true);
         gameObject.transform.position=position;
         ExpBall expBall = gameObject.AddComponent<ExpBall>();
-        expBall.Init(exp);
+        expBall.Init(enemyType);
         return expBall;
     }
 
-    private void Init(int exp)
+    private void Init(EnemyType enemyType)
     {
         base.Init();
         mIsWaitingForSound=false;
@@ -32,12 +35,21 @@ public class ExpBall : FightObject
         mSpriteRenderer = mDisplay.GetComponent<SpriteRenderer>();
         mSpriteRenderer.enabled=true;
         mSpriteRenderer.color=new Color(1,1,1,0);
-        mSpriteRenderer.DOFade(1,0.5f);
-        mExp=exp;
+        mSpriteRenderer.DOFade(1,0.2f);
+        mExp=EnemyTypeToExp(enemyType);
         mSound=GetComponent<AudioSource>();
         mMoveSpeed=500;
     }
-
+    public int EnemyTypeToExp(EnemyType enemyType)
+    {
+        switch(enemyType)
+        {
+            case EnemyType.Normal:return NormalExp;
+            case EnemyType.Elite:return EliteExp;
+            case EnemyType.Boss:BossExp=Player.GetCurrent().GetPlayerLevelController().GetlevelUPExp();return BossExp;
+            default:return NormalExp;
+        }
+    }
     public void Update()
     {
         if(mIsWaitingForSound)
