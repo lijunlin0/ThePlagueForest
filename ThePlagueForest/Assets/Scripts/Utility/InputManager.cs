@@ -7,9 +7,15 @@ public class InputManager:MonoBehaviour
     private Vector3 startPosition;
     private Vector3 currentTouchPosition;
     private Vector3 lastDirection;
-    public static Joystick mJoystick;
-    public static GameObject mJoystickCenter;
-    public static Vector3 mJoystickBasePosition;
+    public  Joystick mJoystick;
+    public  GameObject mJoystickCenter;
+    public Vector3 mJoystickBasePosition;
+    public void Init(Joystick joystick)
+    {
+        mJoystick=joystick;
+        mJoystickCenter=mJoystick.transform.Find("Center").gameObject;
+        mJoystickBasePosition=mJoystick.transform.position;
+    }
     public void OnDisable()
     {
         Touch.onFingerDown-=FingerDown;
@@ -32,7 +38,12 @@ public class InputManager:MonoBehaviour
         }
         currentTouchPosition=finger.screenPosition;
         startPosition=currentTouchPosition;
+        if (float.IsNaN(currentTouchPosition.x) || float.IsNaN(currentTouchPosition.y) || float.IsInfinity(currentTouchPosition.x) || float.IsInfinity(currentTouchPosition.y))
+        {
+        return;
+        }
         mJoystick.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(currentTouchPosition.x, currentTouchPosition.y, -10));
+        Debug.Log(mJoystick.transform.position);
     }
     private void FingerSwipe(Finger finger)
     {
@@ -45,6 +56,10 @@ public class InputManager:MonoBehaviour
         if(swipeDelta!=Vector3.zero)
         {
             lastDirection=swipeDelta.normalized;
+            if (float.IsNaN(lastDirection.x) || float.IsNaN(lastDirection.y)||float.IsNaN(lastDirection.z)  || float.IsInfinity(lastDirection.x) || float.IsInfinity(lastDirection.y)||float.IsInfinity(lastDirection.z))
+            {
+            return;
+            }
             float distance = Mathf.Min(swipeDelta.magnitude, 150);
             mJoystickCenter.transform.localPosition=lastDirection*distance;
         }
@@ -67,7 +82,12 @@ public class InputManager:MonoBehaviour
         {
             return;
         }
+        if (float.IsNaN(lastDirection.x) || float.IsNaN(lastDirection.y)||float.IsNaN(lastDirection.z)  || float.IsInfinity(lastDirection.x) || float.IsInfinity(lastDirection.y)||float.IsInfinity(lastDirection.z))
+        {
+            return;
+        }
         Player.GetCurrent().Move(lastDirection);
+        
     }
 
     private void Update()

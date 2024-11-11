@@ -9,6 +9,7 @@ public class SettingsButton : MonoBehaviour
         Canvas canvas=GameObject.Find("UICanvas").GetComponent<Canvas>();
         GameObject prefab=Resources.Load<GameObject>("UI/SettingsButton");
         GameObject gameObject=GameObject.Instantiate(prefab,canvas.transform);
+        gameObject.GetComponent<CanvasGroup>().alpha=0;
         SettingsButton button=gameObject.AddComponent<SettingsButton>();
         button.Init();
         return button;

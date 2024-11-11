@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public enum EnemyCreateChance
@@ -13,7 +14,7 @@ public class EnemyCreateManager
     private int mNormalLevel=1;
     private int mBossLevel=1;
     private float mBossCreateDefaultTime=0;
-    private float mBossCreateTime=70;
+    private float mBossCreateTime=60;
     
     private float mEnemyLevelUpDefaultTime=0;
     private float mEnemyLevelUpTime=30;
@@ -24,6 +25,7 @@ public class EnemyCreateManager
     private Player mPlayer;
     private List<Enemy> mEnemies;
     private List<Enemy> mLiveBossList;
+    private WarningUI mWarningUI;
     //敌人生成概率表
     private Dictionary<CharacterId,int> mEnemyChance;
     public EnemyCreateManager()
@@ -40,6 +42,7 @@ public class EnemyCreateManager
             {CharacterId.Enemy1,35},//丧尸
         };
         mLiveBossList=new List<Enemy>();
+        mWarningUI=WarningUI.Create();
     }
 
     private Vector3 GetEnemyValidPosition()
@@ -90,6 +93,10 @@ public class EnemyCreateManager
     }
     public void OnUpdate()
     {
+        if(!FightModel.GetCurrent().IsStartTime())
+        {
+            return;
+        }
         mEnemyCreateDefaultTime+=Time.deltaTime;
         mEnemyLevelUpDefaultTime+=Time.deltaTime;
         mBossCreateDefaultTime+=Time.deltaTime;
@@ -105,9 +112,17 @@ public class EnemyCreateManager
             mEnemyCreateTime=Mathf.Clamp(mEnemyCreateTime-0.1f,0.8f,mEnemyCreateTime);
             mNormalLevel++;
         }
-         if(mBossCreateDefaultTime>=mBossCreateTime)
+        if(mBossCreateDefaultTime>=mBossCreateTime)
         {
             mBossCreateDefaultTime=0;
+            BossCreate();
+        }
+    }
+
+    public void BossCreate()
+    {
+        mWarningUI.Play(()=>
+        {
             int randomInt=RandomHelper.RandomInt(0,2);
             if(randomInt==0)
             {
@@ -133,7 +148,7 @@ public class EnemyCreateManager
                 mEnemies.Add(boss);
                 mBossLevel++;
             }
-        }
+        });
     }
 
     private void CreateEnemyCircle()

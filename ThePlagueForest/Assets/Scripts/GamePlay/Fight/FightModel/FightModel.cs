@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class FightModel
 {
+    private bool mIsStartTime=false;
     public static int mHealthChangeTextCount=0;
     private static FightModel sCurrent;
     //敌人
@@ -58,7 +59,6 @@ public class FightModel
         mPlayerBulletList=new List<Bullet>();
         mEquipments=new Dictionary<Equipment,int>();
         mEnemyCreateManager=new EnemyCreateManager();
-        EquipmentSelectWindow.Open(EquipmentUtility.GetStartWeapon(),"选择一把武器");
     }
     public void OnUpdate()
     {
@@ -87,6 +87,9 @@ public class FightModel
     }
 
     public EnemyCreateManager GetEnemyCreateManager(){return mEnemyCreateManager;}
+
+    public bool IsStartTime(){return mIsStartTime;}
+    public void TimeStart(){mIsStartTime=true;}
 
 
     private void UpdateObjects()

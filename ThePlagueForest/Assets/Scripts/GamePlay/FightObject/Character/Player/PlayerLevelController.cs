@@ -16,10 +16,6 @@ public class PlayerLevelController
     private int mMaxHealthAdditionPoint;
     //连续升级时挨个处理
     private List<int> mLevelUpList=new List<int>();
-    public PlayerLevelController()
-    {
-        Init();
-    }
 
     public void Init()
     {
@@ -27,7 +23,8 @@ public class PlayerLevelController
         mLevel=1;
         mExp=0;
         mMaxHealthAdditionPoint=CharacterUtility.GetLevelUpMaxHealthAdd("Player1");
-        mExpBar=ExpBar.Create(GetlevelUPExp());
+        mExpBar=FightManager.GetCurrent().GetExpBar();
+        mExpBar.SetLevelUpExp(GetlevelUPExp());
     }
 
     public void AddExp(int exp)

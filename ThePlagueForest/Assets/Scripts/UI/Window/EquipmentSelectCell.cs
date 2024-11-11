@@ -39,7 +39,7 @@ public class EquipmentSelectCell : MonoBehaviour
         if(equipment is Weapon&&FightModel.GetCurrent().GetEquipmentLayer(equipment)==equipment.GetMaxLayer()-1)
         {
             tittleText.text=equipmentText.Item5;
-            tittleText.color=new Color(1,0.3f,1,1);
+            tittleText.color=new Color(1,0,0,1);
             contentText.text=equipmentText.Item6;
         }
         else

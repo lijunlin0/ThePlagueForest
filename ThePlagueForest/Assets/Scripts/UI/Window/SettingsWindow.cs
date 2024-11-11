@@ -24,6 +24,7 @@ public class SettingsWindow : MonoBehaviour
         Button mainMenuButton=transform.Find("Window/MainMenuButton").GetComponent<Button>();
         mainMenuButton.onClick.AddListener(()=>
         {
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
             SceneManager.LoadScene("Main");
             mIsOpen=false;
             FightManager.GetCurrent().SetPause(false);
@@ -51,7 +52,10 @@ public class SettingsWindow : MonoBehaviour
             AudioListener.volume=mMusicIsOn ? 1 : 0;
         });
     }
-
+    public void OnSceneUnloaded(Scene scene)
+    {
+        DOTween.KillAll();
+    }
     public static bool IsOpen()
     {
         return mIsOpen;

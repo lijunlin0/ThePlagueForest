@@ -6,7 +6,7 @@ using UnityEngine;
 //闪电魔杖
 public class ThunderWand:Weapon
 {   
-    private const int Attack=100;
+    private const int Attack=80;
     private const int ShootRange=1500;
     private const float  ShootTime=1.8f;
 

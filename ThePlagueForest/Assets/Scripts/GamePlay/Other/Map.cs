@@ -19,7 +19,7 @@ public class Map : MonoBehaviour
 
     public static void Create()
     {
-        mCanvas=GameObject.Find("Canvas").GetComponent<Canvas>();
+        GameObject parent=GameObject.Find("Map");
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/0"));
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/1"));
         mGrassPrefabs.Add(Resources.Load<GameObject>("Other/Map/2"));
@@ -44,12 +44,12 @@ public class Map : MonoBehaviour
                 if(i<-Height/2||j<-Width/2||i>=Height/2||j>=Width/2)
                 {
                     prefab=CreateBlock(true);
-                    Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
+                    Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,parent.transform);
                 }
                 else
                 {
                     prefab=CreateBlock(false);
-                    Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,mCanvas.transform);
+                    Instantiate(prefab,new Vector3(j*ImgSize,i*ImgSize,0),quaternion.identity,parent.transform);
                     
                 }
             }

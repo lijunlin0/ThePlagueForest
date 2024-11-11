@@ -14,15 +14,16 @@ public class PoolManager
 
     private void AddGameObjects(string prefabName)
     {
+        GameObject parent = GameObject.Find("Pool");
         List<GameObject> list = mGameobjects[prefabName];
         GameObject prefab=Resources.Load<GameObject>("FightObject/"+prefabName);
-        GameObject baseGameObject=GameObject.Instantiate(prefab);
+        GameObject baseGameObject=GameObject.Instantiate(prefab,parent.transform);
         baseGameObject.name=prefabName;
         baseGameObject.SetActive(false);
         list.Add(baseGameObject);
          for (int i = 1; i < INIT_OBJ_COUNT; ++i)
         {
-            GameObject gameObject=GameObject.Instantiate(baseGameObject);
+            GameObject gameObject=GameObject.Instantiate(baseGameObject,parent.transform);
             gameObject.name=prefabName;
             gameObject.SetActive(false);
             list.Add(gameObject);

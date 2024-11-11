@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class EndWindow : MonoBehaviour
     private void Init()
     {
         mIsOpen=true;
+        TMP_Text text=transform.Find("Window/Border/LiveTimeText").GetComponent<TextMeshProUGUI>();
+        text.text="生存时间:"+FightManager.GetCurrent().GetLiveTime().GetTimeText();
         Button button=GameObject.Find("Window/Button").GetComponent<Button>();
         button.onClick.AddListener(()=>
         {

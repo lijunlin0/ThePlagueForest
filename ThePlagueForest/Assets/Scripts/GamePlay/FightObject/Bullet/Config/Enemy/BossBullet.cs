@@ -19,7 +19,7 @@ public class BossBullet : Bullet
     protected override void Init(Character source, int points)
     {
         base.Init(source,points);
-        mMoveSpeed=700;
+        mMoveSpeed=600;
         mAnimator=mDisplay.GetComponent<Animator>();
         mAnimator.Play("BulletBossMove");
     }
