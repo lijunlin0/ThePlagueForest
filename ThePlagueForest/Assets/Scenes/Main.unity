@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 672153555}
   - component: {fileID: 672153557}
   - component: {fileID: 672153556}
+  - component: {fileID: 672153558}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278752277
+    rgba: 4094202901
   m_fontColor: {r: 0.08355196, g: 0.57861626, b: 0.030932276, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 1
@@ -350,6 +351,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672153554}
   m_CullTransparentMesh: 1
+--- !u!111 &672153558
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672153554}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f0c804d2961954e4d868663ad9601365, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f0c804d2961954e4d868663ad9601365, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &813779922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,8 +1082,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- - - - - - - - - - - - - - - - - -  Click  - - - - - - - - - - - - -
-    - - - - -'
+  m_text: "- - - - - - - - - - - - - - - - - -  \u5F00\u59CB  - - - - - - - - - -
+    - - - - - - - -"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c11525b3c94234e80523d9b6082d87, type: 2}
   m_sharedMaterial: {fileID: 7433318766785674994, guid: b9c11525b3c94234e80523d9b6082d87, type: 2}
