@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5330593165190286867}
   - component: {fileID: 732177967442282227}
+  - component: {fileID: 6109800128800337606}
   m_Layer: 5
   m_Name: ExpBar
   m_TagString: Untagged
@@ -46,6 +47,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200308419543235888}
   m_CullTransparentMesh: 1
+--- !u!225 &6109800128800337606
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200308419543235888}
+  m_Enabled: 1
+  m_Alpha: 0.96
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &294458305918539145
 GameObject:
   m_ObjectHideFlags: 0
